@@ -271,6 +271,13 @@
     </div>
 
     <script>
+        // Configuration constants
+        const CONFIG = {
+            GIT_ADD_DELAY: 1500,  // Simulated git add operation delay (ms)
+            REFRESH_DELAY: 800,   // Simulated refresh operation delay (ms)
+            MESSAGE_TIMEOUT: 5000 // Status message auto-hide timeout (ms)
+        };
+
         // Simulated file data for demo purposes
         let unstagedFiles = [
             { name: 'index.html', status: 'modified' },
@@ -355,10 +362,10 @@
             statusMessage.textContent = message;
             statusMessage.className = `status-message show ${type}`;
             
-            // Hide after 5 seconds
+            // Hide after configured timeout
             setTimeout(() => {
                 statusMessage.className = 'status-message';
-            }, 5000);
+            }, CONFIG.MESSAGE_TIMEOUT);
         }
 
         // Show loading overlay
@@ -373,11 +380,10 @@
                 showLoading(true);
                 
                 // Simulate API call with a delay
-                await new Promise(resolve => setTimeout(resolve, 1500));
+                await new Promise(resolve => setTimeout(resolve, CONFIG.GIT_ADD_DELAY));
                 
                 // In a real application, this would call a backend API
                 const filesArray = Array.from(selectedFiles);
-                console.log('Adding files:', filesArray);
                 
                 // Remove added files from unstaged list
                 unstagedFiles = unstagedFiles.filter(file => !selectedFiles.has(file.name));
@@ -395,7 +401,6 @@
             } catch (error) {
                 showLoading(false);
                 showStatus(`Error: ${error.message}`, 'error');
-                console.error('Git add error:', error);
             }
         }
 
@@ -419,7 +424,7 @@
                 updateButtonStates();
                 showLoading(false);
                 showStatus('File list refreshed successfully!', 'info');
-            }, 800);
+            }, CONFIG.REFRESH_DELAY);
         }
 
         // Reset selection
