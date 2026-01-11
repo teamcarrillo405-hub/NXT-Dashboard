@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Reports | NXT Infrastructure Velocity Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-indigo: #1e1b4b;
+            --electric-yellow: #FDFF66;
+            --white: #ffffff;
+            --off-white: #f8fafc;
+            --green: #22c55e;
+            --green-bg: rgba(34, 197, 94, 0.1);
+            --yellow: #eab308;
+            --yellow-bg: rgba(234, 179, 8, 0.1);
+            --red: #ef4444;
+            --red-bg: rgba(239, 68, 68, 0.1);
+            --blue: #3b82f6;
+            --blue-bg: rgba(59, 130, 246, 0.1);
+            --border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--off-white); color: var(--text-primary); line-height: 1.6; }
+        
+        .header { background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), var(--deep-indigo); color: var(--white); padding: 1rem 2rem; }
+        .header-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--white); }
+        .brand-mark { width: 6px; height: 36px; background: var(--electric-yellow); }
+        .brand-text { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; }
+        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 500; text-decoration: none; cursor: pointer; border: none; transition: all 0.2s; }
+        .btn-home { background: var(--electric-yellow); color: var(--deep-indigo); }
+        .btn-home:hover { background: #e9eb5e; }
+        
+        .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem 0; font-size: 0.8rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--deep-indigo); }
+        .breadcrumb .separator { margin: 0 0.5rem; opacity: 0.5; }
+        .breadcrumb .current { font-weight: 500; color: var(--text-primary); }
+        
+        .main { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        
+        .page-header { margin-bottom: 2rem; }
+        .page-title { font-size: 1.75rem; font-weight: 700; color: var(--deep-indigo); margin-bottom: 0.5rem; }
+        .page-subtitle { font-size: 0.95rem; color: var(--text-secondary); }
+        
+        .section { margin-bottom: 2.5rem; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .section-title { font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .export-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .export-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        
+        .export-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: all 0.2s; }
+        .export-card:hover { border-color: var(--deep-indigo); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .export-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+        .export-card-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+        .export-card-badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; background: var(--deep-indigo); color: var(--white); }
+        .export-card-desc { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6; }
+        .export-card-meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem; }
+        .export-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.625rem 1rem; background: var(--deep-indigo); color: var(--white); border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .export-btn:hover { background: #2d2a5e; }
+        .export-btn svg { width: 16px; height: 16px; }
+        
+        .export-card-featured { background: linear-gradient(135deg, var(--deep-indigo) 0%, #312e81 100%); border: none; color: var(--white); }
+        .export-card-featured .export-card-title { color: var(--white); }
+        .export-card-featured .export-card-desc { color: rgba(255,255,255,0.8); }
+        .export-card-featured .export-card-meta { color: rgba(255,255,255,0.6); }
+        .export-card-featured .export-btn { background: var(--electric-yellow); color: var(--deep-indigo); }
+        .export-card-featured .export-btn:hover { background: #e9eb5e; }
+        
+        .sector-group { background: var(--white); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; }
+        .sector-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: var(--off-white); cursor: pointer; transition: all 0.2s; }
+        .sector-header:hover { background: #f1f5f9; }
+        .sector-header-left { display: flex; align-items: center; gap: 0.75rem; }
+        .sector-icon { width: 36px; height: 36px; background: var(--deep-indigo); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .sector-icon svg { stroke: var(--electric-yellow); width: 18px; height: 18px; }
+        .sector-name { font-weight: 700; font-size: 0.95rem; color: var(--text-primary); }
+        .sector-count { font-size: 0.8rem; color: var(--text-muted); margin-left: 0.5rem; }
+        .sector-toggle { display: flex; align-items: center; gap: 1rem; }
+        .sector-toggle svg { width: 20px; height: 20px; color: var(--text-muted); transition: transform 0.2s; }
+        .sector-group.expanded .sector-toggle svg { transform: rotate(180deg); }
+        .export-all-btn { padding: 0.5rem 0.875rem; background: var(--white); border: 1px solid var(--border); border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
+        .export-all-btn:hover { border-color: var(--deep-indigo); color: var(--deep-indigo); }
+        
+        .sector-content { display: none; padding: 1rem 1.5rem; border-top: 1px solid var(--border); }
+        .sector-group.expanded .sector-content { display: block; }
+        
+        .raid-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+        .raid-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: var(--off-white); border-radius: 8px; transition: all 0.2s; }
+        .raid-item:hover { background: #f1f5f9; }
+        .raid-info { flex: 1; }
+        .raid-name { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
+        .raid-meta { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.125rem; }
+        .raid-export-btn { padding: 0.375rem 0.75rem; background: var(--white); border: 1px solid var(--border); border-radius: 4px; font-size: 0.7rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
+        .raid-export-btn:hover { border-color: var(--deep-indigo); color: var(--deep-indigo); }
+        
+        .info-banner { background: var(--blue-bg); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 2rem; display: flex; align-items: flex-start; gap: 0.75rem; }
+        .info-banner svg { width: 20px; height: 20px; color: var(--blue); flex-shrink: 0; margin-top: 0.125rem; }
+        .info-banner-text { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+        
+        .footer { background: var(--deep-indigo); color: var(--white); padding: 2rem; margin-top: 3rem; }
+        .footer-content { max-width: 1400px; margin: 0 auto; }
+        .footer-main { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-brand-section { display: flex; align-items: center; gap: 0.75rem; }
+        .footer-links-section { display: flex; gap: 2rem; }
+        .footer-links-section a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; }
+        .footer-links-section a:hover { color: var(--white); }
+        .footer-bottom { display: flex; justify-content: space-between; padding-top: 1.5rem; font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+        
+        @media (max-width: 1024px) {
+            .export-grid { grid-template-columns: 1fr; }
+            .export-grid-3 { grid-template-columns: 1fr; }
+            .raid-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; gap: 1rem; }
+            .footer-main { flex-direction: column; gap: 1.5rem; text-align: center; }
+            .footer-links-section { flex-wrap: wrap; justify-content: center; }
+            .sector-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+            .sector-toggle { width: 100%; justify-content: space-between; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="brand">
+                <div class="brand-mark"></div>
+                <div class="brand-text">NXT VELOCITY</div>
+            </a>
+            <a href="index.html" class="btn btn-home">Back to Dashboard</a>
+        </div>
+    </header>
+    
+    <div class="breadcrumb">
+        <a href="index.html">Dashboard</a>
+        <span class="separator">></span>
+        <a href="index.html#tools">Tools</a>
+        <span class="separator">></span>
+        <span class="current">Export Reports</span>
+    </div>
+    
+    <main class="main">
+        <div class="page-header">
+            <h1 class="page-title">Export Reports</h1>
+            <p class="page-subtitle">Generate PDF reports for presentations, board meetings, and stakeholder updates</p>
+        </div>
+        
+        <div class="info-banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <div class="info-banner-text">
+                <strong>How it works:</strong> Click any export button to open the page in print mode. Select "Save as PDF" from your browser's print dialog. For best results, use Chrome or Edge and select "Letter" or "A4" paper size with "Portrait" orientation.
+            </div>
+        </div>
+        
+        <!-- Dashboard Reports -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Dashboard Reports</h2>
+            </div>
+            <div class="export-grid">
+                <div class="export-card export-card-featured">
+                    <div class="export-card-header">
+                        <div class="export-card-title">Executive Dashboard</div>
+                        <div class="export-card-badge">Recommended</div>
+                    </div>
+                    <div class="export-card-desc">Complete executive summary including velocity indices, sector performance, critical watch projects, and full project rankings table.</div>
+                    <div class="export-card-meta">Includes: KPI summary, sector breakdown, critical alerts, all 50 projects</div>
+                    <button class="export-btn" onclick="exportPage('index.html')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Export PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Analysis Pages -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Analysis Pages</h2>
+            </div>
+            <div class="export-grid">
+                <div class="export-card">
+                    <div class="export-card-header">
+                        <div class="export-card-title">Infrastructure Constraints</div>
+                    </div>
+                    <div class="export-card-desc">Power grid bottlenecks, interconnection queue analysis, and regional capacity constraints affecting project timelines.</div>
+                    <div class="export-card-meta">Grid operator data, queue positions, power requirements</div>
+                    <button class="export-btn" onclick="exportPage('INFRASTRUCTURE_CONSTRAINTS.html')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Export PDF
+                    </button>
+                </div>
+                <div class="export-card">
+                    <div class="export-card-header">
+                        <div class="export-card-title">Policy and Risk Monitor</div>
+                    </div>
+                    <div class="export-card-desc">Federal policy landscape, CHIPS Act funding status, regulatory risks, and policy impact assessments.</div>
+                    <div class="export-card-meta">Policy tracking, funding awards, regulatory updates</div>
+                    <button class="export-btn" onclick="exportPage('POLICY_MONITOR.html')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Export PDF
+                    </button>
+                </div>
+                <div class="export-card">
+                    <div class="export-card-header">
+                        <div class="export-card-title">Workforce Analysis</div>
+                    </div>
+                    <div class="export-card-desc">Labor market conditions, workforce disruptions by sector, immigration enforcement impacts, and hiring trends.</div>
+                    <div class="export-card-meta">Workforce status, sector breakdown, enforcement tracking</div>
+                    <button class="export-btn" onclick="exportPage('WORKFORCE.html')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Export PDF
+                    </button>
+                </div>
+                <div class="export-card">
+                    <div class="export-card-header">
+                        <div class="export-card-title">Methodology</div>
+                    </div>
+                    <div class="export-card-desc">Velocity scoring methodology, data sources, verification process, and research citations.</div>
+                    <div class="export-card-meta">Scoring framework, data sources, academic references</div>
+                    <button class="export-btn" onclick="exportPage('METHODOLOGY.html')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Export PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Project RAID Files -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Project RAID Files</h2>
+            </div>
+            
+            <!-- Semiconductors -->
+            <div class="sector-group" id="sectorSemi">
+                <div class="sector-header" onclick="toggleSector('sectorSemi')">
+                    <div class="sector-header-left">
+                        <div class="sector-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                        </div>
+                        <span class="sector-name">Semiconductors</span>
+                        <span class="sector-count">11 projects</span>
+                    </div>
+                    <div class="sector-toggle">
+                        <button class="export-all-btn" onclick="event.stopPropagation(); exportSector('semi')">Export All</button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                </div>
+                <div class="sector-content">
+                    <div class="raid-grid">
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">TSMC Arizona</div>
+                                <div class="raid-meta">$65B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SE001_TSMC_Arizona_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Intel Ohio</div>
+                                <div class="raid-meta">$100B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SE002_Intel_Ohio_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Samsung Taylor</div>
+                                <div class="raid-meta">$44B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SE003_Samsung_Taylor_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">GlobalFoundries Malta</div>
+                                <div class="raid-meta">$11B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SE004_GlobalFoundries_Malta_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Applied Materials</div>
+                                <div class="raid-meta">$4B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SE005_Applied_Materials_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Wolfspeed NC</div>
+                                <div class="raid-meta">$5B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SE006_Wolfspeed_NC_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Polar Semiconductor</div>
+                                <div class="raid-meta">$525M investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SE007_Polar_Semiconductor_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Micron NY</div>
+                                <div class="raid-meta">$100B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SE008_Micron_NY_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Texas Instruments</div>
+                                <div class="raid-meta">$30B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SE009_Texas_Instruments_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Micron Idaho</div>
+                                <div class="raid-meta">$15B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SE010_Micron_Idaho_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">SK Hynix Indiana</div>
+                                <div class="raid-meta">$3.9B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SE011_SK_Hynix_Indiana_RAID.html')">Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Batteries -->
+            <div class="sector-group" id="sectorBattery">
+                <div class="sector-header" onclick="toggleSector('sectorBattery')">
+                    <div class="sector-header-left">
+                        <div class="sector-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/><line x1="6" y1="10" x2="6" y2="14"/><line x1="10" y1="10" x2="10" y2="14"/><line x1="14" y1="10" x2="14" y2="14"/></svg>
+                        </div>
+                        <span class="sector-name">Batteries</span>
+                        <span class="sector-count">13 projects</span>
+                    </div>
+                    <div class="sector-toggle">
+                        <button class="export-all-btn" onclick="event.stopPropagation(); exportSector('battery')">Export All</button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                </div>
+                <div class="sector-content">
+                    <div class="raid-grid">
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Panasonic Kansas</div>
+                                <div class="raid-meta">$4B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT001_Panasonic_Kansas_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">SK Battery Georgia</div>
+                                <div class="raid-meta">$2.6B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT002_SK_Battery_Georgia_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">LG Energy Georgia</div>
+                                <div class="raid-meta">$5.5B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT003_LG_Energy_Georgia_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Honda LG Ohio</div>
+                                <div class="raid-meta">$4.4B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT004_Honda_LG_Ohio_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Redwood Materials</div>
+                                <div class="raid-meta">$3.5B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT005_Redwood_Materials_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">StarPlus Kokomo</div>
+                                <div class="raid-meta">$6.3B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT006_StarPlus_Kokomo_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">AESC Kentucky</div>
+                                <div class="raid-meta">$2B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT007_AESC_Kentucky_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Hyundai LG Georgia</div>
+                                <div class="raid-meta">$4.3B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT009_Hyundai_LG_Georgia_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">BlueOval SK</div>
+                                <div class="raid-meta">$5.8B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT010_BlueOval_SK_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Sila Moses Lake</div>
+                                <div class="raid-meta">$600M investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT011_Sila_Moses_Lake_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Ascend Elements</div>
+                                <div class="raid-meta">$1B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT012_Ascend_Elements_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Natron Energy</div>
+                                <div class="raid-meta">$1.4B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT013_Natron_Energy_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">LG Chem Tennessee</div>
+                                <div class="raid-meta">$3.2B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('BT014_LG_Chem_Tennessee_RAID.html')">Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Centers -->
+            <div class="sector-group" id="sectorDC">
+                <div class="sector-header" onclick="toggleSector('sectorDC')">
+                    <div class="sector-header-left">
+                        <div class="sector-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                        </div>
+                        <span class="sector-name">Data Centers</span>
+                        <span class="sector-count">7 projects</span>
+                    </div>
+                    <div class="sector-toggle">
+                        <button class="export-all-btn" onclick="event.stopPropagation(); exportSector('dc')">Export All</button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                </div>
+                <div class="sector-content">
+                    <div class="raid-grid">
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Meta Hyperion</div>
+                                <div class="raid-meta">$10B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('DC001_Meta_Hyperion_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Google AI Campus</div>
+                                <div class="raid-meta">$5B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('DC002_Google_AI_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Oracle Stargate</div>
+                                <div class="raid-meta">$100B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('DC003_Oracle_Stargate_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Amazon AWS</div>
+                                <div class="raid-meta">$35B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('DC004_Amazon_AWS_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Microsoft AI</div>
+                                <div class="raid-meta">$80B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('DC005_Microsoft_AI_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Apple Data Center</div>
+                                <div class="raid-meta">$1B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('DC006_Apple_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">CoreWeave Denton</div>
+                                <div class="raid-meta">$1.2B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('DC007_CoreWeave_Denton_RAID.html')">Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Automotive -->
+            <div class="sector-group" id="sectorAuto">
+                <div class="sector-header" onclick="toggleSector('sectorAuto')">
+                    <div class="sector-header-left">
+                        <div class="sector-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
+                        </div>
+                        <span class="sector-name">Automotive</span>
+                        <span class="sector-count">9 projects</span>
+                    </div>
+                    <div class="sector-toggle">
+                        <button class="export-all-btn" onclick="event.stopPropagation(); exportSector('auto')">Export All</button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                </div>
+                <div class="sector-content">
+                    <div class="raid-grid">
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Ford BlueOval</div>
+                                <div class="raid-meta">$11B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('AU001_Ford_BlueOval_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">GM Factory ZERO</div>
+                                <div class="raid-meta">$7B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('AU002_GM_Factory_ZERO_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Rivian Georgia</div>
+                                <div class="raid-meta">$5B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('AU003_Rivian_Georgia_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Ford BlueOval City</div>
+                                <div class="raid-meta">$5.6B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('AU004_Ford_BlueOval_City_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">VinFast NC</div>
+                                <div class="raid-meta">$4B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('AU005_VinFast_NC_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Hyundai Steel LA</div>
+                                <div class="raid-meta">$1.1B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('AU006_Hyundai_Steel_LA_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Scout Motors</div>
+                                <div class="raid-meta">$2B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('AU007_Scout_Motors_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Hyundai Metaplant</div>
+                                <div class="raid-meta">$7.6B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('AU008_Hyundai_Metaplant_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Toyota NC Battery</div>
+                                <div class="raid-meta">$13.9B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('AU009_Toyota_NC_Battery_RAID.html')">Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pharmaceuticals -->
+            <div class="sector-group" id="sectorPharma">
+                <div class="sector-header" onclick="toggleSector('sectorPharma')">
+                    <div class="sector-header-left">
+                        <div class="sector-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 20.5L3.5 13.5c-1.5-1.5-1.5-4 0-5.5s4-1.5 5.5 0l7 7c1.5 1.5 1.5 4 0 5.5s-4 1.5-5.5 0z"/><path d="m8.5 8.5 7 7"/><path d="m14 5 7 7"/></svg>
+                        </div>
+                        <span class="sector-name">Pharmaceuticals</span>
+                        <span class="sector-count">3 projects</span>
+                    </div>
+                    <div class="sector-toggle">
+                        <button class="export-all-btn" onclick="event.stopPropagation(); exportSector('pharma')">Export All</button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                </div>
+                <div class="sector-content">
+                    <div class="raid-grid">
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Eli Lilly LEAP</div>
+                                <div class="raid-meta">$13B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('PH001_Eli_Lilly_LEAP_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Novo Nordisk</div>
+                                <div class="raid-meta">$6.8B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('PH002_Novo_Nordisk_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Amgen</div>
+                                <div class="raid-meta">$1B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('PH003_Amgen_RAID.html')">Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Energy & Materials -->
+            <div class="sector-group" id="sectorEnergy">
+                <div class="sector-header" onclick="toggleSector('sectorEnergy')">
+                    <div class="sector-header-left">
+                        <div class="sector-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        </div>
+                        <span class="sector-name">Energy and Materials</span>
+                        <span class="sector-count">7 projects</span>
+                    </div>
+                    <div class="sector-toggle">
+                        <button class="export-all-btn" onclick="event.stopPropagation(); exportSector('energy')">Export All</button>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                </div>
+                <div class="sector-content">
+                    <div class="raid-grid">
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Form Energy</div>
+                                <div class="raid-meta">$760M investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('ES001_Form_Energy_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Plug Power</div>
+                                <div class="raid-meta">$1.6B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('HY001_Plug_Power_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Air Products</div>
+                                <div class="raid-meta">$4.5B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('HY002_Air_Products_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Qcells Georgia</div>
+                                <div class="raid-meta">$2.5B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SO001_Qcells_Georgia_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">First Solar</div>
+                                <div class="raid-meta">$1.1B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('SO002_First_Solar_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Nucor WV</div>
+                                <div class="raid-meta">$3.1B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('ST001_Nucor_WV_RAID.html')">Export</button>
+                        </div>
+                        <div class="raid-item">
+                            <div class="raid-info">
+                                <div class="raid-name">Steel Dynamics</div>
+                                <div class="raid-meta">$2.2B investment</div>
+                            </div>
+                            <button class="raid-export-btn" onclick="exportPage('ST002_Steel_Dynamics_RAID.html')">Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer" style="text-align: center;">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-brand-section" style="display: flex; align-items: center; gap: 0.75rem;">
+                    <img src="Velocity_Transparent_Logo.svg" alt="Velocity" style="height: 36px; width: auto;">
+                    <div style="width: 6px; height: 28px; background: var(--electric-yellow);"></div>
+                    <img src="New_HCC_Logo.svg" alt="HCC" style="height: 70px; width: auto; margin-left: 16px;">
+                </div>
+                <div class="footer-links-section">
+                    <a href="index.html">Dashboard</a>
+                    <a href="METHODOLOGY.html">Methodology</a>
+                    <a href="#">API Access</a>
+                    <a href="mailto:press@velocityxp.com">Press Inquiries</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-disclaimer">Data provided for informational purposes only. Not investment advice.</div>
+                <div class="footer-copyright">© 2026 Velocity. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function toggleSector(sectorId) {
+            const sector = document.getElementById(sectorId);
+            sector.classList.toggle('expanded');
+        }
+        
+        function exportPage(pageName) {
+            // Open page in new window with print parameter
+            const printWindow = window.open(pageName + '?print=true', '_blank');
+            
+            // Wait for page to load then trigger print
+            printWindow.onload = function() {
+                setTimeout(function() {
+                    printWindow.print();
+                }, 500);
+            };
+        }
+        
+        function exportSector(sector) {
+            const sectorFiles = {
+                'semi': ['SE001_TSMC_Arizona_RAID.html', 'SE002_Intel_Ohio_RAID.html', 'SE003_Samsung_Taylor_RAID.html', 'SE004_GlobalFoundries_Malta_RAID.html', 'SE005_Applied_Materials_RAID.html', 'SE006_Wolfspeed_NC_RAID.html', 'SE007_Polar_Semiconductor_RAID.html', 'SE008_Micron_NY_RAID.html', 'SE009_Texas_Instruments_RAID.html', 'SE010_Micron_Idaho_RAID.html', 'SE011_SK_Hynix_Indiana_RAID.html'],
+                'battery': ['BT001_Panasonic_Kansas_RAID.html', 'BT002_SK_Battery_Georgia_RAID.html', 'BT003_LG_Energy_Georgia_RAID.html', 'BT004_Honda_LG_Ohio_RAID.html', 'BT005_Redwood_Materials_RAID.html', 'BT006_StarPlus_Kokomo_RAID.html', 'BT007_AESC_Kentucky_RAID.html', 'BT009_Hyundai_LG_Georgia_RAID.html', 'BT010_BlueOval_SK_RAID.html', 'BT011_Sila_Moses_Lake_RAID.html', 'BT012_Ascend_Elements_RAID.html', 'BT013_Natron_Energy_RAID.html', 'BT014_LG_Chem_Tennessee_RAID.html'],
+                'dc': ['DC001_Meta_Hyperion_RAID.html', 'DC002_Google_AI_RAID.html', 'DC003_Oracle_Stargate_RAID.html', 'DC004_Amazon_AWS_RAID.html', 'DC005_Microsoft_AI_RAID.html', 'DC006_Apple_RAID.html', 'DC007_CoreWeave_Denton_RAID.html'],
+                'auto': ['AU001_Ford_BlueOval_RAID.html', 'AU002_GM_Factory_ZERO_RAID.html', 'AU003_Rivian_Georgia_RAID.html', 'AU004_Ford_BlueOval_City_RAID.html', 'AU005_VinFast_NC_RAID.html', 'AU006_Hyundai_Steel_LA_RAID.html', 'AU007_Scout_Motors_RAID.html', 'AU008_Hyundai_Metaplant_RAID.html', 'AU009_Toyota_NC_Battery_RAID.html'],
+                'pharma': ['PH001_Eli_Lilly_LEAP_RAID.html', 'PH002_Novo_Nordisk_RAID.html', 'PH003_Amgen_RAID.html'],
+                'energy': ['ES001_Form_Energy_RAID.html', 'HY001_Plug_Power_RAID.html', 'HY002_Air_Products_RAID.html', 'SO001_Qcells_Georgia_RAID.html', 'SO002_First_Solar_RAID.html', 'ST001_Nucor_WV_RAID.html', 'ST002_Steel_Dynamics_RAID.html']
+            };
+            
+            const files = sectorFiles[sector];
+            if (files) {
+                alert('This will open ' + files.length + ' files for printing. Click OK to continue, then use your browser\'s print dialog to save each as PDF.');
+                files.forEach(function(file, index) {
+                    setTimeout(function() {
+                        exportPage(file);
+                    }, index * 1000);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
