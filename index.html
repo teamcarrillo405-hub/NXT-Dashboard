@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NXT Dashboard - Git Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: #2d3748;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            opacity: 0.8;
+            font-size: 1.1em;
+        }
+
+        .dashboard-content {
+            padding: 40px;
+        }
+
+        .git-section {
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .git-section h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .file-list {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            min-height: 150px;
+        }
+
+        .file-item {
+            padding: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-item input[type="checkbox"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .file-name {
+            flex: 1;
+            color: #2d3748;
+        }
+
+        .file-status {
+            color: #48bb78;
+            font-size: 0.9em;
+            padding: 4px 8px;
+            background: #f0fff4;
+            border-radius: 4px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #38a169;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+        }
+
+        .btn-danger {
+            background: #f56565;
+            color: white;
+        }
+
+        .btn-danger:hover:not(:disabled) {
+            background: #e53e3e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 101, 101, 0.4);
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .status-message.show {
+            display: block;
+        }
+
+        .status-message.success {
+            background: #f0fff4;
+            border: 1px solid #48bb78;
+            color: #22543d;
+        }
+
+        .status-message.error {
+            background: #fff5f5;
+            border: 1px solid #f56565;
+            color: #742a2a;
+        }
+
+        .status-message.info {
+            background: #ebf8ff;
+            border: 1px solid #4299e1;
+            color: #2c5282;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 NXT Dashboard</h1>
+            <p class="subtitle">Git Repository Management Interface</p>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="git-section">
+                <h2>📁 Unstaged Files</h2>
+                <div class="file-list" id="fileList">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 13h6v-2H9v2zm0 4h6v-2H9v2zm0-8h6V7H9v2zm-4-.5v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-11c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2z"/>
+                        </svg>
+                        <p>No files to stage</p>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn-primary" id="gitAddBtn" disabled>
+                        <span id="gitAddText">Git Add Selected</span>
+                    </button>
+                    <button class="btn-secondary" id="refreshBtn">
+                        Refresh Files
+                    </button>
+                    <button class="btn-danger" id="resetBtn" disabled>
+                        Reset Selection
+                    </button>
+                </div>
+
+                <div class="status-message" id="statusMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <script>
+        // Simulated file data for demo purposes
+        let unstagedFiles = [
+            { name: 'index.html', status: 'modified' },
+            { name: 'styles.css', status: 'new' },
+            { name: 'script.js', status: 'modified' },
+            { name: 'package.json', status: 'modified' }
+        ];
+
+        let selectedFiles = new Set();
+
+        // DOM Elements
+        const fileList = document.getElementById('fileList');
+        const gitAddBtn = document.getElementById('gitAddBtn');
+        const gitAddText = document.getElementById('gitAddText');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const statusMessage = document.getElementById('statusMessage');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
+        // Initialize the application
+        function init() {
+            renderFileList();
+            setupEventListeners();
+        }
+
+        // Render the file list
+        function renderFileList() {
+            if (unstagedFiles.length === 0) {
+                fileList.innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 13h6v-2H9v2zm0 4h6v-2H9v2zm0-8h6V7H9v2zm-4-.5v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-11c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2z"/>
+                        </svg>
+                        <p>No files to stage</p>
+                    </div>
+                `;
+                return;
+            }
+
+            fileList.innerHTML = unstagedFiles.map((file, index) => `
+                <div class="file-item">
+                    <input type="checkbox" id="file-${index}" data-filename="${file.name}">
+                    <label for="file-${index}" class="file-name">${file.name}</label>
+                    <span class="file-status">${file.status}</span>
+                </div>
+            `).join('');
+
+            // Add event listeners to checkboxes
+            document.querySelectorAll('.file-item input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', handleFileSelection);
+            });
+        }
+
+        // Handle file selection
+        function handleFileSelection(event) {
+            const filename = event.target.dataset.filename;
+            
+            if (event.target.checked) {
+                selectedFiles.add(filename);
+            } else {
+                selectedFiles.delete(filename);
+            }
+
+            updateButtonStates();
+        }
+
+        // Update button states based on selection
+        function updateButtonStates() {
+            const hasSelection = selectedFiles.size > 0;
+            gitAddBtn.disabled = !hasSelection;
+            resetBtn.disabled = !hasSelection;
+            
+            if (hasSelection) {
+                gitAddText.textContent = `Git Add (${selectedFiles.size} file${selectedFiles.size > 1 ? 's' : ''})`;
+            } else {
+                gitAddText.textContent = 'Git Add Selected';
+            }
+        }
+
+        // Show status message
+        function showStatus(message, type = 'info') {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message show ${type}`;
+            
+            // Hide after 5 seconds
+            setTimeout(() => {
+                statusMessage.className = 'status-message';
+            }, 5000);
+        }
+
+        // Show loading overlay
+        function showLoading(show = true) {
+            loadingOverlay.className = show ? 'loading-overlay show' : 'loading-overlay';
+        }
+
+        // Simulate git add operation
+        async function performGitAdd() {
+            // Prevent blank screen by ensuring UI stays responsive
+            try {
+                showLoading(true);
+                
+                // Simulate API call with a delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // In a real application, this would call a backend API
+                const filesArray = Array.from(selectedFiles);
+                console.log('Adding files:', filesArray);
+                
+                // Remove added files from unstaged list
+                unstagedFiles = unstagedFiles.filter(file => !selectedFiles.has(file.name));
+                
+                // Clear selection
+                selectedFiles.clear();
+                
+                // Update UI
+                renderFileList();
+                updateButtonStates();
+                
+                showLoading(false);
+                showStatus(`Successfully added ${filesArray.length} file${filesArray.length > 1 ? 's' : ''} to staging area!`, 'success');
+                
+            } catch (error) {
+                showLoading(false);
+                showStatus(`Error: ${error.message}`, 'error');
+                console.error('Git add error:', error);
+            }
+        }
+
+        // Refresh file list
+        function refreshFileList() {
+            showLoading(true);
+            
+            // Simulate fetching new file list
+            setTimeout(() => {
+                // In a real app, this would fetch from the server
+                unstagedFiles = [
+                    { name: 'index.html', status: 'modified' },
+                    { name: 'styles.css', status: 'new' },
+                    { name: 'script.js', status: 'modified' },
+                    { name: 'package.json', status: 'modified' },
+                    { name: 'README.md', status: 'new' }
+                ];
+                
+                selectedFiles.clear();
+                renderFileList();
+                updateButtonStates();
+                showLoading(false);
+                showStatus('File list refreshed successfully!', 'info');
+            }, 800);
+        }
+
+        // Reset selection
+        function resetSelection() {
+            selectedFiles.clear();
+            document.querySelectorAll('.file-item input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            updateButtonStates();
+            showStatus('Selection reset', 'info');
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            gitAddBtn.addEventListener('click', performGitAdd);
+            refreshBtn.addEventListener('click', refreshFileList);
+            resetBtn.addEventListener('click', resetSelection);
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
