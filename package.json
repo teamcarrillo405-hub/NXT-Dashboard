@@ -1,0 +1,13 @@
+{
+  "name": "nxt-dashboard",
+  "version": "1.0.0",
+  "description": "NXT Dashboard - Git Repository Management Interface",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -s .",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": ["dashboard", "git", "interface"],
+  "author": "",
+  "license": "ISC"
+}
