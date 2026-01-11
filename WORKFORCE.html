@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workforce Analysis | NXT Infrastructure Velocity Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --deep-indigo: #1e1b4b;
+            --electric-yellow: #FDFF66;
+            --white: #ffffff;
+            --off-white: #f8fafc;
+            --green: #22c55e;
+            --green-bg: rgba(34, 197, 94, 0.1);
+            --yellow: #eab308;
+            --yellow-bg: rgba(234, 179, 8, 0.1);
+            --red: #ef4444;
+            --red-bg: rgba(239, 68, 68, 0.1);
+            --border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--off-white); color: var(--text-primary); line-height: 1.6; }
+        
+        .header { background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), var(--deep-indigo); color: #fff; padding: 1rem 2rem; }
+        .header-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--white); }
+        .brand-mark { width: 6px; height: 36px; background: var(--electric-yellow); }
+        .brand-text { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; }
+        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 500; text-decoration: none; cursor: pointer; border: none; }
+        .btn-home { background: var(--electric-yellow); color: var(--deep-indigo); }
+        
+        .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem 0; font-size: 0.8rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--deep-indigo); }
+        .breadcrumb .separator { margin: 0 0.5rem; opacity: 0.5; }
+        .breadcrumb .current { font-weight: 500; color: var(--text-primary); }
+        
+        .analysis-nav { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .analysis-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); margin-bottom: 0.5rem; }
+        .analysis-tab { padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 500; text-decoration: none; color: var(--text-secondary); transition: all 0.2s; }
+        .analysis-tab:hover { background: var(--off-white); color: var(--text-primary); }
+        .analysis-tab.active { background: var(--deep-indigo); color: var(--white); }
+        
+        .main { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        
+        .page-header { margin-bottom: 2rem; }
+        .page-title { font-size: 1.75rem; font-weight: 700; color: var(--deep-indigo); margin-bottom: 0.5rem; }
+        .page-subtitle { font-size: 0.95rem; color: var(--text-secondary); }
+        
+        .alert-banner { background: var(--white); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid var(--border); }
+        .alert-banner.critical { border: 1px solid var(--border); }
+        .alert-content { flex: 1; }
+        .alert-title { font-size: 0.85rem; font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .alert-banner.critical .alert-title { color: var(--text-primary); }
+        .alert-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+        
+        .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        .metric-card { background: linear-gradient(135deg, var(--deep-indigo) 0%, #312e81 100%); border-radius: 12px; padding: 1.5rem; text-align: center; }
+        .metric-value { font-size: 1.875rem; font-weight: 800; color: var(--white); line-height: 1.1; margin-bottom: 0.35rem; }
+        .metric-label { font-size: 0.65rem; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 0.25rem; }
+        .metric-detail { font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+        
+        .section { margin-bottom: 2rem; }
+        .section-title { font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        
+        .card { background: var(--white); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border); margin-bottom: 1.5rem; }
+        .card-indigo { background: linear-gradient(135deg, var(--deep-indigo) 0%, #312e81 100%); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .card-indigo h3 { color: var(--white); }
+        .card-indigo .bar-label { color: rgba(255,255,255,0.9); }
+        .card-indigo .bar-value { color: var(--electric-yellow); }
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        
+        .workforce-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+        .workforce-table th { background: var(--off-white); padding: 0.875rem 1rem; text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); font-weight: 600; }
+        .workforce-table td { padding: 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .workforce-table tr:hover { background: rgba(99, 102, 241, 0.03); }
+        .project-name { font-weight: 600; color: var(--text-primary); }
+        .project-name a { color: var(--text-primary); text-decoration: none; }
+        .project-name a:hover { color: var(--deep-indigo); }
+        .project-loc { font-size: 0.75rem; color: var(--text-muted); }
+        
+        .status-badge { display: inline-block; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .status-badge.shortage { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        .status-badge.layoffs { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+        .status-badge.ice { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        .status-badge.risk { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+        .status-badge.ok { background: #e0e7ff; color: #3730a3; border: 1px solid #a5b4fc; }
+        .status-badge.hiring { background: var(--deep-indigo); color: white; }
+        
+        .sector-card { background: linear-gradient(135deg, var(--deep-indigo) 0%, #312e81 100%); border-radius: 12px; padding: 1.25rem; }
+        .sector-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .sector-name { font-weight: 700; font-size: 1rem; color: var(--white); }
+        .sector-rate { font-family: 'Inter', -apple-system, sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--electric-yellow); }
+        .sector-bar { height: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; overflow: hidden; margin-bottom: 0.75rem; }
+        .sector-bar-fill { height: 100%; border-radius: 4px; }
+        .sector-bar-fill.high { background: #fca5a5; }
+        .sector-bar-fill.medium { background: var(--electric-yellow); }
+        .sector-bar-fill.low { background: #86efac; }
+        .sector-detail { font-size: 0.75rem; color: rgba(255,255,255,0.7); }
+        
+        .insight-box { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); color: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; }
+        .insight-label { font-size: 0.65rem; font-weight: 700; color: var(--electric-yellow); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+        .insight-text { font-size: 0.9rem; line-height: 1.8; color: rgba(255,255,255,0.9); }
+        
+        .source-note { font-size: 0.7rem; color: var(--text-muted); margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+        .source-note a { color: var(--deep-indigo); }
+        
+        .footer { background: var(--deep-indigo); color: var(--white); padding: 0; margin-top: 2rem; }
+        .footer-content { max-width: 1400px; margin: 0 auto; }
+        .footer-main { display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-brand-section { display: flex; align-items: center; gap: 0.75rem; }
+        .footer-links-section { display: flex; flex-direction: row; align-items: center; gap: 1.5rem; }
+        .footer-links-section a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.75rem; }
+        .footer-links-section a:hover { color: var(--white); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; flex-wrap: wrap; gap: 0.5rem; }
+        .footer-disclaimer { font-size: 0.6rem; color: rgba(255,255,255,0.4); max-width: 500px; text-align: center; }
+        .footer-copyright { font-size: 0.65rem; color: rgba(255,255,255,0.5); }
+        
+        @media (max-width: 900px) {
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+        /* Timeline Toggle Buttons */
+        .timeline-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .timeline-toggle:hover {
+            border-color: var(--deep-indigo);
+            color: var(--deep-indigo);
+        }
+        .timeline-toggle.active {
+            background: var(--deep-indigo);
+            border-color: var(--deep-indigo);
+            color: var(--white);
+        }
+        .timeline-toggle .toggle-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .timeline-toggle.active .toggle-dot {
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+        }
+        
+        /* Print Styles */
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            body { background: white !important; font-size: 10pt; }
+            .header { position: relative !important; background: #1e1b4b !important; padding: 0.5rem 1rem !important; }
+            .breadcrumb, .analysis-nav { display: none !important; }
+            .main { padding: 1rem !important; max-width: 100% !important; }
+            .footer { display: none !important; }
+            .btn-home { display: none !important; }
+            
+            .page-header { margin-bottom: 1rem !important; }
+            .page-title { font-size: 1.25rem !important; }
+            
+            .metrics-grid { gap: 0.5rem !important; }
+            .metric-card { padding: 0.75rem !important; }
+            .metric-value { font-size: 1.25rem !important; }
+            
+            .section { page-break-inside: avoid; margin-bottom: 1rem !important; }
+            .card { padding: 1rem !important; page-break-inside: avoid; }
+            .grid-2, .grid-3 { gap: 0.75rem !important; }
+            
+            .sector-card { padding: 1rem !important; page-break-inside: avoid; }
+            
+            table { font-size: 8pt !important; }
+            th, td { padding: 0.5rem !important; }
+            
+            h2, h3 { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="brand">
+                <div class="brand-mark"></div>
+                <span class="brand-text">NXT INFRASTRUCTURE VELOCITY REPORT</span>
+            </a>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(34,197,94,0.15); padding: 0.4rem 0.75rem; border-radius: 6px;">
+                    <span style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%;"></span>
+                    <span style="font-size: 0.7rem; color: #22c55e; font-weight: 600;">Live</span>
+                    <span style="color: rgba(255,255,255,0.3);">|</span>
+                    <span style="font-size: 0.65rem; color: rgba(255,255,255,0.8);">Data as of Jan 10, 2026</span>
+                </div>
+                <a href="index.html" class="btn btn-home">Back to Dashboard</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="breadcrumb">
+        <a href="index.html">Dashboard</a>
+        <span class="separator">/</span>
+        <a href="#">Analysis</a>
+        <span class="separator">/</span>
+        <span class="current">Workforce</span>
+    </div>
+    
+    <nav class="analysis-nav">
+        <div class="analysis-tabs">
+            <a href="INFRASTRUCTURE_CONSTRAINTS.html" class="analysis-tab">Infrastructure</a>
+            <a href="POLICY_MONITOR.html" class="analysis-tab">Policy & Risk</a>
+            <a href="WORKFORCE.html" class="analysis-tab active">Workforce</a>
+            <a href="SUPPLY_CHAIN.html" class="analysis-tab">Supply Chain</a>
+            <a href="COMPETITIVE.html" class="analysis-tab">Competitive</a>
+            <a href="METHODOLOGY.html" class="analysis-tab">Methodology</a>
+        </div>
+    </nav>
+    
+    <main class="main">
+        <div class="page-header">
+            <h1 class="page-title">Workforce Analysis</h1>
+            <p class="page-subtitle">Labor market constraints, skills gaps, and immigration enforcement impacts on infrastructure execution</p>
+        </div>
+        
+        <div class="alert-banner">
+            
+            <div class="alert-content">
+                <div class="alert-title">AGC 2025 Workforce Survey: 92% of Contractors Struggling to Hire</div>
+                <div class="alert-text">Survey of 1,342 contractors (July-Aug 2025) shows persistent skilled labor shortage across construction sectors. 28% of firms report workforce disruptions from immigration enforcement actions.</div>
+            </div>
+        </div>
+        
+        <div class="metrics-grid">
+            <div class="metric-card">
+                
+                <div class="metric-value">92%</div>
+                <div class="metric-label">Contractors Can't Hire</div>
+                <div class="metric-detail">AGC Survey Aug 2025</div>
+            </div>
+            <div class="metric-card">
+                
+                <div class="metric-value">16</div>
+                <div class="metric-label">Projects Workforce-Affected</div>
+                <div class="metric-detail">32% of 50 tracked projects</div>
+            </div>
+            <div class="metric-card">
+                
+                <div class="metric-value">28%</div>
+                <div class="metric-label">Immigration Enforcement Impact</div>
+                <div class="metric-detail">AGC firms reporting disruption</div>
+            </div>
+            <div class="metric-card">
+                
+                <div class="metric-value">5</div>
+                <div class="metric-label">Projects with Layoffs</div>
+                <div class="metric-detail">Demand-driven workforce reductions</div>
+            </div>
+        </div>
+        
+        <div class="insight-box">
+            <div class="insight-label">Key Finding</div>
+            <div class="insight-text">Workforce constraints are a systemic risk affecting 32% of tracked projects (16 of 50). Unlike grid interconnection delays (which are the sole cause for many projects), workforce issues typically compound with other challenges like EV demand softness, corporate financial distress, and regulatory hurdles. The September 4, 2025 HSI enforcement at HL-GA Battery in Georgia (475 detained, 300+ South Korean nationals) introduced immigration enforcement as a material risk category for projects with visa-dependent workforces.</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Workforce Status by Sector</h2>
+            <div class="grid-3">
+                <div class="sector-card">
+                    <div class="sector-header">
+                        <span class="sector-name">Batteries</span>
+                        <span class="sector-rate" style="color: #fca5a5;">54%</span>
+                    </div>
+                    <div class="sector-bar"><div class="sector-bar-fill high" style="width: 54%;"></div></div>
+                    <div class="sector-detail">7 of 13 projects with workforce disruption. Layoffs from EV demand softness (SK Battery, BlueOval SK) plus HSI raid at HL-GA Battery.</div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-header">
+                        <span class="sector-name">Semiconductors</span>
+                        <span class="sector-rate" style="color: var(--electric-yellow);">27%</span>
+                    </div>
+                    <div class="sector-bar"><div class="sector-bar-fill medium" style="width: 27%;"></div></div>
+                    <div class="sector-detail">3 of 11 projects affected. Intel layoffs (24,500), Samsung Taylor slowdown, Wolfspeed Chapter 11. Advanced manufacturing skills remain scarce.</div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-header">
+                        <span class="sector-name">Data Centers</span>
+                        <span class="sector-rate" style="color: #86efac;">0%</span>
+                    </div>
+                    <div class="sector-bar"><div class="sector-bar-fill low" style="width: 5%;"></div></div>
+                    <div class="sector-detail">0 of 7 projects with workforce shortage delays. Hyperscalers executing without labor constraints.</div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-header">
+                        <span class="sector-name">Pharmaceuticals</span>
+                        <span class="sector-rate" style="color: var(--electric-yellow);">33%</span>
+                    </div>
+                    <div class="sector-bar"><div class="sector-bar-fill medium" style="width: 33%;"></div></div>
+                    <div class="sector-detail">1 of 3 projects affected. Corporate restructuring layoffs (Novo Nordisk 9,000) but project construction continues on schedule.</div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-header">
+                        <span class="sector-name">Energy & Materials</span>
+                        <span class="sector-rate" style="color: #86efac;">14%</span>
+                    </div>
+                    <div class="sector-bar"><div class="sector-bar-fill low" style="width: 14%;"></div></div>
+                    <div class="sector-detail">1 of 7 projects affected (Plug Power critical). Solar, steel, and energy storage executing on schedule.</div>
+                </div>
+                <div class="sector-card">
+                    <div class="sector-header">
+                        <span class="sector-name">Automotive</span>
+                        <span class="sector-rate" style="color: #fca5a5;">44%</span>
+                    </div>
+                    <div class="sector-bar"><div class="sector-bar-fill high" style="width: 44%;"></div></div>
+                    <div class="sector-detail">4 of 9 projects affected. GM Factory ZERO distressed, Ford BlueOval City distressed, VinFast critical, Rivian monitoring.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Immigration Enforcement Impact</h2>
+            <div class="card">
+                <div class="alert-banner critical" style="margin-bottom: 1rem;">
+                    
+                    <div class="alert-content">
+                        <div class="alert-title">Operation Low Voltage: Largest Single-Site HSI Enforcement in History</div>
+                        <div class="alert-text">September 4, 2025: 475 workers detained at HL-GA Battery construction site in Ellabell, GA (Hyundai Motor Group Metaplant campus). Over 300 South Korean nationals among those detained. Battery plant construction halted, with Hyundai CEO José Muñoz confirming 2-3 month delay. Construction resumed November 2025.</div>
+                    </div>
+                </div>
+                <table class="workforce-table">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Investment</th>
+                            <th>ICE Impact</th>
+                            <th>Timeline Effect</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="project-name"><a href="BT009_Hyundai_LG_Georgia_RAID.html">HL-GA Battery (Hyundai-LG JV)</a></div>
+                                <div class="project-loc">Ellabell, Bryan County, GA</div>
+                            </td>
+                            <td>$4.3B</td>
+                            <td><span class="status-badge ice">475 Detained</span></td>
+                            <td>2-3 month delay, production target H1 2026</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="project-name"><a href="AU008_Hyundai_Metaplant_RAID.html">Hyundai Metaplant Georgia</a></div>
+                                <div class="project-loc">Ellabell, Bryan County, GA</div>
+                            </td>
+                            <td>$7.6B</td>
+                            <td><span class="status-badge ok">EV Ops Unaffected</span></td>
+                            <td>Ioniq 5/9 production continued</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="source-note">Source: DOJ Press Release "Operation Low Voltage" (Sept 5, 2025), HSI Special Agent in Charge Steven Schrank statement, Hyundai official statement</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Projects with Workforce Layoffs</h2>
+            <div class="card">
+                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem;">Layoffs reflect demand destruction or corporate distress rather than labor market dysfunction. These are symptoms of underlying business challenges.</p>
+                <table class="workforce-table">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Sector</th>
+                            <th>Layoffs</th>
+                            <th>Root Cause</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="project-name"><a href="SE002_Intel_Ohio_RAID.html">Intel Ohio</a></div>
+                                <div class="project-loc">New Albany, OH</div>
+                            </td>
+                            <td>Semiconductor</td>
+                            <td><span class="status-badge layoffs">24,500 Corporate</span></td>
+                            <td>Financial distress, no foundry customers</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="project-name"><a href="BT010_BlueOval_SK_RAID.html">Ford BlueOval SK</a></div>
+                                <div class="project-loc">Glendale, KY</div>
+                            </td>
+                            <td>Battery</td>
+                            <td><span class="status-badge layoffs">1,600</span></td>
+                            <td>JV dissolved, EV demand softness</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="project-name"><a href="BT002_SK_Battery_Georgia_RAID.html">SK Battery Georgia</a></div>
+                                <div class="project-loc">Commerce, GA</div>
+                            </td>
+                            <td>Battery</td>
+                            <td><span class="status-badge layoffs">Layoffs + Furloughs</span></td>
+                            <td>EV demand softness (3,000 workforce reduced)</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="project-name">GM/Samsung SDI</div>
+                                <div class="project-loc">New Carlisle, IN</div>
+                            </td>
+                            <td>Battery</td>
+                            <td><span class="status-badge layoffs">Construction Pause</span></td>
+                            <td>Design changes, production line redesign (Oct 2025)</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="project-name"><a href="PH002_Novo_Nordisk_RAID.html">Novo Nordisk</a></div>
+                                <div class="project-loc">Clayton, NC</div>
+                            </td>
+                            <td>Pharma</td>
+                            <td><span class="status-badge layoffs">9,000 Global</span></td>
+                            <td>Corporate restructuring</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Workforce Success Stories</h2>
+            <div class="card">
+                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem;">Projects with proactive workforce development partnerships are executing on schedule. Investment in training correlates with execution success.</p>
+                <table class="workforce-table">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Velocity</th>
+                            <th>Workforce Strategy</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="project-name"><a href="SE001_TSMC_Arizona_RAID.html">TSMC Arizona</a></div>
+                                <div class="project-loc">Phoenix, AZ</div>
+                            </td>
+                            <td><strong>85</strong></td>
+                            <td>Taiwan technician transfers, ASU partnership, local training programs</td>
+                            <td><span class="status-badge ok">Resolved</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="project-name"><a href="SE009_Texas_Instruments_RAID.html">Texas Instruments</a></div>
+                                <div class="project-loc">Sherman, TX</div>
+                            </td>
+                            <td><strong>88</strong></td>
+                            <td>40+ college partnerships, apprenticeship programs</td>
+                            <td><span class="status-badge hiring">Active Hiring</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="project-name"><a href="AU009_Toyota_NC_Battery_RAID.html">Toyota NC Battery</a></div>
+                                <div class="project-loc">Liberty, NC</div>
+                            </td>
+                            <td><strong>88</strong></td>
+                            <td>Community college programs, competitive wages</td>
+                            <td><span class="status-badge ok">On Track</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="project-name"><a href="BT006_StarPlus_Kokomo_RAID.html">StarPlus Energy</a></div>
+                                <div class="project-loc">Kokomo, IN</div>
+                            </td>
+                            <td><strong>82</strong></td>
+                            <td>Indiana University cultural integration, Samsung partnership</td>
+                            <td><span class="status-badge ok">On Track</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">AGC Survey Key Findings</h2>
+            <div class="grid-2">
+                <div class="card-indigo">
+                    <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--white);">Shortage Impact on Projects</h3>
+                    <div style="margin-bottom: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.875rem; margin-bottom: 0.25rem;">
+                            <span style="color: rgba(255,255,255,0.9);">Projects delayed by shortages</span>
+                            <span style="font-weight: 600; color: var(--electric-yellow);">45%</span>
+                        </div>
+                        <div style="height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px;">
+                            <div style="width: 45%; height: 100%; background: #fca5a5; border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.875rem; margin-bottom: 0.25rem;">
+                            <span style="color: rgba(255,255,255,0.9);">Candidates lack skills or licenses</span>
+                            <span style="font-weight: 600; color: var(--electric-yellow);">57%</span>
+                        </div>
+                        <div style="height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px;">
+                            <div style="width: 57%; height: 100%; background: #fca5a5; border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.875rem; margin-bottom: 0.25rem;">
+                            <span style="color: rgba(255,255,255,0.9);">Firms affected by immigration enforcement</span>
+                            <span style="font-weight: 600; color: var(--electric-yellow);">28%</span>
+                        </div>
+                        <div style="height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px;">
+                            <div style="width: 28%; height: 100%; background: var(--electric-yellow); border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.875rem; margin-bottom: 0.25rem;">
+                            <span style="color: rgba(255,255,255,0.9);">Projects impacted by tariffs</span>
+                            <span style="font-weight: 600; color: var(--electric-yellow);">16%</span>
+                        </div>
+                        <div style="height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px;">
+                            <div style="width: 16%; height: 100%; background: var(--electric-yellow); border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                    <div class="source-note" style="color: rgba(255,255,255,0.5); border-top-color: rgba(255,255,255,0.2);">Source: AGC 2025 Workforce Survey, 1,342 respondents</div>
+                </div>
+                <div class="card-indigo">
+                    <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--white);">Contractor Responses to Shortage</h3>
+                    <div style="margin-bottom: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.875rem; margin-bottom: 0.25rem;">
+                            <span style="color: rgba(255,255,255,0.9);">Increased base pay</span>
+                            <span style="font-weight: 600; color: var(--electric-yellow);">95%</span>
+                        </div>
+                        <div style="height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px;">
+                            <div style="width: 95%; height: 100%; background: var(--electric-yellow); border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.875rem; margin-bottom: 0.25rem;">
+                            <span style="color: rgba(255,255,255,0.9);">Increased training investment</span>
+                            <span style="font-weight: 600; color: var(--electric-yellow);">42%</span>
+                        </div>
+                        <div style="height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px;">
+                            <div style="width: 42%; height: 100%; background: var(--electric-yellow); border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.875rem; margin-bottom: 0.25rem;">
+                            <span style="color: rgba(255,255,255,0.9);">Using more subcontractors</span>
+                            <span style="font-weight: 600; color: var(--electric-yellow);">20%</span>
+                        </div>
+                        <div style="height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px;">
+                            <div style="width: 20%; height: 100%; background: var(--electric-yellow); border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                    <div class="source-note" style="color: rgba(255,255,255,0.5); border-top-color: rgba(255,255,255,0.2);">Source: AGC 2025 Workforce Survey, 1,342 respondents</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">National Labor Market Context</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;">Construction Employment (BLS Dec 2025)</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--deep-indigo);">5.3%</div>
+                            <div style="font-size: 0.75rem; color: var(--text-secondary);">Construction Unemployment Rate</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--deep-indigo);">4.4%</div>
+                            <div style="font-size: 0.75rem; color: var(--text-secondary);">National Unemployment Rate</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--deep-indigo);">584K</div>
+                            <div style="font-size: 0.75rem; color: var(--text-secondary);">2025 Jobs Added (Weakest Since 2003)</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--deep-indigo);">$58,360</div>
+                            <div style="font-size: 0.75rem; color: var(--text-secondary);">Median Annual Wage (BLS May 2024)</div>
+                        </div>
+                    </div>
+                    <div class="source-note">Source: BLS Employment Situation (Jan 9, 2026), BLS OEWS (May 2024)</div>
+                </div>
+                <div class="card">
+                    <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;">Structural Labor Shortage Factors</h3>
+                    <div style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6;">
+                        <div style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">439,000</strong> net new workers needed in 2025 (ABC Jan 2025)</div>
+                        <div style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">25.5%</strong> of construction workforce is foreign-born (HBI Fall 2025, historic high)</div>
+                        <div style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">723,000</strong> workers needed annually through 2034 (BLS projections)</div>
+                        <div style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">+19%</strong> wage premium vs. private sector average (AGC)</div>
+                    </div>
+                    <div class="source-note">Source: ABC (Jan 2025), HBI Construction Labor Market Report (Fall 2025), AGC</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Workforce Risk Timeline Interactive Chart -->
+        <div class="section">
+            <h2 class="section-title">Workforce Risk Timeline</h2>
+            <div class="card" style="padding: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <div style="font-size: 1.1rem; font-weight: 700; color: var(--deep-indigo); margin-bottom: 0.25rem;">Labor Competition and Wage Pressure</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Track overlapping project timelines and trade-specific wage acceleration through 2027</div>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button id="toggleCompetition" class="timeline-toggle active" onclick="toggleLayer('competition')">
+                            <span class="toggle-dot" style="background: #6366f1;"></span>
+                            Labor Competition
+                        </button>
+                        <button id="toggleWages" class="timeline-toggle active" onclick="toggleLayer('wages')">
+                            <span class="toggle-dot" style="background: #FDFF66;"></span>
+                            Wage Trends
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chart Container -->
+                <div style="position: relative; height: 420px; margin-bottom: 1.5rem;">
+                    <canvas id="workforceRiskChart"></canvas>
+                </div>
+                
+                <!-- Legend and Key Insights -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem;">
+                    <!-- Peak Competition Windows -->
+                    <div style="background: linear-gradient(135deg, var(--deep-indigo) 0%, #312e81 100%); border-radius: 10px; padding: 1.25rem; color: white;">
+                        <div style="font-size: 0.7rem; font-weight: 700; color: var(--electric-yellow); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">Peak Competition Windows (Verified)</div>
+                        <div style="display: flex; flex-direction: column; gap: 0.625rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <div style="width: 8px; height: 8px; background: var(--electric-yellow); border-radius: 50%; flex-shrink: 0;"></div>
+                                <div style="font-size: 0.8rem;"><strong>2023-2025:</strong> Georgia corridor peaked at 15,000+ concurrent workers across 8 major projects</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <div style="width: 8px; height: 8px; background: var(--electric-yellow); border-radius: 50%; flex-shrink: 0;"></div>
+                                <div style="font-size: 0.8rem;"><strong>2021-2029:</strong> Phoenix metro sustains 12,000 daily workers at TSMC (verified July 2023)</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <div style="width: 8px; height: 8px; background: var(--electric-yellow); border-radius: 50%; flex-shrink: 0;"></div>
+                                <div style="font-size: 0.8rem;"><strong>Sept 2025:</strong> ICE raid at SK-Hyundai GA detained 475 workers, largest single-site enforcement in DHS history</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Wage Pressure Indicators -->
+                    <div style="background: var(--off-white); border-radius: 10px; padding: 1.25rem; border: 1px solid var(--border);">
+                        <div style="font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">Hiring Difficulty by Trade (AGC Aug 2025)</div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.8rem; color: var(--text-primary);">Mechanics</span>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <div style="width: 80px; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 79%; height: 100%; background: var(--red);"></div>
+                                    </div>
+                                    <span style="font-size: 0.75rem; font-weight: 600; color: var(--red);">79%</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.8rem; color: var(--text-primary);">Ironworkers</span>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <div style="width: 80px; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 78%; height: 100%; background: var(--red);"></div>
+                                    </div>
+                                    <span style="font-size: 0.75rem; font-weight: 600; color: var(--red);">78%</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.8rem; color: var(--text-primary);">Electricians</span>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <div style="width: 80px; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 77%; height: 100%; background: var(--red);"></div>
+                                    </div>
+                                    <span style="font-size: 0.75rem; font-weight: 600; color: var(--red);">77%</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.8rem; color: var(--text-primary);">Equipment Operators</span>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <div style="width: 80px; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 77%; height: 100%; background: var(--red);"></div>
+                                    </div>
+                                    <span style="font-size: 0.75rem; font-weight: 600; color: var(--red);">77%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.65rem; color: var(--text-muted); margin-top: 0.75rem;">% of firms reporting difficulty. 92% overall hiring difficulty rate. Ironworkers up from 69% in 2024.</div>
+                    </div>
+                </div>
+                
+                <!-- Competition Details Table -->
+                <div style="margin-top: 1.5rem;">
+                    <div style="font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">Regional Labor Competition Clusters (Verified)</div>
+                    <div style="overflow-x: auto;">
+                        <table class="workforce-table" style="min-width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Region</th>
+                                    <th>Overlapping Projects</th>
+                                    <th>Peak Workers</th>
+                                    <th>Critical Trades</th>
+                                    <th>Risk Level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="project-name">Phoenix Metro</div>
+                                        <div class="project-loc">Maricopa County, AZ</div>
+                                    </td>
+                                    <td style="font-size: 0.8rem;">TSMC (3 phases), Intel Chandler, 39 Taiwan suppliers</td>
+                                    <td style="font-weight: 600;">50,000+</td>
+                                    <td>Pipefitters, Electricians</td>
+                                    <td><span class="status-badge" style="background: var(--red-bg); color: var(--red);">CRITICAL</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="project-name">Georgia Corridor</div>
+                                        <div class="project-loc">Bryan, Jackson, Morgan, Bartow Counties</div>
+                                    </td>
+                                    <td style="font-size: 0.8rem;">Hyundai Metaplant, HL-GA Battery, SK Battery, Rivian, Qcells (2 sites)</td>
+                                    <td style="font-weight: 600;">15,000-25,000</td>
+                                    <td>Electricians, Pipefitters</td>
+                                    <td><span class="status-badge" style="background: var(--red-bg); color: var(--red);">CRITICAL</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="project-name">Central Texas</div>
+                                        <div class="project-loc">Taylor, Sherman</div>
+                                    </td>
+                                    <td style="font-size: 0.8rem;">Samsung Taylor ($40B+), Texas Instruments Sherman ($30B+)</td>
+                                    <td style="font-weight: 600;">20,000+</td>
+                                    <td>Electricians</td>
+                                    <td><span class="status-badge" style="background: var(--red-bg); color: var(--red);">CRITICAL</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="project-name">Central Ohio</div>
+                                        <div class="project-loc">Licking, Franklin Counties</div>
+                                    </td>
+                                    <td style="font-size: 0.8rem;">Intel Ohio (slowed), AWS ($23.8B), Google ($7.2B), Meta ($4B), Cologix ($7B)</td>
+                                    <td style="font-weight: 600;">10,000+</td>
+                                    <td>Electricians</td>
+                                    <td><span class="status-badge" style="background: var(--yellow-bg); color: #92400e;">ELEVATED</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="project-name">Tennessee-Kentucky</div>
+                                        <div class="project-loc">Stanton TN, Glendale KY</div>
+                                    </td>
+                                    <td style="font-size: 0.8rem;">Ford BlueOval City (pivoted to gas), BlueOval SK (JV dissolved Dec 2025)</td>
+                                    <td style="font-weight: 600;">5,500 (complete)</td>
+                                    <td>Electricians, Ironworkers</td>
+                                    <td><span class="status-badge" style="background: rgba(59, 130, 246, 0.1); color: #1d4ed8;">REDUCED</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="source-note" style="margin-top: 1rem;">
+                    <strong>Sources:</strong> AGC/NCCER 2025 Workforce Survey (Aug 28, 2025), BLS OEWS May 2024, TSMC official (July 2023), 
+                    Intel Newsroom (Feb 2025), Samsung 2024 Economic Impact Report, DOE Loan Programs Office (Jan 2025), 
+                    Panasonic President Allan Swan (Jan 2025), CBS News/HSI (Sept 2025). 
+                    <a href="METHODOLOGY.html#workforce-methodology" style="color: var(--deep-indigo); text-decoration: underline;">See full methodology →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Investment Implications -->
+        <div class="insight-box" style="margin-top: 2rem;">
+            <div class="insight-label">Investment Implications</div>
+            <div class="insight-text">
+                <strong>Projects with lowest workforce risk:</strong> Data center hyperscalers (0% affected) and companies with established training partnerships (TSMC, Texas Instruments, Toyota). These projects demonstrate that proactive workforce development correlates with execution success.
+                <br><br>
+                <strong>Projects requiring heightened monitoring:</strong> Battery and automotive sectors show 44-54% workforce disruption rates. EV demand softness is driving layoffs while skilled labor shortages persist for active construction. The Ford BlueOval pivot (December 2025) and SK-Hyundai ICE raid demonstrate how workforce issues can compound with market and regulatory risks.
+                <br><br>
+                <strong>Leading indicators to watch:</strong> AGC quarterly hiring difficulty trends, regional wage acceleration above 5% YoY, and immigration enforcement patterns in high-foreign-born-workforce corridors (Georgia, Texas, Arizona).
+            </div>
+        </div>
+        
+    </main>
+    
+    <footer class="footer" style="text-align: center;">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-brand-section" style="display: flex; align-items: center; gap: 0.75rem;">
+                    <!-- Velocity Logo -->
+                    <img src="Velocity_Transparent_Logo.svg" alt="Velocity" style="height: 36px; width: auto;">
+                    <!-- Yellow brand bar -->
+                    <div style="width: 6px; height: 28px; background: var(--electric-yellow);"></div>
+                    <!-- HCC Logo -->
+                    <img src="New_HCC_Logo.svg" alt="HCC" style="height: 70px; width: auto; margin-left: 16px;">
+                </div>
+                <div class="footer-links-section">
+                    <a href="index.html">Dashboard</a>
+                    <a href="METHODOLOGY.html">Methodology</a>
+                    <a href="#">API Access</a>
+                    <a href="mailto:press@velocityxp.com">Press Inquiries</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-disclaimer">Data provided for informational purposes only. Not investment advice.</div>
+                <div class="footer-copyright">© 2026 Velocity. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Layer visibility state
+        const layerState = {
+            competition: true,
+            wages: true
+        };
+        
+        // Chart data - Project construction timelines (VERIFIED)
+        // Sources: TSMC official (12,000 peak), Intel Newsroom (7,000 projected, 1,200 current), 
+        // Samsung Economic Impact Report (18,636 total), Micron official (4,500), 
+        // Marketplace (5,000 SK-Hyundai), DOE (2,000 Rivian), TN officials (5,500 BlueOval), 
+        // Panasonic President Allan Swan (3,800)
+        const projectData = [
+            { name: 'TSMC Arizona', region: 'Phoenix', start: '2021-04', end: '2029-12', workers: 12000, color: '#6366f1', source: 'TSMC spokesperson, July 2023' },
+            { name: 'Intel Ohio', region: 'Columbus', start: '2022-09', end: '2031-12', workers: 7000, color: '#8b5cf6', source: 'Intel Newsroom, Feb 2025 (current: 1,200)' },
+            { name: 'Samsung Taylor', region: 'Texas', start: '2022-01', end: '2026-12', workers: 8868, color: '#a855f7', source: 'Samsung 2024 Economic Impact Report' },
+            { name: 'Micron NY', region: 'Syracuse', start: '2026-01', end: '2030-06', workers: 4500, color: '#6366f1', source: 'Micron official website' },
+            { name: 'SK-Hyundai GA', region: 'Georgia', start: '2022-10', end: '2026-06', workers: 5000, color: '#ec4899', source: 'Marketplace, June 2024' },
+            { name: 'Rivian GA', region: 'Georgia', start: '2025-09', end: '2028-12', workers: 2000, color: '#f43f5e', source: 'DOE Loan Programs Office, Jan 2025' },
+            { name: 'BlueOval TN', region: 'Tennessee', start: '2022-09', end: '2025-09', workers: 5500, color: '#f97316', source: 'TN officials, Sept 2022 (construction complete)' },
+            { name: 'Panasonic KS', region: 'Kansas', start: '2022-11', end: '2025-07', workers: 3800, color: '#22c55e', source: 'Allan Swan, Panasonic President, Jan 2025' }
+        ];
+        
+        // Wage index data - HISTORICAL ONLY through Q3 2025, then PROJECTED
+        // Baseline: BLS OEWS May 2024; Growth rate: AGC 4.2% annual (Jan 2025), HBI 3.7% (July 2025)
+        // Note: Q1-Q3 2025 based on reported data; Q4 2025+ are projections at 3.7-4.2% annual rate
+        const wageData = {
+            labels: ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25*', 'Q1 26*', 'Q2 26*', 'Q3 26*', 'Q4 26*', 'Q1 27*', 'Q2 27*', 'Q3 27*', 'Q4 27*'],
+            // Electricians: $62,350 median (BLS May 2024), 4.2% YoY growth
+            electricians: [100, 101.0, 101.9, 102.8, 103.8, 104.8, 105.8, 106.9, 108.0, 109.1, 110.2, 111.3],
+            // Pipefitters: $62,970 median (BLS May 2024), 4.2% YoY growth
+            pipefitters: [100, 101.0, 101.9, 102.8, 103.8, 104.8, 105.8, 106.9, 108.0, 109.1, 110.2, 111.3],
+            // Ironworkers: $62,700 median (BLS May 2024), 5.1% YoY (AGC difficulty increase suggests higher pressure)
+            ironworkers: [100, 101.3, 102.5, 103.8, 105.1, 106.4, 107.7, 109.1, 110.5, 111.9, 113.3, 114.8]
+        };
+        
+        // Initialize chart
+        let workforceChart;
+        
+        function initChart() {
+            const ctx = document.getElementById('workforceRiskChart').getContext('2d');
+            
+            // Create datasets
+            const datasets = [];
+            
+            // Competition layer - horizontal bars for projects
+            if (layerState.competition) {
+                projectData.forEach((project, index) => {
+                    const data = new Array(12).fill(null);
+                    
+                    for (let i = 0; i < 12; i++) {
+                        const qDate = quarterToDate(i);
+                        if (qDate >= project.start.substring(0, 7) && qDate <= project.end.substring(0, 7)) {
+                            data[i] = index + 1;
+                        }
+                    }
+                    
+                    datasets.push({
+                        label: project.name,
+                        data: data,
+                        backgroundColor: project.color + '80',
+                        borderColor: project.color,
+                        borderWidth: 2,
+                        borderRadius: 4,
+                        barPercentage: 0.7,
+                        categoryPercentage: 0.9,
+                        yAxisID: 'y'
+                    });
+                });
+            }
+            
+            // Wages layer - line charts
+            if (layerState.wages) {
+                datasets.push({
+                    label: 'Electricians',
+                    data: wageData.electricians,
+                    borderColor: '#FDFF66',
+                    backgroundColor: 'transparent',
+                    borderWidth: 3,
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#FDFF66',
+                    yAxisID: 'y1',
+                    type: 'line'
+                });
+                datasets.push({
+                    label: 'Pipefitters',
+                    data: wageData.pipefitters,
+                    borderColor: '#22c55e',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#22c55e',
+                    yAxisID: 'y1',
+                    type: 'line'
+                });
+                datasets.push({
+                    label: 'Ironworkers',
+                    data: wageData.ironworkers,
+                    borderColor: '#f97316',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#f97316',
+                    yAxisID: 'y1',
+                    type: 'line'
+                });
+            }
+            
+            if (workforceChart) {
+                workforceChart.destroy();
+            }
+            
+            workforceChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: wageData.labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 15,
+                                font: { family: 'Inter', size: 11 },
+                                color: '#475569',
+                                filter: function(item) {
+                                    // Only show wage labels in legend
+                                    return item.text === 'Electricians' || item.text === 'Pipefitters' || item.text === 'Ironworkers';
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1e1b4b',
+                            titleFont: { family: 'Inter', weight: '600' },
+                            bodyFont: { family: 'Inter' },
+                            padding: 12,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.dataset.yAxisID === 'y1' && context.dataset.type === 'line') {
+                                        return `${context.dataset.label}: ${context.parsed.y.toFixed(1)} index`;
+                                    }
+                                    if (context.dataset.yAxisID === 'y' && context.parsed.y !== null) {
+                                        const project = projectData[context.parsed.y - 1];
+                                        return project ? `${project.name}: ${project.workers.toLocaleString()} peak workers` : '';
+                                    }
+                                    return context.dataset.label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: '#e2e8f0', drawBorder: false },
+                            ticks: { 
+                                font: { family: 'Inter', size: 11 },
+                                color: '#64748b'
+                            }
+                        },
+                        y: {
+                            display: layerState.competition,
+                            position: 'left',
+                            min: 0,
+                            max: 9,
+                            ticks: {
+                                stepSize: 1,
+                                callback: function(value) {
+                                    const projects = ['', 'TSMC AZ', 'Intel OH', 'Samsung TX', 'Micron NY', 'SK-Hyundai', 'Rivian GA', 'BlueOval TN', 'Panasonic KS'];
+                                    return projects[value] || '';
+                                },
+                                font: { family: 'Inter', size: 10 },
+                                color: '#64748b'
+                            },
+                            grid: { color: '#e2e8f0', drawBorder: false }
+                        },
+                        y1: {
+                            display: layerState.wages,
+                            position: 'right',
+                            min: 95,
+                            max: 120,
+                            title: {
+                                display: true,
+                                text: 'Wage Index (Q1 2025 = 100)',
+                                font: { family: 'Inter', size: 11 },
+                                color: '#64748b'
+                            },
+                            ticks: {
+                                font: { family: 'Inter', size: 10 },
+                                color: '#64748b'
+                            },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function quarterToDate(index) {
+            const quarters = ['2025-01', '2025-04', '2025-07', '2025-10', '2026-01', '2026-04', '2026-07', '2026-10', '2027-01', '2027-04', '2027-07', '2027-10'];
+            return quarters[index] || '2025-01';
+        }
+        
+        function toggleLayer(layer) {
+            layerState[layer] = !layerState[layer];
+            
+            // Update button state
+            const btn = document.getElementById('toggle' + layer.charAt(0).toUpperCase() + layer.slice(1));
+            if (layerState[layer]) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+            
+            initChart();
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', initChart);
+    </script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SK Hynix Indiana | HCC Infrastructure Velocity Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root { --deep-indigo: #1e1b4b; --electric-yellow: #FDFF66; --white: #ffffff; --off-white: #f8fafc; --border: #e2e8f0; --text-primary: #0f172a; --text-secondary: #475569; --text-muted: #94a3b8; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--off-white); color: var(--text-primary); line-height: 1.6; }
+        .header { background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), var(--deep-indigo); color: var(--white); padding: 0; position: sticky; top: 0; z-index: 100; }
+        .header-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--white); }
+        .velocity-icon { display: flex; gap: 3px; }
+        .velocity-icon span { width: 4px; border-radius: 2px; background: var(--electric-yellow); }
+        .velocity-icon span:nth-child(1) { height: 18px; }
+        .velocity-icon span:nth-child(2) { height: 14px; opacity: 0.7; }
+        .velocity-icon span:nth-child(3) { height: 10px; opacity: 0.4; }
+        .brand-text { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; }
+        .header-right { display: flex; align-items: center; gap: 1rem; }
+        .data-freshness { display: flex; align-items: center; gap: 0.5rem; background: rgba(34,197,94,0.15); padding: 0.4rem 0.75rem; border-radius: 6px; }
+        .freshness-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        .freshness-text { font-size: 0.7rem; color: #22c55e; font-weight: 600; }
+        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600; text-decoration: none; }
+        .btn-home { background: var(--electric-yellow); color: var(--deep-indigo); }
+        .btn-home:hover { background: #e5e855; }
+        .main { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .project-header { display: flex; gap: 2rem; margin-bottom: 1.5rem; }
+        .project-identity { flex: 1; }
+        .project-title { font-size: 2rem; font-weight: 700; color: var(--deep-indigo); margin-bottom: 0.25rem; }
+        .project-subtitle { font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.75rem; }
+        .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .tag { padding: 0.35rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+        .tag.sector { background: var(--deep-indigo); color: var(--white); }
+        .tag.status { background: var(--off-white); color: var(--text-secondary); border: 1px solid var(--border); }
+        .score-display { text-align: center; min-width: 180px; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border-radius: 12px; padding: 1.25rem; }
+        .score-value { font-size: 3.5rem; font-weight: 800; line-height: 1; color: var(--electric-yellow); }
+        .score-label { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-top: 0.25rem; }
+        .score-trend { display: inline-flex; padding: 0.35rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-top: 0.5rem; background: rgba(255,255,255,0.1); color: var(--electric-yellow); }
+        .status-banner { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); color: var(--white); padding: 1.25rem 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1.5rem; }
+        .status-badge { font-size: 1.1rem; font-weight: 800; background: var(--electric-yellow); color: var(--deep-indigo); padding: 0.5rem 1.25rem; border-radius: 8px; letter-spacing: 0.05em; }
+        .status-text { font-size: 0.9rem; line-height: 1.6; }
+        .status-text strong { color: var(--electric-yellow); }
+        .metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+        .metric-box { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); padding: 1.25rem; border-radius: 12px; text-align: center; }
+        .metric-value { font-size: 1.5rem; font-weight: 700; color: var(--electric-yellow); }
+        .metric-label { font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 0.25rem; }
+        .metric-sublabel { font-size: 0.65rem; color: rgba(255,255,255,0.5); }
+        .card { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border: none; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; color: white; }
+        .card-title { font-size: 0.75rem; font-weight: 700; color: var(--electric-yellow); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--electric-yellow); display: inline-block; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .chart-container { height: 280px; position: relative; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; }
+        .velocity-breakdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center; margin-top: 2rem; }
+        .breakdown-score { font-size: 2rem; font-weight: 700; color: var(--electric-yellow); }
+        .breakdown-label { font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 0.25rem; }
+        .breakdown-bar { height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; margin-top: 0.5rem; overflow: hidden; }
+        .breakdown-bar-fill { height: 100%; border-radius: 2px; background: var(--electric-yellow); }
+        .breakdown-weight { font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-top: 0.25rem; }
+        .key-item { padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px; margin-bottom: 0.75rem; }
+        .key-item-text { font-weight: 500; font-size: 0.9rem; color: white; }
+        .thesis-card { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); color: white; }
+        .thesis-card .thesis-title { color: var(--electric-yellow); }
+        .thesis-card .thesis-text { color: rgba(255,255,255,0.9); }
+        .thesis-title { font-size: 0.75rem; font-weight: 700; color: var(--electric-yellow); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .thesis-text { font-size: 0.9rem; line-height: 1.8; color: rgba(255,255,255,0.9); }
+        .raid-section { margin-bottom: 1.5rem; }
+        .raid-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+        .raid-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: var(--deep-indigo); background: var(--electric-yellow); }
+        .raid-title { font-weight: 600; font-size: 1rem; color: white; }
+        .raid-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+        .raid-table th { text-align: left; padding: 0.75rem 1rem; background: rgba(255,255,255,0.1); color: var(--electric-yellow); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .raid-table th:first-child { border-radius: 8px 0 0 0; }
+        .raid-table th:last-child { border-radius: 0 8px 0 0; }
+        .raid-table td { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); }
+        .raid-table tr:last-child td { border-bottom: none; }
+        .raid-table tr:hover { background: rgba(255,255,255,0.05); }
+        .severity-badge { padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; background: rgba(255,255,255,0.15); color: var(--electric-yellow); border: 1px solid rgba(255,255,255,0.2); }
+        .status-badge-sm { padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; background: rgba(255,255,255,0.15); color: var(--electric-yellow); border: 1px solid rgba(255,255,255,0.2); }
+        .milestone-item { display: flex; gap: 1rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px; margin-bottom: 0.75rem; }
+        .milestone-date { min-width: 70px; text-align: center; }
+        .milestone-month { font-size: 0.7rem; color: rgba(255,255,255,0.6); text-transform: uppercase; }
+        .milestone-day { font-size: 1.5rem; font-weight: 700; color: var(--electric-yellow); }
+        .milestone-year { font-size: 0.7rem; color: rgba(255,255,255,0.6); }
+        .milestone-content { flex: 1; }
+        .milestone-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; color: white; }
+        .milestone-desc { font-size: 0.8rem; color: rgba(255,255,255,0.7); }
+        .milestone-status { display: flex; align-items: center; }
+        .footer { background: var(--deep-indigo); color: var(--white); padding: 2rem; margin-top: 2rem; }
+        .footer-content { max-width: 1400px; margin: 0 auto; }
+        .footer-main { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .footer-brand { display: flex; align-items: center; gap: 0.75rem; }
+        .footer-brand img { height: 36px; }
+        .footer-bar { width: 6px; height: 28px; background: var(--electric-yellow); }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.8rem; }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+        /* Print Styles */
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            body { background: white !important; font-size: 9pt; }
+            .header { position: relative !important; background: #1e1b4b !important; padding: 0.5rem 1rem !important; }
+            .header-content { padding: 0.5rem 1rem !important; }
+            .btn-home, .data-freshness { display: none !important; }
+            .main { padding: 1rem !important; max-width: 100% !important; }
+            .footer { display: none !important; }
+            .project-header { margin-bottom: 1rem !important; gap: 1rem !important; }
+            .project-title { font-size: 1.5rem !important; }
+            .score-display { padding: 1rem !important; min-width: 140px !important; }
+            .score-value { font-size: 2.5rem !important; }
+            .status-banner { padding: 1rem !important; margin-bottom: 1rem !important; }
+            .metrics-row { gap: 0.5rem !important; margin-bottom: 1rem !important; }
+            .metric-box { padding: 0.75rem !important; }
+            .metric-value { font-size: 1.25rem !important; }
+            .card { padding: 1rem !important; margin-bottom: 1rem !important; page-break-inside: avoid; }
+            .grid-2, .grid-3 { gap: 0.75rem !important; }
+            .chart-container { height: 200px !important; padding: 0.5rem !important; }
+            .velocity-breakdown { gap: 0.5rem !important; margin-top: 1rem !important; }
+            .breakdown-score { font-size: 1.5rem !important; }
+            .raid-section { margin-bottom: 1rem !important; page-break-inside: avoid; }
+            .raid-table { font-size: 7pt !important; }
+            .raid-table th, .raid-table td { padding: 0.5rem !important; }
+            .key-item { padding: 0.5rem !important; margin-bottom: 0.5rem !important; }
+            h2, h3 { page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body>
+        <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="brand">
+                <div class="velocity-icon"><span></span><span></span><span></span></div>
+                <span class="brand-text">NXT Infrastructure Execution Report</span>
+            </a>
+            <div class="header-right">
+                <div class="data-freshness">
+                    <span class="freshness-dot"></span>
+                    <span class="freshness-text">Live</span>
+                </div>
+                <a href="index.html" class="btn btn-home">← Back to Dashboard</a>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="project-header">
+            <div class="project-identity">
+                <h1 class="project-title">SK Hynix Indiana</h1>
+                <p class="project-subtitle">West Lafayette, IN | HBM Advanced Packaging | Purdue Research Park</p>
+                <div class="project-tags">
+                    <span class="tag sector">Semiconductor</span>
+                    <span class="tag status">Pre-Construction</span>
+                    <span class="tag chips">$458M CHIPS Finalized</span>
+                    <span class="tag capital">First US HBM Packaging</span>
+                </div>
+            </div>
+            <div class="score-display">
+                <div class="score-value">65</div>
+                <div class="score-label" title="±8 reflects variance from source timing differences and qualitative assessment margins">Velocity Score (±8)*</div>
+                <div style="font-size: 0.55rem; color: rgba(255,255,255,0.5); margin-top: 0.25rem;">*Margin reflects source timing variance</div>
+                <div class="score-trend">NEW PROJECT</div>
+            </div></div>
+        <div style="text-align: right; margin-top: 0.5rem;">
+            <span style="font-size: 0.7rem; color: rgba(255,255,255,0.6);">Last Updated: Jan 9, 2026</span>
+        </div>
+        
+        <div style="background: rgba(30,27,75,0.1); border: 1px solid #1e1b4b; border-radius: 8px; padding: 0.5rem 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <span style="width: 8px; height: 8px; background: #1e1b4b; border-radius: 50%; display: inline-block;"></span>
+            <span style="font-size: 0.7rem; color: #1e1b4b; font-weight: 500;">Web-verified Jan 9, 2026</span>
+            <span style="font-size: 0.65rem; color: #1e1b4b;">Sources:</span>
+            <a href="https://news.skhynix.com" target="_blank" style="font-size: 0.65rem; color: #1e1b4b; text-decoration: underline;">SK Hynix</a>
+            <a href="https://www.commerce.gov/news/press-releases" target="_blank" style="font-size: 0.65rem; color: #1e1b4b; text-decoration: underline;">Commerce.gov</a>
+            <a href="https://www.iedc.in.gov" target="_blank" style="font-size: 0.65rem; color: #1e1b4b; text-decoration: underline;">IN EDC</a>
+        </div>
+        
+        <div style="background: rgba(30,27,75,0.1); border: 1px solid #1e1b4b; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem;">
+            <div style="font-weight: 700; font-size: 0.8rem; color: #1e1b4b; margin-bottom: 0.25rem;">⚠️ Community Opposition</div>
+            <div style="font-size: 0.75rem; color: #1e1b4b;">West Lafayette City Council approved rezoning 6-3 on May 5, 2025 despite 800+ petition signatures opposing heavy industrial use near residential neighborhoods. Concerns about chemical exposure and traffic.</div>
+        </div>
+        
+        <div class="status-banner">
+            <div class="status-badge">EXECUTING</div>
+            <div class="status-text"><strong>Original Announcement:</strong> April 3, 2024 | <strong>Original Target:</strong> H2 2028 | <strong>Current Target:</strong> H2 2028 | <strong>Delay:</strong> NONE | Advanced HBM packaging facility remains on track for 2028 mass production. Site rezoning approved May 2025. Infrastructure progressing. $458M CHIPS award finalized Dec 2024. First US advanced HBM packaging facility. SK Hynix holds 52.5% global HBM market share.</div></div>
+        <div class="metrics-row">
+            <div class="metric-box">
+                <div class="metric-value">$3.87B</div>
+                <div class="metric-label">Total Investment</div>
+                <div class="metric-sublabel">SK Hynix direct</div>
+                <div style="font-size: 0.5rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem;">Verified: Jan 2026</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">$458M</div>
+                <div class="metric-label">CHIPS Award</div>
+                <div class="metric-sublabel">Finalized Dec 2024</div>
+                <div style="font-size: 0.5rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem;">Verified: Jan 2026</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">$700M</div>
+                <div class="metric-label">Indiana IEDC</div>
+                <div class="metric-sublabel">State incentives</div>
+                <div style="font-size: 0.5rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem;">Verified: Jan 2026</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">1,000+</div>
+                <div class="metric-label">Direct Jobs</div>
+                <div class="metric-sublabel">By end of 2030</div>
+                <div style="font-size: 0.5rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem;">Verified: Jan 2026</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">H2 2028</div>
+                <div class="metric-label">Mass Production</div>
+                <div class="metric-sublabel">HBM4 target</div>
+                <div style="font-size: 0.5rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem;">Verified: Jan 2026</div>
+            </div>
+            </div>
+        <div class="grid-2">
+            <div class="card">
+                <h2 class="card-title">12-Month Velocity Trend</h2>
+                <div class="chart-container"><canvas id="velocityChart"></canvas></div>
+                <p style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem; text-align: center;">Monthly scores calculated from weighted factor assessments. Historical data reflects month-end evaluations.</p>
+            </div>
+            <div class="card">
+                <h2 class="card-title">Velocity Score Breakdown</h2>
+                <p style="font-size: 0.7rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem;">Four equally-weighted factors. Workforce and power/grid constraints embedded within. Confidence interval reflects data recency and source reliability.</p>
+                <div class="velocity-breakdown">
+                    <div class="breakdown-item">
+                        <div class="breakdown-score">60</div>
+                        <div class="breakdown-label">Timeline Adherence</div>
+                        <div style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem;">incl. grid queue, permits</div>
+                        <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width: 60%;"></div></div>
+                        <div class="breakdown-weight">Weight: 25%</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-score">75</div>
+                        <div class="breakdown-label">Funding Security</div>
+                        <div style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem;">incl. power agreements</div>
+                        <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width: 75%;"></div></div>
+                        <div class="breakdown-weight">Weight: 25%</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-score">55</div>
+                        <div class="breakdown-label">Construction Progress</div>
+                        <div style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem;">incl. workforce avail.</div>
+                        <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width: 55%;"></div></div>
+                        <div class="breakdown-weight">Weight: 25%</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-score">70</div>
+                        <div class="breakdown-label">Operator Stability</div>
+                        <div style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem;">incl. utility relations</div>
+                        <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width: 70%;"></div></div>
+                        <div class="breakdown-weight">Weight: 25%</div>
+                    </div>
+                </div>
+            </div></div>
+        
+        <!-- Score Derivation Notes -->
+        <div class="card">
+            <h2 class="card-title">Score Change Log</h2>
+            <p style="font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-bottom: 0.75rem;">Audit trail of velocity score changes with rationale. Full derivation notes available upon request.</p>
+            <table class="raid-table" style="font-size: 0.75rem;">
+                <thead>
+                    <tr>
+                        <th style="width: 90px;">Date</th>
+                        <th style="width: 60px;">Old</th>
+                        <th style="width: 60px;">New</th>
+                        <th style="width: 70px;">Change</th>
+                        <th>Rationale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jan 2026</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>Monthly review; see RAID log for details</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.6rem; color: rgba(255,255,255,0.4); margin-top: 0.75rem; font-style: italic;">Contact research@velocityxp.com for detailed factor-by-factor scoring derivation.</p>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title">Key Risks</h2></div>
+        <div class="card thesis-card">
+            <div class="thesis-title">Investment Thesis</div>
+            <p class="thesis-text">SK Hynix Indiana represents a strategic investment to establish the first US-based High Bandwidth Memory (HBM) advanced packaging facility, filling a critical gap in the AI chip supply chain. The $3.87B facility on 90 acres at Purdue Research Park will mass produce next-generation HBM4 memory chips for AI accelerators, with SK Hynix holding dominant 52.5% global HBM market share. The facility enables SK Hynix to compete directly with TSMC's CoWoS packaging by offering turnkey HBM solutions. NVIDIA accounts for 16% of SK Hynix sales as primary HBM customer. CHIPS funding ($458M direct + up to $500M loans) finalized Dec 19, 2024. Indiana IEDC providing $700M in incentives. Purdue University partnership includes R&D collaboration on advanced packaging, heterogeneous integration, and memory-centric AI solutions through Birck Nanotechnology Center. Community opposition resulted in 6-3 Council approval of rezoning May 2025 despite 800+ petition signatures. Sen. Todd Young (R-IN), co-author of CHIPS Act, actively supporting project. Timeline: design/permits H1 2025, groundbreaking H2 2025, construction 2026-2027, production H2 2028. (Sources: NIST.gov, SK Hynix Newsroom Oct 2024, Indiana IEDC, Fox59 Aug 2024, Tom's Hardware Dec 2024)</p>
+            <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                <div style="font-size: 0.65rem; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem;">SOURCES (Click to verify):</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    <a href="https://www.sec.gov" target="_blank" style="font-size: 0.6rem; color: #FDFF66; text-decoration: none; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;">SEC Filings</a>
+                    <a href="https://www.chips.gov" target="_blank" style="font-size: 0.6rem; color: #FDFF66; text-decoration: none; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;">CHIPS.gov</a>
+                    <a href="https://www.energy.gov/lpo" target="_blank" style="font-size: 0.6rem; color: #FDFF66; text-decoration: none; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;">DOE LPO</a>
+                </div>
+            </div></div>
+        
+        <div class="card">
+            <h2 class="card-title">RAID Log</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.55rem; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem;"><span>Severity: <span class="severity-badge" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">HIGH</span> Critical path</span><span><span class="severity-badge" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">MEDIUM</span> Manageable</span><span><span class="severity-badge" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">LOW</span> Minor impact</span></div>
+            <p style="font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-bottom: 1rem;">Risk assessments reviewed monthly. Last review: Jan 9, 2026. Sources: NIST.gov, Based in Lafayette, WSWS</p>
+            <div class="raid-section">
+                <div class="raid-header"><div class="raid-icon">R</div><div class="raid-title">Risks</div></div>
+                <table class="raid-table">
+                    <thead><tr><th>Risk</th><th>Impact</th><th>Probability</th><th>Mitigation</th></tr></thead>
+                    <tbody>
+                        <tr><td>Trump admin CHIPS review</td><td><span class="severity-badge">HIGH</span></td><td><span class="severity-badge">MEDIUM</span></td><td>Sen. Young advocating, contract finalized</td></tr>
+                        <tr><td>Community opposition</td><td><span class="severity-badge">MEDIUM</span></td><td><span class="severity-badge">LOW</span></td><td>Rezoning approved May 2025</td></tr>
+                        <tr><td>Environmental/chemical concerns</td><td><span class="severity-badge">MEDIUM</span></td><td><span class="severity-badge">MEDIUM</span></td><td>EPA compliance, community outreach</td></tr>
+                        <tr><td>AI market demand volatility</td><td><span class="severity-badge">MEDIUM</span></td><td><span class="severity-badge">LOW</span></td><td>52.5% HBM market share, NVIDIA relationship</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="raid-section">
+                <div class="raid-header"><div class="raid-icon">A</div><div class="raid-title">Actions</div></div>
+                <table class="raid-table">
+                    <thead><tr><th>Action</th><th>Owner</th><th>Due Date</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>CHIPS award finalization</td><td>Commerce</td><td>Dec 19, 2024</td><td><span class="status-badge-sm complete">COMPLETE</span></td></tr>
+                        <tr><td>Investment agreement signing</td><td>Indiana/SK Hynix</td><td>Oct 2024</td><td><span class="status-badge-sm complete">COMPLETE</span></td></tr>
+                        <tr><td>City Council rezoning approval</td><td>West Lafayette</td><td>May 5, 2025</td><td><span class="status-badge-sm complete">APPROVED 6-3</span></td></tr>
+                        <tr><td>County Road 425 North design</td><td>Redevelopment Comm</td><td>Mar 2026</td><td><span class="status-badge-sm">IN PROGRESS</span></td></tr>
+                        <tr><td>Factory design and permits</td><td>SK Hynix</td><td>H1 2025</td><td><span class="status-badge-sm">ACTIVE</span></td></tr>
+                        <tr><td>Infrastructure groundbreaking</td><td>SK Hynix</td><td>H2 2025</td><td><span class="status-badge-sm">PLANNED</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="raid-section">
+                <div class="raid-header"><div class="raid-icon">I</div><div class="raid-title">Issues</div></div>
+                <table class="raid-table">
+                    <thead><tr><th>Issue</th><th>Severity</th><th>Status</th><th>Resolution</th></tr></thead>
+                    <tbody>
+                        <tr><td>800+ petition signatures opposing project</td><td><span class="severity-badge">MEDIUM</span></td><td><span class="status-badge-sm">RESOLVED</span></td><td>Council approved rezoning May 2025</td></tr>
+                        <tr><td>TIF district negotiations ongoing</td><td><span class="severity-badge">MEDIUM</span></td><td><span class="status-badge-sm">ACTIVE</span></td><td>City/IEDC agreement pending</td></tr>
+                        <tr><td>Trump admin CHIPS funding uncertainty</td><td><span class="severity-badge">HIGH</span></td><td><span class="status-badge-sm">MONITORING</span></td><td>Sen. Young advocating for project</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="raid-section">
+                <div class="raid-header"><div class="raid-icon">D</div><div class="raid-title">Decisions</div></div>
+                <table class="raid-table">
+                    <thead><tr><th>Decision</th><th>Date</th><th>Rationale</th><th>Impact</th></tr></thead>
+                    <tbody>
+                        <tr><td>Select West Lafayette/Purdue site</td><td>Apr 2024</td><td>Purdue R&D partnership, workforce pipeline</td><td>$3.87B investment</td></tr>
+                        <tr><td>Change site from Location A to B</td><td>2025</td><td>Strategic considerations, community input</td><td>Moved to Salisbury/Calumet intersection</td></tr>
+                        <tr><td>Apply for CHIPS funding</td><td>2024</td><td>Federal incentives, supply chain security</td><td>$458M award + $500M loan access</td></tr>
+                        <tr><td>Partner with Purdue for R&D</td><td>Oct 2024</td><td>Birck Nanotechnology Center, talent</td><td>Advanced packaging innovation</td></tr>
+                    </tbody>
+                </table>
+            </div></div>
+        <div class="card">
+            <h2 class="card-title">Upcoming Milestones</h2>
+            <p style="font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem;">Dates from NIST.gov, SK Hynix announcements, Based in Lafayette</p>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; font-size: 0.55rem; color: rgba(255,255,255,0.6); margin-bottom: 0.75rem;"><span><span class="status-badge-sm" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">COMPLETE</span> Achieved</span><span><span class="status-badge-sm" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">CONFIRMED</span> Official</span><span><span class="status-badge-sm" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">TARGET</span> Guidance</span><span><span class="status-badge-sm" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">PROJECTED</span> Estimate</span><span><span class="status-badge-sm" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">DELAYED</span> Behind</span></div>
+            <div class="milestone-item">
+                <div class="milestone-date"><div class="milestone-month">H1</div><div class="milestone-day">--</div><div class="milestone-year">2025</div></div>
+                <div class="milestone-content"><div class="milestone-title">Factory Design and Permits</div><div class="milestone-desc">Complete facility design, obtain construction permits.</div></div>
+                <div class="milestone-status"><span class="status-badge-sm">ACTIVE</span></div>
+            </div>
+            <div class="milestone-item">
+                <div class="milestone-date"><div class="milestone-month">H2</div><div class="milestone-day">--</div><div class="milestone-year">2025</div></div>
+                <div class="milestone-content"><div class="milestone-title">Infrastructure Groundbreaking</div><div class="milestone-desc">Start infrastructure construction, official groundbreaking.</div></div>
+                <div class="milestone-status"><span class="status-badge-sm">PLANNED</span></div>
+            </div>
+            <div class="milestone-item">
+                <div class="milestone-date"><div class="milestone-month">Mar</div><div class="milestone-day">--</div><div class="milestone-year">2026</div></div>
+                <div class="milestone-content"><div class="milestone-title">County Road 425 North Construction Start</div><div class="milestone-desc">New road connecting Yeager Rd to Soldiers Home Rd for facility access.</div></div>
+                <div class="milestone-status"><span class="status-badge-sm">SCHEDULED</span></div>
+            </div>
+            <div class="milestone-item">
+                <div class="milestone-date"><div class="milestone-month">--</div><div class="milestone-day">--</div><div class="milestone-year">2026-27</div></div>
+                <div class="milestone-content"><div class="milestone-title">Factory Construction and Equipment</div><div class="milestone-desc">430,000 sq ft facility construction and key equipment installation.</div></div>
+                <div class="milestone-status"><span class="status-badge-sm">PLANNED</span></div>
+            </div>
+            <div class="milestone-item">
+                <div class="milestone-date"><div class="milestone-month">H2</div><div class="milestone-day">--</div><div class="milestone-year">2028</div></div>
+                <div class="milestone-content"><div class="milestone-title">Mass Production Begins</div><div class="milestone-desc">HBM4 advanced packaging mass production commences.</div></div>
+                <div class="milestone-status"><span class="severity-badge">TARGET</span></div>
+            </div></div>
+        </main>
+        <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <img src="Velocity_Transparent_Logo.svg" alt="Velocity">
+                    <div class="footer-bar"></div>
+                    <img src="New_HCC_Logo.svg" alt="HCC" style="height: 50px;">
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Dashboard</a>
+                    <a href="index.html#tools">Methodology</a>
+                    <a href="mailto:press@velocityxp.com">Press Inquiries</a>
+                    <a href="mailto:research@velocityxp.com">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>Data provided for informational purposes only. Not investment advice.</span>
+                <span>© 2026 Velocity. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const ctx = document.getElementById('velocityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                datasets: [{
+                    label: 'Velocity Score',
+                    data: [null, null, 55, 58, 60, 62, 63, 64, 65, 65, 65, 65],
+                    borderColor: '#FDFF66',
+                    backgroundColor: 'rgba(30, 27, 75, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#FDFF66'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { min: 0, max: 100, grid: { color: '#e2e8f0' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
