@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Brief | NXT Infrastructure Velocity Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-indigo: #1e1b4b;
+            --electric-yellow: #FDFF66;
+            --white: #ffffff;
+            --off-white: #f8fafc;
+            --green: #22c55e;
+            --green-bg: rgba(34, 197, 94, 0.1);
+            --yellow: #eab308;
+            --yellow-bg: rgba(234, 179, 8, 0.1);
+            --red: #ef4444;
+            --red-bg: rgba(239, 68, 68, 0.1);
+            --blue: #3b82f6;
+            --blue-bg: rgba(59, 130, 246, 0.1);
+            --orange: #f97316;
+            --border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--off-white); color: var(--text-primary); line-height: 1.7; }
+        
+        .header { background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), var(--deep-indigo); color: var(--white); padding: 1rem 2rem; }
+        .header-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--white); }
+        .brand-mark { width: 6px; height: 36px; background: var(--electric-yellow); }
+        .brand-text { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; }
+        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 500; text-decoration: none; cursor: pointer; border: none; }
+        .btn-home { background: var(--electric-yellow); color: var(--deep-indigo); }
+        .btn-print { background: rgba(255,255,255,0.1); color: var(--white); margin-right: 0.5rem; }
+        .btn-print:hover { background: rgba(255,255,255,0.2); }
+        
+        .breadcrumb { max-width: 1000px; margin: 0 auto; padding: 1rem 2rem 0; font-size: 0.8rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--deep-indigo); }
+        .breadcrumb .separator { margin: 0 0.5rem; opacity: 0.5; }
+        .breadcrumb .current { font-weight: 500; color: var(--text-primary); }
+        
+        .main { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        
+        .brief-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 3px solid var(--electric-yellow); }
+        .brief-label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+        .brief-title { font-size: 2rem; font-weight: 800; color: var(--deep-indigo); line-height: 1.2; margin-bottom: 0.75rem; }
+        .brief-subtitle { font-size: 1rem; color: var(--text-secondary); }
+        
+        .brief-section { margin-bottom: 2.5rem; }
+        .brief-section-title { font-size: 1.25rem; font-weight: 700; color: var(--deep-indigo); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+        .brief-text { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1rem; }
+        .brief-text strong { color: var(--text-primary); }
+        
+        .highlight-box { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border-radius: 12px; padding: 1.5rem; color: white; margin: 1.5rem 0; }
+        .highlight-box-label { font-size: 0.7rem; font-weight: 700; color: var(--electric-yellow); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .highlight-box-text { font-size: 1rem; line-height: 1.7; }
+        .highlight-box-text strong { color: var(--electric-yellow); }
+        
+        .data-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+        .data-table th { background: var(--deep-indigo); color: var(--white); padding: 0.75rem 1rem; text-align: left; font-weight: 600; }
+        .data-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); }
+        .data-table tr:hover { background: var(--off-white); }
+        
+        .footer { background: var(--deep-indigo); color: var(--white); padding: 2rem; margin-top: 3rem; }
+        .footer-content { max-width: 1000px; margin: 0 auto; text-align: center; }
+        .footer-brand { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+        .footer-desc { font-size: 0.8rem; color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; }
+        .footer-bottom { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+        
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            body { background: white !important; font-size: 10pt; }
+            .header { background: #1e1b4b !important; }
+            .btn { display: none !important; }
+            .main { padding: 1rem !important; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="brand">
+                <div class="brand-mark"></div>
+                <div class="brand-text">NXT VELOCITY</div>
+            </a>
+            <div>
+                <button onclick="window.print()" class="btn btn-print">🖨️ Print / PDF</button>
+                <a href="index.html" class="btn btn-home">← Back to Dashboard</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="breadcrumb">
+        <a href="index.html">Dashboard</a>
+        <span class="separator">›</span>
+        <span class="current">Executive Brief</span>
+    </div>
+    
+    <main class="main">
+        <div class="brief-header">
+            <div class="brief-label">NXT Infrastructure Velocity Report</div>
+            <h1 class="brief-title">The Speed Paradox: What xAI's 122-Day Buildout Reveals About American Infrastructure</h1>
+            <p class="brief-subtitle">Why $2.5 trillion in committed capital faces a fundamental execution crisis</p>
+        </div>
+        
+        <div class="brief-section">
+            <p class="brief-text">In September 2024, xAI brought the world's largest AI training cluster from groundbreaking to operational in 122 days. Meanwhile, Intel's Ohio fab sits 4+ years behind schedule. Samsung Taylor remains paused indefinitely.</p>
+            
+            <div class="highlight-box">
+                <div class="highlight-box-label">Core Finding</div>
+                <div class="highlight-box-text">The NXT Infrastructure Velocity Report tracks <strong>$2.5 trillion</strong> in committed capital across <strong>54 megaprojects</strong>. Our data reveals: <strong>the traditional infrastructure playbook is broken, but the alternative comes with costs most operators cannot accept.</strong></div>
+            </div>
+        </div>
+        
+        <div class="brief-section">
+            <h2 class="brief-section-title">The Real Bottleneck Is Power, Not Capital</h2>
+            
+            <p class="brief-text">Every major grid operator in America is overwhelmed. The national interconnection queue now contains <strong>2,300 gigawatts</strong> of projects waiting for approval.</p>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Grid Region</th>
+                        <th>Avg Wait Time</th>
+                        <th>Queue Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Virginia (Dominion)</strong></td>
+                        <td>7+ years</td>
+                        <td>100+ MW facilities severely constrained</td>
+                    </tr>
+                    <tr>
+                        <td><strong>California (CAISO)</strong></td>
+                        <td>9+ years</td>
+                        <td>Longest waits nationally</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PJM (Mid-Atlantic)</strong></td>
+                        <td>8+ years</td>
+                        <td>2,700+ GW backlog</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ERCOT (Texas)</strong></td>
+                        <td>4-5 years</td>
+                        <td>226+ GW large load queue</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="brief-section">
+            <h2 class="brief-section-title">The Bottom Line</h2>
+            <p class="brief-text">xAI proved that American infrastructure can move at extraordinary speed. But the methods are not available to most operators.</p>
+            <p class="brief-text">For everyone else, the path runs through a 2,300 GW interconnection queue, a construction workforce short half a million workers, and communities increasingly willing to reject projects.</p>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">NXT INFRASTRUCTURE VELOCITY REPORT</div>
+            <p class="footer-desc">Tracking $2.5 trillion across 54 projects.</p>
+            <div class="footer-bottom">© 2026 Hispanic Construction Council.</div>
+        </div>
+    </footer>
+</body>
+</html>
