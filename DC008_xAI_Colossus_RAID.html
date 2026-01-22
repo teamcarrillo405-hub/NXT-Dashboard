@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stargate AI (OpenAI/SoftBank/Oracle) | NXT Infrastructure Velocity Report</title>
+    <title>xAI Colossus | NXT Infrastructure Velocity Report</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -87,134 +87,80 @@
         .milestone-year { font-size: 0.7rem; color: rgba(255,255,255,0.6); }
         .milestone-content { flex: 1; }
         .milestone-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; color: white; }
-        .milestone-desc { font-size: 0.8rem; color: rgba(255,255,255,0.7); }
+        .milestone-desc { font-size: 0.75rem; color: rgba(255,255,255,0.7); }
         .milestone-status { display: flex; align-items: center; }
-        .footer { background: var(--deep-indigo); color: var(--white); padding: 2rem; margin-top: 2rem; }
-        .footer-content { max-width: 1400px; margin: 0 auto; }
+        .footer { background: var(--deep-indigo); color: var(--white); padding: 2rem 0; margin-top: 2rem; }
+        .footer-content { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
         .footer-main { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-        .footer-brand { display: flex; align-items: center; gap: 0.75rem; }
-        .footer-brand img { height: 36px; }
-        .footer-bar { width: 6px; height: 28px; background: var(--electric-yellow); }
+        .footer-brand { display: flex; align-items: center; gap: 1.5rem; }
+        .footer-brand img { height: 40px; }
+        .footer-bar { width: 1px; height: 30px; background: rgba(255,255,255,0.3); }
         .footer-links { display: flex; gap: 2rem; }
-        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.8rem; }
-        .footer-links a:hover { color: white; }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(255,255,255,0.5); }
-        /* Print Styles */
-        @media print {
-            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            body { background: white !important; font-size: 9pt; }
-            .header { position: relative !important; background: #1e1b4b !important; padding: 0.5rem 1rem !important; }
-            .header-content { padding: 0.5rem 1rem !important; }
-            .btn-home, .data-freshness { display: none !important; }
-            .main { padding: 1rem !important; max-width: 100% !important; }
-            .footer { display: none !important; }
-            .project-header { margin-bottom: 1rem !important; gap: 1rem !important; }
-            .project-title { font-size: 1.5rem !important; }
-            .score-display { padding: 1rem !important; min-width: 140px !important; }
-            .score-value { font-size: 2.5rem !important; }
-            .status-banner { padding: 1rem !important; margin-bottom: 1rem !important; }
-            .metrics-row { gap: 0.5rem !important; margin-bottom: 1rem !important; }
-            .metric-box { padding: 0.75rem !important; }
-            .metric-value { font-size: 1.25rem !important; }
-            .card { padding: 1rem !important; margin-bottom: 1rem !important; page-break-inside: avoid; }
-            .grid-2, .grid-3 { gap: 0.75rem !important; }
-            .chart-container { height: 200px !important; padding: 0.5rem !important; }
-            .velocity-breakdown { gap: 0.5rem !important; margin-top: 1rem !important; }
-            .breakdown-score { font-size: 1.5rem !important; }
-            .raid-section { margin-bottom: 1rem !important; page-break-inside: avoid; }
-            .raid-table { font-size: 7pt !important; }
-            .raid-table th, .raid-table td { padding: 0.5rem !important; }
-            .key-item { padding: 0.5rem !important; margin-bottom: 0.5rem !important; }
-            h2, h3 { page-break-after: avoid; }
-        }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; }
+        .footer-links a:hover { color: var(--electric-yellow); }
+        .footer-bottom { display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(255,255,255,0.5); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; }
     </style>
 </head>
 <body>
-        <header class="header">
+    <header class="header">
         <div class="header-content">
             <a href="index.html" class="brand">
                 <div class="velocity-icon"><span></span><span></span><span></span></div>
-                <span class="brand-text">NXT Infrastructure Execution Report</span>
+                <span class="brand-text">NXT VELOCITY REPORT</span>
             </a>
             <div class="header-right">
-                <div class="data-freshness">
-                    <span class="freshness-dot"></span>
-                    <span class="freshness-text">Live</span>
-                </div>
-                <a href="index.html" class="btn btn-home">← Back to Dashboard</a>
+                <div class="data-freshness"><div class="freshness-dot"></div><span class="freshness-text">LIVE DATA</span></div>
+                <a href="index.html" class="btn btn-home">← Dashboard</a>
             </div>
         </div>
     </header>
     <main class="main">
         <div class="project-header">
             <div class="project-identity">
-                <h1 class="project-title">Stargate AI Infrastructure</h1>
-                <p class="project-subtitle">Abilene, TX (Flagship) + 5 Sites | OpenAI/Oracle/SoftBank JV</p>
+                <h1 class="project-title">xAI Colossus</h1>
+                <p class="project-subtitle">Memphis, TN and Southaven, MS | World's Largest AI Supercomputer</p>
                 <div class="project-tags">
                     <span class="tag sector">Data Center</span>
-                    <span class="tag status">LIVE + Expanding</span>
-                    <span class="tag chips">$500B Commitment</span>
+                    <span class="tag status">Operational / Expanding</span>
+                    <span class="tag status">DC008</span>
                 </div>
             </div>
             <div class="score-display">
-                <div class="score-value">78</div>
-                <div class="score-label" title="±8 reflects variance from source timing differences and qualitative assessment margins">Velocity Score (±8)*</div>
-                <div style="font-size: 0.55rem; color: rgba(255,255,255,0.5); margin-top: 0.25rem;">*Margin reflects source timing variance</div>
-                <div class="score-trend">↑ +26 pts YTD</div>
-            </div></div>
-        <div style="text-align: right; margin-top: 0.5rem;">
-            <span style="font-size: 0.7rem; color: rgba(255,255,255,0.6);">Last Updated: Jan 9, 2026</span>
+                <div class="score-value">82</div>
+                <div class="score-label">Velocity Score</div>
+                <div class="score-trend">▲ +8 pts (90 days)</div>
+            </div>
         </div>
-        
-        <div style="background: rgba(30,27,75,0.1); border: 1px solid #1e1b4b; border-radius: 8px; padding: 0.5rem 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-            <span style="width: 8px; height: 8px; background: #1e1b4b; border-radius: 50%; display: inline-block;"></span>
-            <span style="font-size: 0.7rem; color: #1e1b4b; font-weight: 500;">Web-verified Jan 9, 2026</span>
-            <span style="font-size: 0.65rem; color: #1e1b4b;">Sources:</span>
-            <a href="https://openai.com/blog" target="_blank" style="font-size: 0.65rem; color: #1e1b4b; text-decoration: underline;">OpenAI Blog</a>
-            <a href="https://www.oracle.com/news" target="_blank" style="font-size: 0.65rem; color: #1e1b4b; text-decoration: underline;">Oracle News</a>
-            <a href="https://www.constructiondive.com" target="_blank" style="font-size: 0.65rem; color: #1e1b4b; text-decoration: underline;">Construction Dive</a>
-        </div>
-        
-        <div style="background: rgba(30,27,75,0.1); border: 1px solid #1e1b4b; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem;">
-            <div style="font-weight: 700; font-size: 0.8rem; color: #1e1b4b; margin-bottom: 0.25rem;">✓ Flagship Abilene Campus OPERATIONAL Sept 30, 2025</div>
-            <div style="font-size: 0.75rem; color: #1e1b4b;">Crusoe announced first phase live on OCI. GB200 racks delivered June 2025. OpenAI running training/inference. 5 new sites announced Sept 2025 bringing total to ~7GW and $400B+.</div>
-        </div>
-        
         <div class="status-banner">
-            <div class="status-badge">EXECUTING</div>
-            <div class="status-text"><strong>Original Announcement:</strong> January 21, 2025 | <strong>Original Target:</strong> $100B immediate, $500B over 4 years | <strong>Current Target:</strong> Abilene OPERATIONAL Sept 2025 | <strong>Delay:</strong> NONE (AHEAD OF SCHEDULE) | First data center operational by September 2025. On track to secure full $500B commitment by end of 2025, ahead of original 4-year timeline. Five additional sites announced. Total ~7GW capacity and $400B+ investment underway.</div></div>
+            <div class="status-badge">OPERATIONAL</div>
+            <div class="status-text"><strong>Fastest AI infrastructure buildout in history.</strong> 122 days from start to 100K GPUs operational (Sept 2024). Expanded to 230K+ GPUs by Dec 2024. Scaling to 2 GW and 555K GPUs by Jan 2026. Active environmental litigation from SELC/NAACP over air permits.</div>
+        </div>
         <div class="metrics-row">
             <div class="metric-box">
-                <div class="metric-value">$500B</div>
-                <div class="metric-label">Total Commitment</div>
-                <div class="metric-sublabel">$400B+ underway</div>
+                <div class="metric-value">$32B+</div>
+                <div class="metric-label">Total Raised</div>
+                <div class="metric-sublabel">Equity + Debt</div>
                 <div style="font-size: 0.5rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem;">Verified: Jan 2026</div>
             </div>
             <div class="metric-box">
-                <div class="metric-value">~7 GW</div>
-                <div class="metric-label">Planned Capacity</div>
-                <div class="metric-sublabel">6 sites announced</div>
+                <div class="metric-value">555K</div>
+                <div class="metric-label">Target GPUs</div>
+                <div class="metric-sublabel">H100/H200/GB200</div>
                 <div style="font-size: 0.5rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem;">Verified: Jan 2026</div>
             </div>
             <div class="metric-box">
-                <div class="metric-value">1+ GW</div>
-                <div class="metric-label">Abilene Campus</div>
-                <div class="metric-sublabel">Phase 1 LIVE</div>
+                <div class="metric-value">2 GW</div>
+                <div class="metric-label">Power Capacity</div>
+                <div class="metric-sublabel">Grid + Turbines + Battery</div>
                 <div style="font-size: 0.5rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem;">Verified: Jan 2026</div>
             </div>
             <div class="metric-box">
-                <div class="metric-value">100K+</div>
-                <div class="metric-label">US Jobs</div>
-                <div class="metric-sublabel">Projected</div>
+                <div class="metric-value">$230B</div>
+                <div class="metric-label">Valuation</div>
+                <div class="metric-sublabel">Series E (Jan 2026)</div>
                 <div style="font-size: 0.5rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem;">Verified: Jan 2026</div>
             </div>
-            <div class="metric-box">
-                <div class="metric-value">GB200</div>
-                <div class="metric-label">Nvidia Racks</div>
-                <div class="metric-sublabel">Deployed June 2025</div>
-                <div style="font-size: 0.5rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem;">Verified: Jan 2026</div>
-            </div>
-            </div>
+        </div>
         <div class="grid-2">
             <div class="card">
                 <h2 class="card-title">12-Month Velocity Trend</h2>
@@ -226,37 +172,37 @@
                 <p style="font-size: 0.7rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem;">Four equally-weighted factors. Workforce and power/grid constraints embedded within. Confidence interval reflects data recency and source reliability.</p>
                 <div class="velocity-breakdown">
                     <div class="breakdown-item">
-                        <div class="breakdown-score">45</div>
+                        <div class="breakdown-score">95</div>
                         <div class="breakdown-label">Timeline Adherence</div>
-                        <div style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem;">incl. grid queue, permits</div>
-                        <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width: 45%;"></div></div>
+                        <div style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem;">122-day buildout record</div>
+                        <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width: 95%;"></div></div>
                         <div class="breakdown-weight">Weight: 25%</div>
                     </div>
                     <div class="breakdown-item">
-                        <div class="breakdown-score">55</div>
+                        <div class="breakdown-score">88</div>
                         <div class="breakdown-label">Funding Security</div>
-                        <div style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem;">incl. power agreements</div>
-                        <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width: 55%;"></div></div>
+                        <div style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem;">$32B+ raised</div>
+                        <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width: 88%;"></div></div>
                         <div class="breakdown-weight">Weight: 25%</div>
                     </div>
                     <div class="breakdown-item">
-                        <div class="breakdown-score">55</div>
+                        <div class="breakdown-score">85</div>
                         <div class="breakdown-label">Construction Progress</div>
-                        <div style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem;">incl. workforce avail.</div>
-                        <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width: 55%;"></div></div>
+                        <div style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem;">Colossus 2 ramping</div>
+                        <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width: 85%;"></div></div>
                         <div class="breakdown-weight">Weight: 25%</div>
                     </div>
                     <div class="breakdown-item">
-                        <div class="breakdown-score">53</div>
+                        <div class="breakdown-score">60</div>
                         <div class="breakdown-label">Operator Stability</div>
-                        <div style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem;">incl. utility relations</div>
-                        <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width: 53%;"></div></div>
+                        <div style="font-size: 0.6rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem;">Active litigation</div>
+                        <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width: 60%;"></div></div>
                         <div class="breakdown-weight">Weight: 25%</div>
                     </div>
                 </div>
-            </div></div>
+            </div>
+        </div>
         
-        <!-- Score Derivation Notes -->
         <div class="card">
             <h2 class="card-title">Score Change Log</h2>
             <p style="font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-bottom: 0.75rem;">Audit trail of velocity score changes with rationale. Full derivation notes available upon request.</p>
@@ -273,44 +219,58 @@
                 <tbody>
                     <tr>
                         <td>Jan 2026</td>
+                        <td>80</td>
+                        <td>82</td>
+                        <td>+2</td>
+                        <td>Series E $20B closed at $230B valuation. MACROHARDR Mississippi site announced.</td>
+                    </tr>
+                    <tr>
+                        <td>Dec 2025</td>
+                        <td>78</td>
+                        <td>80</td>
+                        <td>+2</td>
+                        <td>SELC lawsuit against air permit upheld 6-1 by Shelby County. Turbine permit valid.</td>
+                    </tr>
+                    <tr>
+                        <td>Sep 2024</td>
                         <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>Monthly review; see RAID log for details</td>
+                        <td>74</td>
+                        <td>NEW</td>
+                        <td>Initial score. Colossus 1 operational with 100K GPUs in 122 days.</td>
                     </tr>
                 </tbody>
             </table>
             <p style="font-size: 0.6rem; color: rgba(255,255,255,0.4); margin-top: 0.75rem; font-style: italic;">Contact research@velocityxp.com for detailed factor-by-factor scoring derivation.</p>
         </div>
         
-        <div class="card">
-            <h2 class="card-title">Key Risks</h2></div>
         <div class="card thesis-card">
             <div class="thesis-title">Investment Thesis</div>
-            <p class="thesis-text">Project Stargate has transformed from announcement to operational reality. Announced Jan 21, 2025 at White House by Trump with Sam Altman (OpenAI), Larry Ellison (Oracle), and Masayoshi Son (SoftBank). Initial skepticism (Elon Musk: "They don't have the money") has given way to demonstrated execution. Flagship Abilene campus went LIVE Sept 30, 2025, just 15 months after construction began June 2024. Crusoe serves as developer, Oracle Cloud Infrastructure powers operations. OpenAI already running training and inference workloads. Five additional sites announced Sept 2025 bring total to ~7GW and $400B+ committed. Funding secured: SoftBank borrowed $10B from Mizuho (April 2025), JPMorgan lent $2.3B (May 2025), $100B investment from NVIDIA for AI processors. Key risks remain: execution at unprecedented scale, partner coordination (reported friction between OpenAI and SoftBank), power procurement at 10GW scale. International expansion includes UAE Stargate (G42/Oracle/SoftBank), Norway, and Stargate Argentina ($25B, 500MW). (Sources: OpenAI.com Sept 2025, CNBC, Wikipedia, Crusoe.ai)</p>
+            <p class="thesis-text">xAI Colossus represents the fastest AI infrastructure buildout in history. Elon Musk's AI company went from site selection (March 2024) to 100,000 H100 GPUs operational (September 3, 2024) in just 122 days, a pace 2.5x faster than industry norms. By December 2024, the cluster expanded to 230K+ GPUs (150K H100s, 50K H200s, 30K GB200s). Colossus 2 broke ground in March 2025 with an $80M land acquisition and targets 200 MW additional capacity by August 2025. Total capital raised exceeds $32B including a $20B Series E in January 2026 at $230B valuation. Investors include QIA, NVIDIA, Cisco, BlackRock, Morgan Stanley, and Kingdom Holdings. The company operates 35+ gas turbines (421 MW combined) with contested air permits. SELC and NAACP filed EPA complaints citing Clean Air Act violations. Despite regulatory friction, execution velocity remains exceptional with priority NVIDIA GPU access and strategic partnerships with Dell and Supermicro. (Sources: xAI Series E announcement Jan 2026; TIME Dec 2025; Data Center Dynamics; SELC filings)</p>
             <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.2);">
                 <div style="font-size: 0.65rem; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem;">SOURCES (Click to verify):</div>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                    <a href="https://www.sec.gov" target="_blank" style="font-size: 0.6rem; color: #FDFF66; text-decoration: none; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;">SEC Filings</a>
-                    <a href="https://www.chips.gov" target="_blank" style="font-size: 0.6rem; color: #FDFF66; text-decoration: none; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;">CHIPS.gov</a>
-                    <a href="https://www.energy.gov/lpo" target="_blank" style="font-size: 0.6rem; color: #FDFF66; text-decoration: none; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;">DOE LPO</a>
+                    <a href="https://x.ai/news/series-e" target="_blank" style="font-size: 0.6rem; color: #FDFF66; text-decoration: none; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;">xAI Series E</a>
+                    <a href="https://time.com/7308925/elon-musk-memphis-ai-data-center/" target="_blank" style="font-size: 0.6rem; color: #FDFF66; text-decoration: none; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;">TIME Investigation</a>
+                    <a href="https://www.selc.org" target="_blank" style="font-size: 0.6rem; color: #FDFF66; text-decoration: none; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;">SELC Filings</a>
+                    <a href="https://www.datacenterdynamics.com" target="_blank" style="font-size: 0.6rem; color: #FDFF66; text-decoration: none; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.1); border-radius: 4px;">DCD Coverage</a>
                 </div>
-            </div></div>
+            </div>
+        </div>
         
         <div class="card">
             <h2 class="card-title">RAID Log</h2>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.55rem; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem;"><span>Severity: <span class="severity-badge" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">HIGH</span> Critical path</span><span><span class="severity-badge" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">MEDIUM</span> Manageable</span><span><span class="severity-badge" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">LOW</span> Minor impact</span></div>
-            <p style="font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-bottom: 1rem;">Risk assessments reviewed monthly. Last review: Jan 9, 2026</p>
+            <p style="font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-bottom: 1rem;">Risk assessments reviewed monthly. Last review: Jan 11, 2026</p>
             <div class="raid-section">
                 <div class="raid-header"><div class="raid-icon">R</div><div class="raid-title">Risks</div></div>
                 <table class="raid-table">
                     <thead><tr><th>Risk</th><th>Impact</th><th>Probability</th><th>Mitigation</th></tr></thead>
                     <tbody>
-                        <tr><td>Funding structure undefined</td><td><span class="severity-badge">HIGH</span></td><td><span class="severity-badge">HIGH</span></td><td>Partner commitments needed</td></tr>
-                        <tr><td>Grid capacity insufficient</td><td><span class="severity-badge">HIGH</span></td><td><span class="severity-badge">HIGH</span></td><td>Nuclear, renewables exploration</td></tr>
-                        <tr><td>Unrealistic timeline</td><td><span class="severity-badge">HIGH</span></td><td><span class="severity-badge">HIGH</span></td><td>Phased approach likely</td></tr>
-                        <tr><td>Partner misalignment</td><td><span class="severity-badge">HIGH</span></td><td><span class="severity-badge">MEDIUM</span></td><td>Clear governance needed</td></tr>
-                        <tr><td>Technology evolution</td><td><span class="severity-badge">MEDIUM</span></td><td><span class="severity-badge">MEDIUM</span></td><td>Flexible architecture</td></tr>
+                        <tr><td>Environmental litigation (SELC/NAACP/EPA)</td><td><span class="severity-badge">HIGH</span></td><td><span class="severity-badge">HIGH</span></td><td>Permit upheld Dec 2025. EPA 60-day notice filed. Appeals ongoing.</td></tr>
+                        <tr><td>Community opposition (Boxtown)</td><td><span class="severity-badge">MEDIUM</span></td><td><span class="severity-badge">HIGH</span></td><td>$250K air quality study funded. 1,000+ public comments opposed.</td></tr>
+                        <tr><td>Grid strain on Memphis power</td><td><span class="severity-badge">HIGH</span></td><td><span class="severity-badge">MEDIUM</span></td><td>TVA substations ($55M invested). Could reach 1/3 of Memphis supply.</td></tr>
+                        <tr><td>Cash burn rate (~$1B/month)</td><td><span class="severity-badge">MEDIUM</span></td><td><span class="severity-badge">LOW</span></td><td>$32B+ raised. Revenue ~$100M (2024). Runway extended.</td></tr>
+                        <tr><td>Air quality violations (NOx emissions)</td><td><span class="severity-badge">HIGH</span></td><td><span class="severity-badge">MEDIUM</span></td><td>79% increase in peak NO2 per UT analysis. Permit limits 110 hrs/year.</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -319,10 +279,12 @@
                 <table class="raid-table">
                     <thead><tr><th>Action</th><th>Owner</th><th>Due Date</th><th>Status</th></tr></thead>
                     <tbody>
-                        <tr><td>Site selection</td><td>Oracle</td><td>Q2 2025</td><td><span class="status-badge-sm">ACTIVE</span></td></tr>
-                        <tr><td>Funding commitment letters</td><td>All Partners</td><td>Q1 2025</td><td><span class="status-badge-sm on-hold">PENDING</span></td></tr>
-                        <tr><td>Grid interconnection applications</td><td>Oracle</td><td>Q1 2025</td><td><span class="status-badge-sm on-hold">UPCOMING</span></td></tr>
-                        <tr><td>Phase 1 detailed planning</td><td>Joint Team</td><td>Q2 2025</td><td><span class="status-badge-sm on-hold">UPCOMING</span></td></tr>
+                        <tr><td>Colossus 2 build (200 MW, 6-month timeline)</td><td>xAI Ops</td><td>Aug 2025</td><td><span class="status-badge-sm">ACTIVE</span></td></tr>
+                        <tr><td>MACROHARDR Mississippi site buildout</td><td>MZX Tech LLC</td><td>Feb 2026</td><td><span class="status-badge-sm">ACTIVE</span></td></tr>
+                        <tr><td>TVA Substation #22 construction ($20M)</td><td>TVA/xAI</td><td>Q2 2026</td><td><span class="status-badge-sm">ACTIVE</span></td></tr>
+                        <tr><td>Solaris Energy JV (900 MW supply)</td><td>Stateline Power</td><td>Ongoing</td><td><span class="status-badge-sm complete">COMPLETE</span></td></tr>
+                        <tr><td>Tesla Megapack deployment (168 units)</td><td>Tesla/xAI</td><td>2025</td><td><span class="status-badge-sm complete">COMPLETE</span></td></tr>
+                        <tr><td>$80M wastewater treatment plant</td><td>xAI</td><td>2026</td><td><span class="status-badge-sm">ACTIVE</span></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -331,10 +293,9 @@
                 <table class="raid-table">
                     <thead><tr><th>Issue</th><th>Severity</th><th>Status</th><th>Resolution</th></tr></thead>
                     <tbody>
-                        <tr><td>No concrete funding commitments</td><td><span class="severity-badge">HIGH</span></td><td><span class="status-badge-sm">ACTIVE</span></td><td>Negotiations ongoing</td></tr>
-                        <tr><td>Grid queue 36+ months</td><td><span class="severity-badge">HIGH</span></td><td><span class="status-badge-sm">ACTIVE</span></td><td>Alternative power sources</td></tr>
-                        <tr><td>Partner governance unclear</td><td><span class="severity-badge">MEDIUM</span></td><td><span class="status-badge-sm">ACTIVE</span></td><td>JV structure in development</td></tr>
-                        <tr><td>Skepticism from market</td><td><span class="severity-badge">MEDIUM</span></td><td><span class="status-badge-sm">ACTIVE</span></td><td>Demonstrate early progress</td></tr>
+                        <tr><td>Operated 35 turbines for ~1 year without permits</td><td><span class="severity-badge">HIGH</span></td><td><span class="status-badge-sm">RESOLVED</span></td><td>364-day "temporary" exemption. Permit granted July 2025.</td></tr>
+                        <tr><td>Mississippi turbines without air permits</td><td><span class="severity-badge">HIGH</span></td><td><span class="status-badge-sm">ACTIVE</span></td><td>12-month temporary DEQ approval. "Temporary-mobile" category.</td></tr>
+                        <tr><td>Cancer risk 4x national average (Boxtown)</td><td><span class="severity-badge">HIGH</span></td><td><span class="status-badge-sm">ACTIVE</span></td><td>Environmental justice concerns raised. Compared to "Cancer Alley".</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -343,38 +304,48 @@
                 <table class="raid-table">
                     <thead><tr><th>Decision</th><th>Date</th><th>Rationale</th><th>Impact</th></tr></thead>
                     <tbody>
-                        <tr><td>Announce Stargate partnership</td><td>Jan 2025</td><td>Political timing, AI demand</td><td>Created expectations</td></tr>
-                        <tr><td>Target Abilene, TX</td><td>2025</td><td>Land, power potential, incentives</td><td>Grid still constrained</td></tr>
-                        <tr><td>$500B headline figure</td><td>Jan 2025</td><td>Maximize impact</td><td>Credibility questions</td></tr>
+                        <tr><td>Memphis site selection</td><td>Mar 2024</td><td>TVA grid access. Low-cost real estate. Speed priority.</td><td>122-day buildout record</td></tr>
+                        <tr><td>On-site gas turbine power generation</td><td>2024</td><td>Bypass grid interconnection queues</td><td>421 MW turbine capacity</td></tr>
+                        <tr><td>Mississippi expansion (MACROHARDR)</td><td>Dec 2025</td><td>$20B investment. Former Duke Energy site (640 MW).</td><td>Largest AI facility globally</td></tr>
+                        <tr><td>Priority NVIDIA GPU supply agreement</td><td>2024</td><td>$2B strategic investment from NVIDIA</td><td>Access to GB200/GB300 chips</td></tr>
+                        <tr><td>Series E at $230B valuation</td><td>Jan 2026</td><td>$20B raise for continued expansion</td><td>QIA, NVIDIA, Cisco investors</td></tr>
                     </tbody>
                 </table>
-            </div></div>
+            </div>
+        </div>
+        
         <div class="card">
             <h2 class="card-title">Upcoming Milestones</h2>
             <p style="font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem;">Dates from official company announcements and regulatory filings</p>
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; font-size: 0.55rem; color: rgba(255,255,255,0.6); margin-bottom: 0.75rem;"><span><span class="status-badge-sm" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">COMPLETE</span> Achieved</span><span><span class="status-badge-sm" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">CONFIRMED</span> Official</span><span><span class="status-badge-sm" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">TARGET</span> Guidance</span><span><span class="status-badge-sm" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">PROJECTED</span> Estimate</span><span><span class="status-badge-sm" style="font-size: 0.5rem; padding: 0.1rem 0.3rem;">DELAYED</span> Behind</span></div>
             <div class="milestone-item">
-                <div class="milestone-date"><div class="milestone-month">H1</div><div class="milestone-day">--</div><div class="milestone-year">2026</div></div>
-                <div class="milestone-content"><div class="milestone-title">Lordstown Ohio Operational</div><div class="milestone-desc">SoftBank converted EV factory. Advanced modular data center design.</div></div>
-                <div class="milestone-status"><span class="status-badge-sm">ON TRACK</span></div>
+                <div class="milestone-date"><div class="milestone-month">Sep</div><div class="milestone-day">03</div><div class="milestone-year">2024</div></div>
+                <div class="milestone-content"><div class="milestone-title">Colossus 1 Operational</div><div class="milestone-desc">100,000 H100 GPUs online. 122 days from start. World's largest AI training cluster.</div></div>
+                <div class="milestone-status"><span class="status-badge-sm complete">COMPLETE</span></div>
             </div>
             <div class="milestone-item">
-                <div class="milestone-date"><div class="milestone-month">H2</div><div class="milestone-day">--</div><div class="milestone-year">2026</div></div>
-                <div class="milestone-content"><div class="milestone-title">Abilene Phase 2 Energized</div><div class="milestone-desc">Six buildings with 1 GW capacity. Started March 2025. GB200 racks deployed.</div></div>
-                <div class="milestone-status"><span class="status-badge-sm">ON TRACK</span></div>
+                <div class="milestone-date"><div class="milestone-month">Dec</div><div class="milestone-day">04</div><div class="milestone-year">2024</div></div>
+                <div class="milestone-content"><div class="milestone-title">Expanded to 230K GPUs</div><div class="milestone-desc">150K H100s + 50K H200s + 30K GB200s. 92-day expansion completed.</div></div>
+                <div class="milestone-status"><span class="status-badge-sm complete">COMPLETE</span></div>
             </div>
             <div class="milestone-item">
-                <div class="milestone-date"><div class="milestone-month">H2</div><div class="milestone-day">--</div><div class="milestone-year">2026</div></div>
-                <div class="milestone-content"><div class="milestone-title">Texas Frontier Campus Live</div><div class="milestone-desc">Vantage 1.4 GW site. First of 10 buildings. 3.7M sq ft at full buildout.</div></div>
-                <div class="milestone-status"><span class="status-badge-sm">CONFIRMED</span></div>
-            </div>
-            <div class="milestone-item">
-                <div class="milestone-date"><div class="milestone-month">Dec</div><div class="milestone-day">31</div><div class="milestone-year">2029</div></div>
-                <div class="milestone-content"><div class="milestone-title">10 GW Full Commitment</div><div class="milestone-desc">$500B total. 7 sites. 100K+ jobs. UAE and international expansion.</div></div>
+                <div class="milestone-date"><div class="milestone-month">Feb</div><div class="milestone-day">--</div><div class="milestone-year">2026</div></div>
+                <div class="milestone-content"><div class="milestone-title">MACROHARDR Mississippi Operational</div><div class="milestone-desc">Former Duke Energy site. 640 MW capacity. 59 turbines planned.</div></div>
                 <div class="milestone-status"><span class="status-badge-sm">TARGET</span></div>
-            </div></div>
-        </main>
-        <footer class="footer">
+            </div>
+            <div class="milestone-item">
+                <div class="milestone-date"><div class="milestone-month">Aug</div><div class="milestone-day">--</div><div class="milestone-year">2025</div></div>
+                <div class="milestone-content"><div class="milestone-title">Colossus 2 Operational</div><div class="milestone-desc">200 MW capacity. 6-month buildout. $18B GPU investment (550K GB200/GB300).</div></div>
+                <div class="milestone-status"><span class="status-badge-sm">TARGET</span></div>
+            </div>
+            <div class="milestone-item">
+                <div class="milestone-date"><div class="milestone-month">Jan</div><div class="milestone-day">--</div><div class="milestone-year">2026</div></div>
+                <div class="milestone-content"><div class="milestone-title">555K GPU Target / 2 GW Capacity</div><div class="milestone-desc">Full Colossus complex. World's largest AI supercomputer cluster.</div></div>
+                <div class="milestone-status"><span class="status-badge-sm">TARGET</span></div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
         <div class="footer-content">
             <div class="footer-main">
                 <div class="footer-brand">
@@ -384,14 +355,14 @@
                 </div>
                 <div class="footer-links">
                     <a href="index.html">Dashboard</a>
-                    <a href="index.html#tools">Methodology</a>
+                    <a href="METHODOLOGY.html">Methodology</a>
                     <a href="mailto:press@velocityxp.com">Press Inquiries</a>
                     <a href="mailto:research@velocityxp.com">Contact</a>
                 </div>
             </div>
             <div class="footer-bottom">
                 <span>Data provided for informational purposes only. Not investment advice.</span>
-                <span>© 2026 Velocity. All rights reserved.</span>
+                <span>© 2026 NXT Velocity Report. All rights reserved.</span>
             </div>
         </div>
     </footer>
@@ -403,10 +374,10 @@
         new Chart(velocityCtx, {
             type: 'line',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{ data: [73.0, 72.3, 71.5, 70.8, 70.1, 69.4, 68.6, 67.9, 67.2, 66.5, 65.7, 65.0], borderColor: '#FDFF66', backgroundColor: velocityGradient, fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#FDFF66', borderWidth: 2 }]
+                labels: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                datasets: [{ data: [null, null, null, null, null, null, null, 74, 76, 78, 80, 82], borderColor: '#FDFF66', backgroundColor: velocityGradient, fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#FDFF66', borderWidth: 2 }]
             },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 55.0, max: 83.0, grid: { color: 'rgba(0,0,0,0.05)' } }, x: { grid: { display: false } } } }
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 60, max: 95, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: 'rgba(255,255,255,0.6)' } }, x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.6)' } } } }
         });
     </script>
 </body>

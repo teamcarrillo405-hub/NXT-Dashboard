@@ -31,23 +31,41 @@
             line-height: 1.6;
         }
         .header {
-            background: var(--deep-indigo);
-            padding: 1rem 2rem;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), var(--deep-indigo);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
+        .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 1.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
         }
         .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: #fff; }
-        .brand-mark { width: 6px; height: 28px; background: var(--electric-yellow); }
-        .brand-text { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; color: #fff; }
-        .header-actions { display: flex; gap: 0.5rem; align-items: center; }
-        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.8rem; font-weight: 500; text-decoration: none; cursor: pointer; border: none; }
-        .btn-home { background: var(--electric-yellow); color: var(--deep-indigo); }
-        .btn-ghost { background: transparent; color: rgba(255,255,255,0.8); }
+        .header-actions { display: flex; gap: 1rem; align-items: center; }
+        .data-freshness { display: flex; align-items: center; gap: 0.5rem; background: rgba(34,197,94,0.15); padding: 0.4rem 0.75rem; border-radius: 6px; }
+        .freshness-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .freshness-text { font-size: 0.7rem; color: var(--green); font-weight: 600; }
+        .freshness-divider { color: rgba(255,255,255,0.3); }
+        .freshness-timestamp { font-size: 0.65rem; color: rgba(255,255,255,0.8); }
+        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.8rem; font-weight: 500; text-decoration: none; cursor: pointer; border: none; display: flex; align-items: center; gap: 0.5rem; }
+        .btn-export { background: var(--electric-yellow); color: var(--deep-indigo); font-weight: 600; }
+        .btn-export:hover { background: #e5e855; }
+        .main-nav { border-top: 1px solid rgba(255,255,255,0.1); }
+        .nav-container { max-width: 1600px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 0; }
+        .nav-tab { padding: 1rem 1.5rem; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; font-weight: 500; border-bottom: 3px solid transparent; transition: all 0.2s; cursor: pointer; display: flex; align-items: center; }
+        .nav-tab:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        .nav-tab.active { color: var(--electric-yellow); border-bottom-color: var(--electric-yellow); }
+        .nav-tab-dropdown { position: relative; }
+        .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--deep-indigo); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; min-width: 200px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); z-index: 1000; padding: 0.5rem 0; }
+        .nav-tab-dropdown:hover .nav-dropdown-menu { display: block; }
+        .nav-dropdown-item { display: block; padding: 0.75rem 1.25rem; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; transition: all 0.2s; }
+        .nav-dropdown-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
         .btn-ghost:hover { background: rgba(255,255,255,0.1); color: white; }
         
         .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem 0; font-size: 0.8rem; color: var(--text-muted); }
@@ -149,36 +167,53 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="header-content">
-            <a href="index.html" class="brand">
-                <svg class="brand-logo" style="height: 24px; width: auto;" xmlns="http://www.w3.org/2000/svg" viewBox="0 38 96 13" preserveAspectRatio="xMidYMid meet"><defs><clipPath id="c1"><path d="M 39 39 L 45 39 L 45 49 L 39 49 Z" clip-rule="nonzero"/></clipPath><clipPath id="c2"><path d="M 67 39 L 73 39 L 73 49 L 67 49 Z" clip-rule="nonzero"/></clipPath><clipPath id="c3"><path d="M 72 39 L 83 39 L 83 49 L 72 49 Z" clip-rule="nonzero"/></clipPath><clipPath id="c4"><path d="M 82 41 L 96 41 L 96 50 L 82 50 Z" clip-rule="nonzero"/></clipPath><clipPath id="c5"><path d="M 0 39 L 31 39 L 31 49 L 0 49 Z" clip-rule="nonzero"/></clipPath></defs><path fill="#ffffff" d="M 28.355469 44.839844 C 28.355469 42.660156 30.996094 40.941406 34.296875 40.941406 C 37.128906 40.941406 39.460938 42.289062 39.460938 44.539062 C 39.460938 44.742188 39.433594 44.886719 39.410156 45.03125 L 31.570312 45.03125 C 31.691406 45.828125 32.527344 46.355469 33.757812 46.355469 C 34.726562 46.355469 35.515625 46.089844 35.945312 45.550781 L 39.195312 45.550781 C 38.3125 47.210938 36.160156 48.292969 33.507812 48.292969 C 30.566406 48.292969 28.355469 46.765625 28.355469 44.839844 Z M 31.871094 43.851562 L 36.246094 43.851562 C 35.957031 43.179688 35.074219 42.816406 34.117188 42.816406 C 33.160156 42.816406 32.324219 43.179688 31.871094 43.851562 Z M 31.871094 43.851562 " fill-opacity="1" fill-rule="nonzero"/><g clip-path="url(#c1)"><path fill="#ffffff" d="M 41.289062 39.605469 L 44.660156 39.605469 L 42.878906 48.027344 L 39.507812 48.027344 Z M 41.289062 39.605469 " fill-opacity="1" fill-rule="nonzero"/></g><path fill="#ffffff" d="M 55.796875 44.347656 C 55.796875 46.765625 52.964844 48.292969 49.773438 48.292969 C 46.855469 48.292969 44.335938 47.042969 44.335938 44.886719 C 44.335938 42.46875 47.167969 40.941406 50.359375 40.941406 C 53.273438 40.941406 55.796875 42.191406 55.796875 44.347656 Z M 52.535156 44.441406 C 52.535156 43.5625 51.578125 42.988281 50.226562 43 C 48.792969 43 47.597656 43.707031 47.597656 44.792969 C 47.597656 45.671875 48.554688 46.246094 49.894531 46.246094 C 51.339844 46.234375 52.535156 45.527344 52.535156 44.441406 Z M 52.535156 44.441406 " fill-opacity="1" fill-rule="nonzero"/><path fill="#ffffff" d="M 56.453125 44.863281 C 56.453125 42.578125 59.09375 40.941406 62.441406 40.941406 C 65.464844 40.941406 67.617188 42.3125 67.710938 44.25 L 64.582031 44.25 C 64.4375 43.515625 63.53125 42.988281 62.324219 42.988281 C 60.804688 42.988281 59.71875 43.804688 59.71875 44.816406 C 59.71875 45.671875 60.578125 46.246094 61.976562 46.246094 C 63.039062 46.246094 64.101562 45.753906 64.4375 45.054688 L 67.59375 45.054688 C 66.898438 47.113281 64.726562 48.292969 61.761719 48.292969 C 58.796875 48.292969 56.453125 46.910156 56.453125 44.863281 Z M 56.453125 44.863281 " fill-opacity="1" fill-rule="nonzero"/><g clip-path="url(#c2)"><path fill="#ffffff" d="M 69.121094 41.207031 L 72.492188 41.207031 L 71.058594 48.027344 L 67.6875 48.027344 Z M 69.578125 39.0625 L 72.949219 39.0625 L 72.601562 40.664062 L 69.242188 40.664062 Z M 69.578125 39.0625 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#c3)"><path fill="#ffffff" d="M 73.210938 41.207031 L 76.03125 41.207031 L 76.355469 39.652344 L 79.652344 39.652344 L 79.328125 41.207031 L 82.796875 41.207031 L 82.390625 43.082031 L 78.933594 43.082031 L 78.492188 45.152344 C 78.480469 45.226562 78.46875 45.296875 78.46875 45.355469 C 78.46875 45.851562 78.886719 46.054688 79.554688 46.054688 L 81.753906 46.054688 L 81.347656 48.027344 L 77.488281 48.027344 C 75.898438 48.027344 75.039062 47.414062 75.039062 46.1875 C 75.039062 45.972656 75.0625 45.730469 75.121094 45.476562 L 75.625 43.082031 L 72.816406 43.082031 Z M 73.210938 41.207031 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#c4)"><path fill="#ffffff" d="M 83.25 48.171875 L 85.269531 48.171875 C 85.652344 48.171875 85.949219 48.101562 86.25 47.882812 L 83 41.207031 L 86.464844 41.207031 L 88.390625 45.574219 L 91.902344 41.207031 L 95.464844 41.207031 L 89.273438 48.484375 C 88.328125 49.605469 87.335938 50.230469 85.832031 50.230469 L 82.832031 50.230469 Z M 83.25 48.171875 " fill-opacity="1" fill-rule="nonzero"/></g><g clip-path="url(#c5)"><path fill="#ffffff" d="M 4.917969 48.289062 L 20.425781 48.289062 C 21.800781 48.289062 23.113281 47.703125 24.035156 46.679688 L 30.882812 39.0625 L 13.046875 39.0625 L 10.269531 42.214844 L 7.484375 45.375 L 6.042969 42.214844 L 4.59375 39.0625 L 0.535156 39.0625 Z M 4.917969 48.289062 " fill-opacity="1" fill-rule="nonzero"/></g></svg>
-                <div class="brand-mark"></div>
-                <div>
-                    <span class="brand-text">NXT INFRASTRUCTURE REPORT</span>
-                    <div style="font-size: 0.6rem; color: rgba(255,255,255,0.6);">Executive Intelligence Platform</div>
-                </div>
+    <header class="header">
+        <div class="header-top">
+            <a href="index.html" class="brand" style="text-decoration: none; padding: 1rem 1.5rem; display: flex; align-items: center;">
+                <span style="font-size: 1.4rem; font-weight: 800; color: white; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.75rem;"><span style="display: flex; gap: 3px;"><span style="width: 4px; height: 18px; background: #FDFF66; border-radius: 2px;"></span><span style="width: 4px; height: 14px; background: #FDFF66; opacity: 0.7; border-radius: 2px;"></span><span style="width: 4px; height: 10px; background: #FDFF66; opacity: 0.4; border-radius: 2px;"></span></span>NXT Infrastructure Execution Report</span>
             </a>
             <div class="header-actions">
-                <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(34,197,94,0.15); padding: 0.4rem 0.75rem; border-radius: 6px;">
-                    <span style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%;"></span>
-                    <span style="font-size: 0.7rem; color: #22c55e; font-weight: 600;">Live</span>
-                    <span style="color: rgba(255,255,255,0.3);">|</span>
-                    <span style="font-size: 0.65rem; color: rgba(255,255,255,0.8);">Data as of Jan 10, 2026</span>
+                <div class="data-freshness">
+                    <span class="freshness-dot"></span>
+                    <span class="freshness-text">Live</span>
+                    <span class="freshness-divider">|</span>
+                    <span class="freshness-timestamp">Data as of Jan 12, 2026</span>
                 </div>
-                <a href="index.html" class="btn btn-home">Home</a>
+                <button onclick="window.print()" class="btn btn-export">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Export PDF
+                </button>
             </div>
         </div>
-    </div>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <a class="nav-tab" href="index.html">Home</a>
+                <a class="nav-tab" href="index.html#markets">Projects</a>
+                <div class="nav-tab-dropdown">
+                    <a class="nav-tab active">Analysis <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 4px;"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <div class="nav-dropdown-menu">
+                        <a href="EXECUTIVE_BRIEF.html" class="nav-dropdown-item">Executive Brief</a>
+                        <a href="INFRASTRUCTURE_CONSTRAINTS.html" class="nav-dropdown-item">Infrastructure</a>
+                        <a href="POLICY_MONITOR.html" class="nav-dropdown-item">Policy & Risk</a>
+                        <a href="WORKFORCE.html" class="nav-dropdown-item">Workforce</a>
+                        <a href="SUPPLY_CHAIN.html" class="nav-dropdown-item">Supply Chain</a>
+                        <a href="COMPETITIVE.html" class="nav-dropdown-item">Competitive</a>
+                        <a href="METHODOLOGY.html" class="nav-dropdown-item">Methodology</a>
+                    </div>
+                </div>
+                <a class="nav-tab" href="index.html#tools">Tools</a>
+            </div>
+        </nav>
+    </header>
+    
     <nav class="breadcrumb">
-        <a href="index.html">Home</a>
-        <span class="separator">›</span>
-        <span class="current">Analysis</span>
+        <a href="index.html">Dashboard</a>
         <span class="separator">›</span>
         <span class="current">Supply Chain</span>
     </nav>
     <div class="analysis-nav">
         <div class="analysis-tabs">
+            <a href="EXECUTIVE_BRIEF.html" class="analysis-tab">Executive Brief</a>
             <a href="INFRASTRUCTURE_CONSTRAINTS.html" class="analysis-tab">Infrastructure</a>
             <a href="POLICY_MONITOR.html" class="analysis-tab">Policy & Risk</a>
             <a href="WORKFORCE.html" class="analysis-tab">Workforce</a>

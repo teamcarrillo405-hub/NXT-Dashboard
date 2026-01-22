@@ -25,13 +25,29 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', -apple-system, sans-serif; background: var(--off-white); color: var(--text-primary); line-height: 1.6; }
         
-        .header { background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), var(--deep-indigo); color: var(--white); padding: 1rem 2rem; }
-        .header-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .header { background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), var(--deep-indigo); color: var(--white); padding: 0; position: sticky; top: 0; z-index: 100; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; max-width: 1600px; margin: 0 auto; }
         .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--white); }
-        .brand-mark { width: 6px; height: 36px; background: var(--electric-yellow); }
-        .brand-text { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; }
-        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 500; text-decoration: none; cursor: pointer; border: none; }
-        .btn-home { background: var(--electric-yellow); color: var(--deep-indigo); }
+        .header-actions { display: flex; align-items: center; gap: 1rem; }
+        .data-freshness { display: flex; align-items: center; gap: 0.5rem; background: rgba(34,197,94,0.15); padding: 0.4rem 0.75rem; border-radius: 6px; }
+        .freshness-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .freshness-text { font-size: 0.7rem; color: var(--green); font-weight: 600; }
+        .freshness-divider { color: rgba(255,255,255,0.3); }
+        .freshness-timestamp { font-size: 0.65rem; color: rgba(255,255,255,0.8); }
+        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 500; text-decoration: none; cursor: pointer; border: none; display: flex; align-items: center; gap: 0.5rem; }
+        .btn-export { background: var(--electric-yellow); color: var(--deep-indigo); font-weight: 600; }
+        .btn-export:hover { background: #e5e855; }
+        .main-nav { border-top: 1px solid rgba(255,255,255,0.1); }
+        .nav-container { max-width: 1600px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 0; }
+        .nav-tab { padding: 1rem 1.5rem; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; font-weight: 500; border-bottom: 3px solid transparent; transition: all 0.2s; cursor: pointer; display: flex; align-items: center; }
+        .nav-tab:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+        .nav-tab.active { color: var(--electric-yellow); border-bottom-color: var(--electric-yellow); }
+        .nav-tab-dropdown { position: relative; }
+        .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--deep-indigo); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; min-width: 200px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); z-index: 1000; padding: 0.5rem 0; }
+        .nav-tab-dropdown:hover .nav-dropdown-menu { display: block; }
+        .nav-dropdown-item { display: block; padding: 0.75rem 1.25rem; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; transition: all 0.2s; }
+        .nav-dropdown-item:hover { background: rgba(255,255,255,0.1); color: var(--white); }
         
         .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem 0; font-size: 0.8rem; color: var(--text-muted); }
         .breadcrumb a { color: var(--text-muted); text-decoration: none; }
@@ -183,33 +199,53 @@
 </head>
 <body>
     <header class="header">
-        <div class="header-content">
-            <a href="index.html" class="brand">
-                <div class="brand-mark"></div>
-                <span class="brand-text">NXT INFRASTRUCTURE VELOCITY REPORT</span>
+        <div class="header-top">
+            <a href="index.html" class="brand" style="text-decoration: none; padding: 1rem 1.5rem; display: flex; align-items: center;">
+                <span style="font-size: 1.4rem; font-weight: 800; color: white; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.75rem;"><span style="display: flex; gap: 3px;"><span style="width: 4px; height: 18px; background: #FDFF66; border-radius: 2px;"></span><span style="width: 4px; height: 14px; background: #FDFF66; opacity: 0.7; border-radius: 2px;"></span><span style="width: 4px; height: 10px; background: #FDFF66; opacity: 0.4; border-radius: 2px;"></span></span>NXT Infrastructure Execution Report</span>
             </a>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(34,197,94,0.15); padding: 0.4rem 0.75rem; border-radius: 6px;">
-                    <span style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%;"></span>
-                    <span style="font-size: 0.7rem; color: #22c55e; font-weight: 600;">Live</span>
-                    <span style="color: rgba(255,255,255,0.3);">|</span>
-                    <span style="font-size: 0.65rem; color: rgba(255,255,255,0.8);">Data as of Jan 10, 2026</span>
+            <div class="header-actions">
+                <div class="data-freshness">
+                    <span class="freshness-dot"></span>
+                    <span class="freshness-text">Live</span>
+                    <span class="freshness-divider">|</span>
+                    <span class="freshness-timestamp">Data as of Jan 12, 2026</span>
                 </div>
-                <a href="index.html" class="btn btn-home">Back to Dashboard</a>
+                <button onclick="window.print()" class="btn btn-export">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Export PDF
+                </button>
             </div>
         </div>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <a class="nav-tab" href="index.html">Home</a>
+                <a class="nav-tab" href="index.html#markets">Projects</a>
+                <div class="nav-tab-dropdown">
+                    <a class="nav-tab active">Analysis <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 4px;"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <div class="nav-dropdown-menu">
+                        <a href="EXECUTIVE_BRIEF.html" class="nav-dropdown-item">Executive Brief</a>
+                        <a href="INFRASTRUCTURE_CONSTRAINTS.html" class="nav-dropdown-item">Infrastructure</a>
+                        <a href="POLICY_MONITOR.html" class="nav-dropdown-item">Policy & Risk</a>
+                        <a href="WORKFORCE.html" class="nav-dropdown-item">Workforce</a>
+                        <a href="SUPPLY_CHAIN.html" class="nav-dropdown-item">Supply Chain</a>
+                        <a href="COMPETITIVE.html" class="nav-dropdown-item">Competitive</a>
+                        <a href="METHODOLOGY.html" class="nav-dropdown-item">Methodology</a>
+                    </div>
+                </div>
+                <a class="nav-tab" href="index.html#tools">Tools</a>
+            </div>
+        </nav>
     </header>
     
     <div class="breadcrumb">
         <a href="index.html">Dashboard</a>
-        <span class="separator">/</span>
-        <a href="#">Analysis</a>
-        <span class="separator">/</span>
+        <span class="separator">›</span>
         <span class="current">Infrastructure</span>
     </div>
     
     <nav class="analysis-nav">
         <div class="analysis-tabs">
+            <a href="EXECUTIVE_BRIEF.html" class="analysis-tab">Executive Brief</a>
             <a href="INFRASTRUCTURE_CONSTRAINTS.html" class="analysis-tab active">Infrastructure</a>
             <a href="POLICY_MONITOR.html" class="analysis-tab">Policy & Risk</a>
             <a href="WORKFORCE.html" class="analysis-tab">Workforce</a>
