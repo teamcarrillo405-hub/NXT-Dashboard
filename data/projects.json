@@ -1,0 +1,1645 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-01-28T00:00:00Z",
+  "total_projects": 54,
+  "projects": [
+    {
+      "id": "SE001",
+      "name": "TSMC Arizona",
+      "company": "Taiwan Semiconductor Manufacturing Company",
+      "company_ticker": "TSM",
+      "sector": "semiconductor",
+      "location": {
+        "city": "Phoenix",
+        "state": "Arizona",
+        "country": "USA"
+      },
+      "capital_committed": 65000000000,
+      "capital_deployed": 28000000000,
+      "original_production_date": "2024-01-01",
+      "current_production_date": "2025-04-01",
+      "chips_award": {
+        "amount": 6600000000,
+        "status": "finalized",
+        "award_date": "2024-04-08"
+      },
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "4nm", "status": "production", "target": "2025-Q1"},
+        {"phase": 2, "node": "3nm", "status": "equipment_install", "target": "2028"},
+        {"phase": 3, "node": "2nm", "status": "construction", "target": "2030"}
+      ],
+      "workforce": {
+        "target_headcount": 6000,
+        "current_headcount": 4500,
+        "filled_pct": 75
+      },
+      "raid_file": "projects/SE001_TSMC_Arizona_RAID.html",
+      "research_keywords": ["TSMC Arizona", "TSMC Phoenix", "Taiwan Semiconductor Arizona"],
+      "news_sources": ["reuters.com", "wsj.com", "semianalysis.com", "theelec.co.kr"]
+    },
+    {
+      "id": "SE002",
+      "name": "Intel Ohio",
+      "company": "Intel Corporation",
+      "company_ticker": "INTC",
+      "sector": "semiconductor",
+      "location": {
+        "city": "New Albany",
+        "state": "Ohio",
+        "country": "USA"
+      },
+      "capital_committed": 20000000000,
+      "capital_deployed": 1500000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2030-06-01",
+      "chips_award": {
+        "amount": 7900000000,
+        "status": "finalized",
+        "award_date": "2024-03-20"
+      },
+      "grid_operator": "PJM",
+      "interconnection_id": "PJM-2023-0847",
+      "phases": [
+        {"phase": 1, "node": "18A", "status": "site_prep", "target": "2030"},
+        {"phase": 2, "node": "14A", "status": "planned", "target": "2031"}
+      ],
+      "workforce": {
+        "target_headcount": 3000,
+        "current_headcount": 450,
+        "filled_pct": 15
+      },
+      "raid_file": "projects/SE002_Intel_Ohio_RAID.html",
+      "research_keywords": ["Intel Ohio", "Intel New Albany", "Intel fab Ohio"],
+      "news_sources": ["reuters.com", "wsj.com", "semianalysis.com", "columbus.com"]
+    },
+    {
+      "id": "SE003",
+      "name": "Samsung Taylor",
+      "company": "Samsung Electronics",
+      "company_ticker": "005930.KS",
+      "sector": "semiconductor",
+      "location": {
+        "city": "Taylor",
+        "state": "Texas",
+        "country": "USA"
+      },
+      "capital_committed": 17000000000,
+      "capital_deployed": 12000000000,
+      "original_production_date": "2024-07-01",
+      "current_production_date": "2027-02-01",
+      "chips_award": {
+        "amount": 4700000000,
+        "status": "finalized",
+        "award_date": "2024-04-15"
+      },
+      "grid_operator": "ERCOT",
+      "interconnection_id": "ERCOT-2022-1156",
+      "phases": [
+        {"phase": 1, "node": "4nm", "status": "equipment_frozen", "target": "2027"}
+      ],
+      "workforce": {
+        "target_headcount": 2000,
+        "current_headcount": 800,
+        "filled_pct": 40
+      },
+      "raid_file": "projects/SE003_Samsung_Taylor_RAID.html",
+      "research_keywords": ["Samsung Taylor", "Samsung Texas fab", "Samsung foundry Texas"],
+      "news_sources": ["reuters.com", "theelec.co.kr", "semianalysis.com", "statesman.com"]
+    },
+    {
+      "id": "SE004",
+      "name": "Micron Idaho",
+      "company": "Micron Technology",
+      "company_ticker": "MU",
+      "sector": "semiconductor",
+      "location": {
+        "city": "Boise",
+        "state": "Idaho",
+        "country": "USA"
+      },
+      "capital_committed": 15000000000,
+      "capital_deployed": 4000000000,
+      "original_production_date": "2027-01-01",
+      "current_production_date": "2027-06-01",
+      "chips_award": {
+        "amount": 6400000000,
+        "status": "finalized",
+        "award_date": "2024-04-25"
+      },
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "HBM3E", "status": "construction", "target": "2027"}
+      ],
+      "workforce": {
+        "target_headcount": 2000,
+        "current_headcount": 600,
+        "filled_pct": 30
+      },
+      "raid_file": "projects/SE004_Micron_Idaho_RAID.html",
+      "research_keywords": ["Micron Boise", "Micron Idaho expansion", "Micron HBM"],
+      "news_sources": ["reuters.com", "wsj.com", "semianalysis.com"]
+    },
+    {
+      "id": "SE005",
+      "name": "Micron New York",
+      "company": "Micron Technology",
+      "company_ticker": "MU",
+      "sector": "semiconductor",
+      "location": {
+        "city": "Clay",
+        "state": "New York",
+        "country": "USA"
+      },
+      "capital_committed": 100000000000,
+      "capital_deployed": 2000000000,
+      "original_production_date": "2028-01-01",
+      "current_production_date": "2030-01-01",
+      "chips_award": {
+        "amount": 0,
+        "status": "included_in_idaho",
+        "award_date": null
+      },
+      "grid_operator": "NYISO",
+      "interconnection_id": "NYISO-2023-0445",
+      "phases": [
+        {"phase": 1, "node": "DRAM", "status": "site_prep", "target": "2030"}
+      ],
+      "workforce": {
+        "target_headcount": 9000,
+        "current_headcount": 200,
+        "filled_pct": 2
+      },
+      "raid_file": "projects/SE005_Micron_NY_RAID.html",
+      "research_keywords": ["Micron New York", "Micron Clay", "Micron Syracuse"],
+      "news_sources": ["reuters.com", "wsj.com", "syracuse.com"]
+    },
+    {
+      "id": "SE006",
+      "name": "GlobalFoundries Malta",
+      "company": "GlobalFoundries",
+      "company_ticker": "GFS",
+      "sector": "semiconductor",
+      "location": {
+        "city": "Malta",
+        "state": "New York",
+        "country": "USA"
+      },
+      "capital_committed": 12000000000,
+      "capital_deployed": 3500000000,
+      "original_production_date": "2027-01-01",
+      "current_production_date": "2028-01-01",
+      "chips_award": {
+        "amount": 1500000000,
+        "status": "finalized",
+        "award_date": "2024-02-19"
+      },
+      "grid_operator": "NYISO",
+      "interconnection_id": "NYISO-2022-0892",
+      "phases": [
+        {"phase": "expansion", "node": "12nm", "status": "construction", "target": "2028"}
+      ],
+      "workforce": {
+        "target_headcount": 1500,
+        "current_headcount": 900,
+        "filled_pct": 60
+      },
+      "raid_file": "projects/SE006_GlobalFoundries_Malta_RAID.html",
+      "research_keywords": ["GlobalFoundries Malta", "GlobalFoundries New York", "GF expansion"],
+      "news_sources": ["reuters.com", "semianalysis.com", "timesunion.com"]
+    },
+    {
+      "id": "SE007",
+      "name": "Polar Semiconductor",
+      "company": "Polar Semiconductor",
+      "company_ticker": null,
+      "sector": "semiconductor",
+      "location": {
+        "city": "Bloomington",
+        "state": "Minnesota",
+        "country": "USA"
+      },
+      "capital_committed": 525000000,
+      "capital_deployed": 400000000,
+      "original_production_date": "2025-06-01",
+      "current_production_date": "2025-09-01",
+      "chips_award": {
+        "amount": 120000000,
+        "status": "finalized",
+        "award_date": "2024-09-23"
+      },
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "expansion", "node": "power_semiconductors", "status": "construction", "target": "2025"}
+      ],
+      "workforce": {
+        "target_headcount": 400,
+        "current_headcount": 320,
+        "filled_pct": 80
+      },
+      "raid_file": "projects/SE007_Polar_Semi_RAID.html",
+      "research_keywords": ["Polar Semiconductor", "Polar Semi Minnesota"],
+      "news_sources": ["reuters.com", "startribune.com"]
+    },
+    {
+      "id": "SE008",
+      "name": "Wolfspeed North Carolina",
+      "company": "Wolfspeed",
+      "company_ticker": "WOLF",
+      "sector": "semiconductor",
+      "location": {
+        "city": "Chatham County",
+        "state": "North Carolina",
+        "country": "USA"
+      },
+      "capital_committed": 5000000000,
+      "capital_deployed": 1200000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2026-06-01",
+      "chips_award": {
+        "amount": 750000000,
+        "status": "never_finalized",
+        "award_date": null
+      },
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "SiC", "status": "paused", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 1800,
+        "current_headcount": 400,
+        "filled_pct": 22
+      },
+      "raid_file": "projects/SE008_Wolfspeed_NC_RAID.html",
+      "research_keywords": ["Wolfspeed", "Wolfspeed North Carolina", "Wolfspeed SiC", "Wolfspeed bankruptcy"],
+      "news_sources": ["reuters.com", "wsj.com", "bizjournals.com/triangle"]
+    },
+    {
+      "id": "SE009",
+      "name": "Applied Materials Sunnyvale",
+      "company": "Applied Materials",
+      "company_ticker": "AMAT",
+      "sector": "semiconductor",
+      "location": {
+        "city": "Sunnyvale",
+        "state": "California",
+        "country": "USA"
+      },
+      "capital_committed": 4000000000,
+      "capital_deployed": 1500000000,
+      "original_production_date": "2026-01-01",
+      "current_production_date": "2027-01-01",
+      "chips_award": {
+        "amount": 0,
+        "status": "none",
+        "award_date": null
+      },
+      "grid_operator": "CAISO",
+      "interconnection_id": "CAISO-2023-0234",
+      "phases": [
+        {"phase": "EPIC", "node": "equipment_R&D", "status": "construction", "target": "2027"}
+      ],
+      "workforce": {
+        "target_headcount": 2000,
+        "current_headcount": 1100,
+        "filled_pct": 55
+      },
+      "raid_file": "projects/SE009_Applied_Materials_RAID.html",
+      "research_keywords": ["Applied Materials EPIC", "Applied Materials Sunnyvale"],
+      "news_sources": ["reuters.com", "semianalysis.com", "mercurynews.com"]
+    },
+    {
+      "id": "SE010",
+      "name": "NVIDIA US Manufacturing",
+      "company": "NVIDIA Corporation",
+      "company_ticker": "NVDA",
+      "sector": "semiconductor",
+      "location": {
+        "city": "Multiple",
+        "state": "Texas",
+        "country": "USA"
+      },
+      "capital_committed": 50000000000,
+      "capital_deployed": 5000000000,
+      "original_production_date": "2026-01-01",
+      "current_production_date": "2026-06-01",
+      "chips_award": {
+        "amount": 0,
+        "status": "none",
+        "award_date": null
+      },
+      "grid_operator": "ERCOT",
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "packaging", "status": "ramp", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 5000,
+        "current_headcount": 2000,
+        "filled_pct": 40
+      },
+      "raid_file": "projects/SE010_NVIDIA_US_RAID.html",
+      "research_keywords": ["NVIDIA US manufacturing", "NVIDIA Texas", "NVIDIA domestic production"],
+      "news_sources": ["reuters.com", "wsj.com", "semianalysis.com"]
+    },
+    {
+      "id": "BA001",
+      "name": "LG Chem Tennessee",
+      "company": "LG Chem",
+      "company_ticker": "051910.KS",
+      "sector": "battery",
+      "location": {
+        "city": "Clarksville",
+        "state": "Tennessee",
+        "country": "USA"
+      },
+      "capital_committed": 3200000000,
+      "capital_deployed": 2400000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2025-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "cathode", "status": "commissioning", "target": "2025"}
+      ],
+      "workforce": {
+        "target_headcount": 850,
+        "current_headcount": 700,
+        "filled_pct": 82
+      },
+      "raid_file": "projects/BA001_LG_Chem_TN_RAID.html",
+      "research_keywords": ["LG Chem Tennessee", "LG Chem Clarksville", "LG cathode"],
+      "news_sources": ["reuters.com", "electrek.co", "tennessean.com"]
+    },
+    {
+      "id": "BA002",
+      "name": "Panasonic Kansas",
+      "company": "Panasonic Energy",
+      "company_ticker": "6752.T",
+      "sector": "battery",
+      "location": {
+        "city": "De Soto",
+        "state": "Kansas",
+        "country": "USA"
+      },
+      "capital_committed": 4000000000,
+      "capital_deployed": 2800000000,
+      "original_production_date": "2025-03-01",
+      "current_production_date": "2025-06-01",
+      "chips_award": null,
+      "grid_operator": "SPP",
+      "interconnection_id": "SPP-2023-0156",
+      "phases": [
+        {"phase": 1, "node": "2170_cells", "status": "commissioning", "target": "2025"},
+        {"phase": 2, "node": "4680_cells", "status": "construction", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 4000,
+        "current_headcount": 2200,
+        "filled_pct": 55
+      },
+      "raid_file": "projects/BA002_Panasonic_KS_RAID.html",
+      "research_keywords": ["Panasonic Kansas", "Panasonic De Soto", "Panasonic battery"],
+      "news_sources": ["reuters.com", "electrek.co", "kansascity.com"]
+    },
+    {
+      "id": "BA003",
+      "name": "SK Battery Georgia",
+      "company": "SK On",
+      "company_ticker": "096770.KS",
+      "sector": "battery",
+      "location": {
+        "city": "Commerce",
+        "state": "Georgia",
+        "country": "USA"
+      },
+      "capital_committed": 2600000000,
+      "capital_deployed": 2400000000,
+      "original_production_date": "2022-01-01",
+      "current_production_date": "2022-01-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "NCM", "status": "production", "target": "2022"},
+        {"phase": 2, "node": "NCM", "status": "production", "target": "2023"}
+      ],
+      "workforce": {
+        "target_headcount": 2600,
+        "current_headcount": 2600,
+        "filled_pct": 100
+      },
+      "raid_file": "projects/BA003_SK_Battery_GA_RAID.html",
+      "research_keywords": ["SK Battery Georgia", "SK On Commerce", "SK Battery plant"],
+      "news_sources": ["reuters.com", "electrek.co", "ajc.com"]
+    },
+    {
+      "id": "BA004",
+      "name": "BlueOval SK Kentucky",
+      "company": "BlueOval SK",
+      "company_ticker": null,
+      "sector": "battery",
+      "location": {
+        "city": "Glendale",
+        "state": "Kentucky",
+        "country": "USA"
+      },
+      "capital_committed": 5800000000,
+      "capital_deployed": 3200000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2026-01-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "NCM", "status": "construction", "target": "2026"},
+        {"phase": 2, "node": "NCM", "status": "construction", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 5000,
+        "current_headcount": 1800,
+        "filled_pct": 36
+      },
+      "raid_file": "projects/BA004_BlueOval_SK_KY_RAID.html",
+      "research_keywords": ["BlueOval SK", "Ford SK Kentucky", "BlueOval battery"],
+      "news_sources": ["reuters.com", "electrek.co", "courier-journal.com"]
+    },
+    {
+      "id": "BA005",
+      "name": "Ascend Elements Kentucky",
+      "company": "Ascend Elements",
+      "company_ticker": null,
+      "sector": "battery",
+      "location": {
+        "city": "Hopkinsville",
+        "state": "Kentucky",
+        "country": "USA"
+      },
+      "capital_committed": 1000000000,
+      "capital_deployed": 300000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2026-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "Apex1", "node": "recycling", "status": "construction", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 400,
+        "current_headcount": 100,
+        "filled_pct": 25
+      },
+      "raid_file": "projects/BA005_Ascend_Elements_RAID.html",
+      "research_keywords": ["Ascend Elements", "Ascend Elements Kentucky", "battery recycling"],
+      "news_sources": ["reuters.com", "electrek.co", "bizjournals.com"]
+    },
+    {
+      "id": "BA006",
+      "name": "Natron Energy",
+      "company": "Natron Energy",
+      "company_ticker": null,
+      "sector": "battery",
+      "location": {
+        "city": "Holland",
+        "state": "Michigan",
+        "country": "USA"
+      },
+      "capital_committed": 1400000000,
+      "capital_deployed": 200000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": null,
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "sodium_ion", "status": "terminated", "target": null}
+      ],
+      "workforce": {
+        "target_headcount": 0,
+        "current_headcount": 0,
+        "filled_pct": 0
+      },
+      "raid_file": "projects/BA006_Natron_Energy_RAID.html",
+      "research_keywords": ["Natron Energy", "Natron sodium ion", "Natron bankruptcy"],
+      "news_sources": ["reuters.com", "electrek.co"]
+    },
+    {
+      "id": "BA007",
+      "name": "Redwood Materials Nevada",
+      "company": "Redwood Materials",
+      "company_ticker": null,
+      "sector": "battery",
+      "location": {
+        "city": "McCarran",
+        "state": "Nevada",
+        "country": "USA"
+      },
+      "capital_committed": 3500000000,
+      "capital_deployed": 1800000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2025-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "Campus", "node": "recycling_anode", "status": "ramp", "target": "2025"}
+      ],
+      "workforce": {
+        "target_headcount": 1500,
+        "current_headcount": 900,
+        "filled_pct": 60
+      },
+      "raid_file": "projects/BA007_Redwood_NV_RAID.html",
+      "research_keywords": ["Redwood Materials", "Redwood Nevada", "Redwood battery recycling"],
+      "news_sources": ["reuters.com", "electrek.co", "rgj.com"]
+    },
+    {
+      "id": "BA008",
+      "name": "AESC Kentucky",
+      "company": "AESC",
+      "company_ticker": null,
+      "sector": "battery",
+      "location": {
+        "city": "Bowling Green",
+        "state": "Kentucky",
+        "country": "USA"
+      },
+      "capital_committed": 2000000000,
+      "capital_deployed": 800000000,
+      "original_production_date": "2025-06-01",
+      "current_production_date": "2026-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "NCM", "status": "construction", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 2000,
+        "current_headcount": 400,
+        "filled_pct": 20
+      },
+      "raid_file": "projects/BA008_AESC_KY_RAID.html",
+      "research_keywords": ["AESC Kentucky", "AESC Bowling Green", "Envision AESC"],
+      "news_sources": ["reuters.com", "electrek.co", "bgdailynews.com"]
+    },
+    {
+      "id": "BA009",
+      "name": "Honda LG Ohio",
+      "company": "Honda LG Energy Solution",
+      "company_ticker": null,
+      "sector": "battery",
+      "location": {
+        "city": "Fayette County",
+        "state": "Ohio",
+        "country": "USA"
+      },
+      "capital_committed": 4400000000,
+      "capital_deployed": 2000000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2025-12-01",
+      "chips_award": null,
+      "grid_operator": "PJM",
+      "interconnection_id": "PJM-2023-0567",
+      "phases": [
+        {"phase": 1, "node": "pouch", "status": "construction", "target": "2025"}
+      ],
+      "workforce": {
+        "target_headcount": 2200,
+        "current_headcount": 800,
+        "filled_pct": 36
+      },
+      "raid_file": "projects/BA009_Honda_LG_OH_RAID.html",
+      "research_keywords": ["Honda LG Ohio", "Honda battery Ohio", "L-H Battery"],
+      "news_sources": ["reuters.com", "electrek.co", "dispatch.com"]
+    },
+    {
+      "id": "BA010",
+      "name": "Hyundai LG Georgia",
+      "company": "Hyundai LG",
+      "company_ticker": null,
+      "sector": "battery",
+      "location": {
+        "city": "Savannah",
+        "state": "Georgia",
+        "country": "USA"
+      },
+      "capital_committed": 4300000000,
+      "capital_deployed": 1500000000,
+      "original_production_date": "2025-06-01",
+      "current_production_date": "2026-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "pouch", "status": "construction", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 3000,
+        "current_headcount": 600,
+        "filled_pct": 20
+      },
+      "raid_file": "projects/BA010_Hyundai_LG_GA_RAID.html",
+      "research_keywords": ["Hyundai LG Georgia", "Hyundai battery Savannah"],
+      "news_sources": ["reuters.com", "electrek.co", "savannahnow.com"]
+    },
+    {
+      "id": "BA011",
+      "name": "LG Energy Michigan",
+      "company": "LG Energy Solution",
+      "company_ticker": "373220.KS",
+      "sector": "battery",
+      "location": {
+        "city": "Holland",
+        "state": "Michigan",
+        "country": "USA"
+      },
+      "capital_committed": 2500000000,
+      "capital_deployed": 1800000000,
+      "original_production_date": "2024-01-01",
+      "current_production_date": "2024-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "expansion", "node": "cylindrical", "status": "production", "target": "2024"}
+      ],
+      "workforce": {
+        "target_headcount": 1700,
+        "current_headcount": 1600,
+        "filled_pct": 94
+      },
+      "raid_file": "projects/BA011_LG_Energy_MI_RAID.html",
+      "research_keywords": ["LG Energy Michigan", "LG Energy Holland"],
+      "news_sources": ["reuters.com", "electrek.co", "mlive.com"]
+    },
+    {
+      "id": "BA012",
+      "name": "Sila Nanotechnologies",
+      "company": "Sila Nanotechnologies",
+      "company_ticker": null,
+      "sector": "battery",
+      "location": {
+        "city": "Moses Lake",
+        "state": "Washington",
+        "country": "USA"
+      },
+      "capital_committed": 600000000,
+      "capital_deployed": 450000000,
+      "original_production_date": "2024-01-01",
+      "current_production_date": "2025-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "silicon_anode", "status": "ramp", "target": "2025"}
+      ],
+      "workforce": {
+        "target_headcount": 300,
+        "current_headcount": 220,
+        "filled_pct": 73
+      },
+      "raid_file": "projects/BA012_Sila_WA_RAID.html",
+      "research_keywords": ["Sila Nanotechnologies", "Sila Moses Lake", "Sila anode"],
+      "news_sources": ["reuters.com", "electrek.co", "geekwire.com"]
+    },
+    {
+      "id": "BA013",
+      "name": "Form Energy West Virginia",
+      "company": "Form Energy",
+      "company_ticker": null,
+      "sector": "battery",
+      "location": {
+        "city": "Weirton",
+        "state": "West Virginia",
+        "country": "USA"
+      },
+      "capital_committed": 760000000,
+      "capital_deployed": 500000000,
+      "original_production_date": "2024-06-01",
+      "current_production_date": "2025-06-01",
+      "chips_award": null,
+      "grid_operator": "PJM",
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "iron_air", "status": "commissioning", "target": "2025"}
+      ],
+      "workforce": {
+        "target_headcount": 750,
+        "current_headcount": 550,
+        "filled_pct": 73
+      },
+      "raid_file": "projects/BA013_Form_Energy_WV_RAID.html",
+      "research_keywords": ["Form Energy", "Form Energy Weirton", "iron air battery"],
+      "news_sources": ["reuters.com", "utilitydive.com", "wvnews.com"]
+    },
+    {
+      "id": "BA014",
+      "name": "StarPlus Texas",
+      "company": "StarPlus Energy",
+      "company_ticker": null,
+      "sector": "battery",
+      "location": {
+        "city": "Kokomo",
+        "state": "Indiana",
+        "country": "USA"
+      },
+      "capital_committed": 3200000000,
+      "capital_deployed": 1600000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2026-01-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "NCM", "status": "construction", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 1400,
+        "current_headcount": 400,
+        "filled_pct": 29
+      },
+      "raid_file": "projects/BA014_StarPlus_RAID.html",
+      "research_keywords": ["StarPlus Energy", "Stellantis Samsung battery", "StarPlus Kokomo"],
+      "news_sources": ["reuters.com", "electrek.co", "indystar.com"]
+    },
+    {
+      "id": "DC001",
+      "name": "Stargate Abilene",
+      "company": "Stargate JV",
+      "company_ticker": null,
+      "sector": "data_center",
+      "location": {
+        "city": "Abilene",
+        "state": "Texas",
+        "country": "USA"
+      },
+      "capital_committed": 100000000000,
+      "capital_deployed": 10000000000,
+      "original_production_date": "2025-06-01",
+      "current_production_date": "2025-12-01",
+      "chips_award": null,
+      "grid_operator": "ERCOT",
+      "interconnection_id": "ERCOT-2024-0892",
+      "phases": [
+        {"phase": 1, "node": "1GW", "status": "operational", "target": "2025"},
+        {"phase": 2, "node": "multi_site", "status": "construction", "target": "2026-2029"}
+      ],
+      "workforce": {
+        "target_headcount": 3000,
+        "current_headcount": 1200,
+        "filled_pct": 40
+      },
+      "raid_file": "projects/DC001_Stargate_RAID.html",
+      "research_keywords": ["Stargate AI", "Stargate Abilene", "OpenAI Stargate", "SoftBank Stargate"],
+      "news_sources": ["reuters.com", "wsj.com", "datacenterdynamics.com", "reporterNews.com"]
+    },
+    {
+      "id": "DC002",
+      "name": "CoreWeave Denton",
+      "company": "CoreWeave",
+      "company_ticker": null,
+      "sector": "data_center",
+      "location": {
+        "city": "Denton",
+        "state": "Texas",
+        "country": "USA"
+      },
+      "capital_committed": 2000000000,
+      "capital_deployed": 800000000,
+      "original_production_date": "2025-06-01",
+      "current_production_date": "2026-06-01",
+      "chips_award": null,
+      "grid_operator": "ERCOT",
+      "interconnection_id": "ERCOT-2024-0456",
+      "phases": [
+        {"phase": 1, "node": "GPU_cluster", "status": "construction", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 200,
+        "current_headcount": 60,
+        "filled_pct": 30
+      },
+      "raid_file": "projects/DC002_CoreWeave_RAID.html",
+      "research_keywords": ["CoreWeave Denton", "CoreWeave Texas", "CoreWeave data center"],
+      "news_sources": ["reuters.com", "datacenterdynamics.com", "dentonrc.com"]
+    },
+    {
+      "id": "DC003",
+      "name": "xAI Colossus",
+      "company": "xAI",
+      "company_ticker": null,
+      "sector": "data_center",
+      "location": {
+        "city": "Memphis",
+        "state": "Tennessee",
+        "country": "USA"
+      },
+      "capital_committed": 10000000000,
+      "capital_deployed": 6000000000,
+      "original_production_date": "2024-09-01",
+      "current_production_date": "2024-09-01",
+      "chips_award": null,
+      "grid_operator": "TVA",
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "100k_GPU", "status": "operational", "target": "2024"},
+        {"phase": 2, "node": "555k_GPU", "status": "construction", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 500,
+        "current_headcount": 400,
+        "filled_pct": 80
+      },
+      "raid_file": "projects/DC003_xAI_Colossus_RAID.html",
+      "research_keywords": ["xAI Colossus", "xAI Memphis", "Elon Musk data center"],
+      "news_sources": ["reuters.com", "wsj.com", "datacenterdynamics.com", "commercialappeal.com"]
+    },
+    {
+      "id": "DC004",
+      "name": "Anthropic Lake Mariner",
+      "company": "Anthropic",
+      "company_ticker": null,
+      "sector": "data_center",
+      "location": {
+        "city": "Somerset",
+        "state": "New York",
+        "country": "USA"
+      },
+      "capital_committed": 3000000000,
+      "capital_deployed": 500000000,
+      "original_production_date": "2026-01-01",
+      "current_production_date": "2026-06-01",
+      "chips_award": null,
+      "grid_operator": "NYISO",
+      "interconnection_id": "NYISO-2024-0234",
+      "phases": [
+        {"phase": 1, "node": "training_cluster", "status": "construction", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 300,
+        "current_headcount": 50,
+        "filled_pct": 17
+      },
+      "raid_file": "projects/DC004_Anthropic_RAID.html",
+      "research_keywords": ["Anthropic data center", "Anthropic Lake Mariner", "Claude training"],
+      "news_sources": ["reuters.com", "wsj.com", "datacenterdynamics.com"]
+    },
+    {
+      "id": "DC005",
+      "name": "Amazon AWS Virginia",
+      "company": "Amazon Web Services",
+      "company_ticker": "AMZN",
+      "sector": "data_center",
+      "location": {
+        "city": "Ashburn",
+        "state": "Virginia",
+        "country": "USA"
+      },
+      "capital_committed": 35000000000,
+      "capital_deployed": 15000000000,
+      "original_production_date": "2026-01-01",
+      "current_production_date": "2027-01-01",
+      "chips_award": null,
+      "grid_operator": "PJM",
+      "interconnection_id": "PJM-2023-1456",
+      "phases": [
+        {"phase": "expansion", "node": "multi_campus", "status": "construction", "target": "2027"}
+      ],
+      "workforce": {
+        "target_headcount": 2000,
+        "current_headcount": 800,
+        "filled_pct": 40
+      },
+      "raid_file": "projects/DC005_AWS_VA_RAID.html",
+      "research_keywords": ["AWS Virginia", "AWS Ashburn", "Amazon data center Virginia"],
+      "news_sources": ["reuters.com", "datacenterdynamics.com", "loudounnow.com"]
+    },
+    {
+      "id": "DC006",
+      "name": "Meta Data Center",
+      "company": "Meta Platforms",
+      "company_ticker": "META",
+      "sector": "data_center",
+      "location": {
+        "city": "Multiple",
+        "state": "Louisiana",
+        "country": "USA"
+      },
+      "capital_committed": 10000000000,
+      "capital_deployed": 2000000000,
+      "original_production_date": "2027-01-01",
+      "current_production_date": "2028-01-01",
+      "chips_award": null,
+      "grid_operator": "MISO",
+      "interconnection_id": "MISO-2024-0789",
+      "phases": [
+        {"phase": 1, "node": "AI_training", "status": "site_prep", "target": "2028"}
+      ],
+      "workforce": {
+        "target_headcount": 1500,
+        "current_headcount": 200,
+        "filled_pct": 13
+      },
+      "raid_file": "projects/DC006_Meta_RAID.html",
+      "research_keywords": ["Meta data center", "Meta Louisiana", "Facebook AI infrastructure"],
+      "news_sources": ["reuters.com", "datacenterdynamics.com", "theadvocate.com"]
+    },
+    {
+      "id": "DC007",
+      "name": "Blackstone QTS Pennsylvania",
+      "company": "QTS Data Centers",
+      "company_ticker": null,
+      "sector": "data_center",
+      "location": {
+        "city": "Pittsburgh",
+        "state": "Pennsylvania",
+        "country": "USA"
+      },
+      "capital_committed": 7000000000,
+      "capital_deployed": 500000000,
+      "original_production_date": "2027-01-01",
+      "current_production_date": "2028-01-01",
+      "chips_award": null,
+      "grid_operator": "PJM",
+      "interconnection_id": "PJM-2024-0345",
+      "phases": [
+        {"phase": 1, "node": "hyperscale", "status": "permitting", "target": "2028"}
+      ],
+      "workforce": {
+        "target_headcount": 800,
+        "current_headcount": 50,
+        "filled_pct": 6
+      },
+      "raid_file": "projects/DC007_Blackstone_QTS_RAID.html",
+      "research_keywords": ["Blackstone QTS", "QTS Pittsburgh", "Blackstone data center"],
+      "news_sources": ["reuters.com", "datacenterdynamics.com", "post-gazette.com"]
+    },
+    {
+      "id": "DC008",
+      "name": "Google Data Center",
+      "company": "Google",
+      "company_ticker": "GOOGL",
+      "sector": "data_center",
+      "location": {
+        "city": "Multiple",
+        "state": "Multiple",
+        "country": "USA"
+      },
+      "capital_committed": 50000000000,
+      "capital_deployed": 20000000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2026-01-01",
+      "chips_award": null,
+      "grid_operator": "Multiple",
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "expansion", "node": "AI_infrastructure", "status": "construction", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 5000,
+        "current_headcount": 2500,
+        "filled_pct": 50
+      },
+      "raid_file": "projects/DC008_Google_RAID.html",
+      "research_keywords": ["Google data center", "Google AI infrastructure", "Google cloud expansion"],
+      "news_sources": ["reuters.com", "datacenterdynamics.com", "wsj.com"]
+    },
+    {
+      "id": "DC009",
+      "name": "Microsoft Azure",
+      "company": "Microsoft",
+      "company_ticker": "MSFT",
+      "sector": "data_center",
+      "location": {
+        "city": "Multiple",
+        "state": "Multiple",
+        "country": "USA"
+      },
+      "capital_committed": 80000000000,
+      "capital_deployed": 30000000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2026-01-01",
+      "chips_award": null,
+      "grid_operator": "Multiple",
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "expansion", "node": "Azure_AI", "status": "construction", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 8000,
+        "current_headcount": 4000,
+        "filled_pct": 50
+      },
+      "raid_file": "projects/DC009_Microsoft_RAID.html",
+      "research_keywords": ["Microsoft data center", "Azure infrastructure", "Microsoft AI expansion"],
+      "news_sources": ["reuters.com", "datacenterdynamics.com", "wsj.com"]
+    },
+    {
+      "id": "AU001",
+      "name": "VinFast North Carolina",
+      "company": "VinFast",
+      "company_ticker": "VFS",
+      "sector": "automotive",
+      "location": {
+        "city": "Moncure",
+        "state": "North Carolina",
+        "country": "USA"
+      },
+      "capital_committed": 4000000000,
+      "capital_deployed": 200000000,
+      "original_production_date": "2024-07-01",
+      "current_production_date": "2028-01-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "EV_assembly", "status": "paused", "target": "2028"}
+      ],
+      "workforce": {
+        "target_headcount": 7500,
+        "current_headcount": 100,
+        "filled_pct": 1
+      },
+      "raid_file": "projects/AU001_VinFast_NC_RAID.html",
+      "research_keywords": ["VinFast North Carolina", "VinFast Moncure", "VinFast USA"],
+      "news_sources": ["reuters.com", "wsj.com", "newsobserver.com"]
+    },
+    {
+      "id": "AU002",
+      "name": "Rivian Georgia",
+      "company": "Rivian Automotive",
+      "company_ticker": "RIVN",
+      "sector": "automotive",
+      "location": {
+        "city": "Social Circle",
+        "state": "Georgia",
+        "country": "USA"
+      },
+      "capital_committed": 5000000000,
+      "capital_deployed": 500000000,
+      "original_production_date": "2024-01-01",
+      "current_production_date": "2028-01-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "EV_assembly", "status": "resumed", "target": "2028"}
+      ],
+      "workforce": {
+        "target_headcount": 7500,
+        "current_headcount": 200,
+        "filled_pct": 3
+      },
+      "raid_file": "projects/AU002_Rivian_GA_RAID.html",
+      "research_keywords": ["Rivian Georgia", "Rivian Social Circle", "Rivian plant"],
+      "news_sources": ["reuters.com", "electrek.co", "ajc.com"]
+    },
+    {
+      "id": "AU003",
+      "name": "Ford BlueOval City",
+      "company": "Ford Motor Company",
+      "company_ticker": "F",
+      "sector": "automotive",
+      "location": {
+        "city": "Stanton",
+        "state": "Tennessee",
+        "country": "USA"
+      },
+      "capital_committed": 5600000000,
+      "capital_deployed": 2000000000,
+      "original_production_date": "2025-06-01",
+      "current_production_date": "2027-01-01",
+      "chips_award": null,
+      "grid_operator": "TVA",
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "EV_truck", "status": "construction", "target": "2027"}
+      ],
+      "workforce": {
+        "target_headcount": 6000,
+        "current_headcount": 1000,
+        "filled_pct": 17
+      },
+      "raid_file": "projects/AU003_Ford_BlueOval_RAID.html",
+      "research_keywords": ["Ford BlueOval City", "Ford Tennessee", "F-150 Lightning plant"],
+      "news_sources": ["reuters.com", "electrek.co", "tennessean.com"]
+    },
+    {
+      "id": "AU004",
+      "name": "GM ZERO Ohio",
+      "company": "General Motors",
+      "company_ticker": "GM",
+      "sector": "automotive",
+      "location": {
+        "city": "Lordstown",
+        "state": "Ohio",
+        "country": "USA"
+      },
+      "capital_committed": 2200000000,
+      "capital_deployed": 1500000000,
+      "original_production_date": "2024-01-01",
+      "current_production_date": "2025-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "conversion", "node": "EV_assembly", "status": "ramp", "target": "2025"}
+      ],
+      "workforce": {
+        "target_headcount": 2000,
+        "current_headcount": 1200,
+        "filled_pct": 60
+      },
+      "raid_file": "projects/AU004_GM_ZERO_RAID.html",
+      "research_keywords": ["GM Lordstown", "GM ZERO", "GM Ohio EV"],
+      "news_sources": ["reuters.com", "electrek.co", "vindy.com"]
+    },
+    {
+      "id": "AU005",
+      "name": "Hyundai Metaplant Georgia",
+      "company": "Hyundai Motor Group",
+      "company_ticker": "005380.KS",
+      "sector": "automotive",
+      "location": {
+        "city": "Ellabell",
+        "state": "Georgia",
+        "country": "USA"
+      },
+      "capital_committed": 7600000000,
+      "capital_deployed": 5500000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2025-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "EV_assembly", "status": "commissioning", "target": "2025"}
+      ],
+      "workforce": {
+        "target_headcount": 8500,
+        "current_headcount": 4000,
+        "filled_pct": 47
+      },
+      "raid_file": "projects/AU005_Hyundai_Meta_RAID.html",
+      "research_keywords": ["Hyundai Metaplant", "Hyundai Georgia", "Hyundai Ellabell"],
+      "news_sources": ["reuters.com", "electrek.co", "savannahnow.com"]
+    },
+    {
+      "id": "AU006",
+      "name": "Scout Motors South Carolina",
+      "company": "Scout Motors",
+      "company_ticker": null,
+      "sector": "automotive",
+      "location": {
+        "city": "Blythewood",
+        "state": "South Carolina",
+        "country": "USA"
+      },
+      "capital_committed": 2000000000,
+      "capital_deployed": 800000000,
+      "original_production_date": "2027-01-01",
+      "current_production_date": "2027-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "EV_SUV", "status": "construction", "target": "2027"}
+      ],
+      "workforce": {
+        "target_headcount": 4000,
+        "current_headcount": 300,
+        "filled_pct": 8
+      },
+      "raid_file": "projects/AU006_Scout_SC_RAID.html",
+      "research_keywords": ["Scout Motors", "Scout South Carolina", "VW Scout"],
+      "news_sources": ["reuters.com", "electrek.co", "thestate.com"]
+    },
+    {
+      "id": "AU007",
+      "name": "Ford Michigan",
+      "company": "Ford Motor Company",
+      "company_ticker": "F",
+      "sector": "automotive",
+      "location": {
+        "city": "Marshall",
+        "state": "Michigan",
+        "country": "USA"
+      },
+      "capital_committed": 3500000000,
+      "capital_deployed": 1000000000,
+      "original_production_date": "2026-01-01",
+      "current_production_date": "2027-01-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "LFP_battery", "status": "construction", "target": "2027"}
+      ],
+      "workforce": {
+        "target_headcount": 2500,
+        "current_headcount": 400,
+        "filled_pct": 16
+      },
+      "raid_file": "projects/AU007_Ford_MI_RAID.html",
+      "research_keywords": ["Ford Marshall Michigan", "Ford battery Michigan", "Ford LFP"],
+      "news_sources": ["reuters.com", "electrek.co", "freep.com"]
+    },
+    {
+      "id": "PH001",
+      "name": "Eli Lilly LEAP Indiana",
+      "company": "Eli Lilly and Company",
+      "company_ticker": "LLY",
+      "sector": "pharmaceutical",
+      "location": {
+        "city": "Lebanon",
+        "state": "Indiana",
+        "country": "USA"
+      },
+      "capital_committed": 9000000000,
+      "capital_deployed": 6000000000,
+      "original_production_date": "2026-06-01",
+      "current_production_date": "2026-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "LEAP", "node": "injectable", "status": "construction", "target": "2026"}
+      ],
+      "workforce": {
+        "target_headcount": 3000,
+        "current_headcount": 1800,
+        "filled_pct": 60
+      },
+      "raid_file": "projects/PH001_Eli_Lilly_RAID.html",
+      "research_keywords": ["Eli Lilly LEAP", "Eli Lilly Lebanon", "Lilly manufacturing"],
+      "news_sources": ["reuters.com", "wsj.com", "indystar.com"]
+    },
+    {
+      "id": "PH002",
+      "name": "Novo Nordisk North Carolina",
+      "company": "Novo Nordisk",
+      "company_ticker": "NVO",
+      "sector": "pharmaceutical",
+      "location": {
+        "city": "Clayton",
+        "state": "North Carolina",
+        "country": "USA"
+      },
+      "capital_committed": 6000000000,
+      "capital_deployed": 3500000000,
+      "original_production_date": "2027-01-01",
+      "current_production_date": "2027-01-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "expansion", "node": "GLP-1", "status": "construction", "target": "2027"}
+      ],
+      "workforce": {
+        "target_headcount": 2000,
+        "current_headcount": 1000,
+        "filled_pct": 50
+      },
+      "raid_file": "projects/PH002_Novo_Nordisk_RAID.html",
+      "research_keywords": ["Novo Nordisk Clayton", "Novo Nordisk North Carolina", "Ozempic manufacturing"],
+      "news_sources": ["reuters.com", "wsj.com", "newsobserver.com"]
+    },
+    {
+      "id": "PH003",
+      "name": "Moderna Massachusetts",
+      "company": "Moderna",
+      "company_ticker": "MRNA",
+      "sector": "pharmaceutical",
+      "location": {
+        "city": "Norwood",
+        "state": "Massachusetts",
+        "country": "USA"
+      },
+      "capital_committed": 2000000000,
+      "capital_deployed": 1500000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2025-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "expansion", "node": "mRNA", "status": "commissioning", "target": "2025"}
+      ],
+      "workforce": {
+        "target_headcount": 1000,
+        "current_headcount": 750,
+        "filled_pct": 75
+      },
+      "raid_file": "projects/PH003_Moderna_RAID.html",
+      "research_keywords": ["Moderna Norwood", "Moderna manufacturing", "mRNA facility"],
+      "news_sources": ["reuters.com", "wsj.com", "bostonglobe.com"]
+    },
+    {
+      "id": "SO001",
+      "name": "First Solar Ohio",
+      "company": "First Solar",
+      "company_ticker": "FSLR",
+      "sector": "solar",
+      "location": {
+        "city": "Toledo",
+        "state": "Ohio",
+        "country": "USA"
+      },
+      "capital_committed": 1100000000,
+      "capital_deployed": 900000000,
+      "original_production_date": "2024-01-01",
+      "current_production_date": "2024-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "expansion", "node": "CdTe_panels", "status": "production", "target": "2024"}
+      ],
+      "workforce": {
+        "target_headcount": 700,
+        "current_headcount": 680,
+        "filled_pct": 97
+      },
+      "raid_file": "projects/SO001_First_Solar_OH_RAID.html",
+      "research_keywords": ["First Solar Ohio", "First Solar Toledo", "First Solar expansion"],
+      "news_sources": ["reuters.com", "utilitydive.com", "toledoblade.com"]
+    },
+    {
+      "id": "SO002",
+      "name": "First Solar Alabama",
+      "company": "First Solar",
+      "company_ticker": "FSLR",
+      "sector": "solar",
+      "location": {
+        "city": "Lawrence County",
+        "state": "Alabama",
+        "country": "USA"
+      },
+      "capital_committed": 1100000000,
+      "capital_deployed": 800000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2025-03-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "CdTe_panels", "status": "commissioning", "target": "2025"}
+      ],
+      "workforce": {
+        "target_headcount": 800,
+        "current_headcount": 650,
+        "filled_pct": 81
+      },
+      "raid_file": "projects/SO002_First_Solar_AL_RAID.html",
+      "research_keywords": ["First Solar Alabama", "First Solar Lawrence County"],
+      "news_sources": ["reuters.com", "utilitydive.com", "al.com"]
+    },
+    {
+      "id": "SO003",
+      "name": "Qcells Georgia",
+      "company": "Qcells",
+      "company_ticker": null,
+      "sector": "solar",
+      "location": {
+        "city": "Cartersville",
+        "state": "Georgia",
+        "country": "USA"
+      },
+      "capital_committed": 2500000000,
+      "capital_deployed": 1800000000,
+      "original_production_date": "2024-06-01",
+      "current_production_date": "2024-12-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "expansion", "node": "silicon_panels", "status": "production", "target": "2024"}
+      ],
+      "workforce": {
+        "target_headcount": 3500,
+        "current_headcount": 3200,
+        "filled_pct": 91
+      },
+      "raid_file": "projects/SO003_Qcells_GA_RAID.html",
+      "research_keywords": ["Qcells Georgia", "Qcells Cartersville", "Hanwha Qcells"],
+      "news_sources": ["reuters.com", "utilitydive.com", "ajc.com"]
+    },
+    {
+      "id": "SO004",
+      "name": "Meyer Burger Arizona",
+      "company": "Meyer Burger",
+      "company_ticker": "MBTN.SW",
+      "sector": "solar",
+      "location": {
+        "city": "Goodyear",
+        "state": "Arizona",
+        "country": "USA"
+      },
+      "capital_committed": 1400000000,
+      "capital_deployed": 600000000,
+      "original_production_date": "2024-06-01",
+      "current_production_date": "2025-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "cells_modules", "status": "ramp", "target": "2025"}
+      ],
+      "workforce": {
+        "target_headcount": 1000,
+        "current_headcount": 500,
+        "filled_pct": 50
+      },
+      "raid_file": "projects/SO004_Meyer_Burger_RAID.html",
+      "research_keywords": ["Meyer Burger Arizona", "Meyer Burger Goodyear"],
+      "news_sources": ["reuters.com", "utilitydive.com", "azcentral.com"]
+    },
+    {
+      "id": "ST001",
+      "name": "Nucor West Virginia",
+      "company": "Nucor Corporation",
+      "company_ticker": "NUE",
+      "sector": "steel",
+      "location": {
+        "city": "Mason County",
+        "state": "West Virginia",
+        "country": "USA"
+      },
+      "capital_committed": 3200000000,
+      "capital_deployed": 2000000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": "2025-06-01",
+      "chips_award": null,
+      "grid_operator": "PJM",
+      "interconnection_id": "PJM-2022-0678",
+      "phases": [
+        {"phase": 1, "node": "sheet_mill", "status": "commissioning", "target": "2025"}
+      ],
+      "workforce": {
+        "target_headcount": 800,
+        "current_headcount": 600,
+        "filled_pct": 75
+      },
+      "raid_file": "projects/ST001_Nucor_WV_RAID.html",
+      "research_keywords": ["Nucor West Virginia", "Nucor sheet mill", "Nucor Apple Grove"],
+      "news_sources": ["reuters.com", "amm.com", "wvgazettemail.com"]
+    },
+    {
+      "id": "ST002",
+      "name": "Hyundai Steel Louisiana",
+      "company": "Hyundai Steel",
+      "company_ticker": "004020.KS",
+      "sector": "steel",
+      "location": {
+        "city": "St. James Parish",
+        "state": "Louisiana",
+        "country": "USA"
+      },
+      "capital_committed": 5800000000,
+      "capital_deployed": 1000000000,
+      "original_production_date": "2027-01-01",
+      "current_production_date": "2027-06-01",
+      "chips_award": null,
+      "grid_operator": "MISO",
+      "interconnection_id": "MISO-2024-0456",
+      "phases": [
+        {"phase": 1, "node": "green_steel", "status": "construction", "target": "2027"}
+      ],
+      "workforce": {
+        "target_headcount": 1000,
+        "current_headcount": 150,
+        "filled_pct": 15
+      },
+      "raid_file": "projects/ST002_Hyundai_Steel_RAID.html",
+      "research_keywords": ["Hyundai Steel Louisiana", "Hyundai Steel USA", "green steel Louisiana"],
+      "news_sources": ["reuters.com", "amm.com", "theadvocate.com"]
+    },
+    {
+      "id": "ST003",
+      "name": "US Steel Arkansas",
+      "company": "United States Steel",
+      "company_ticker": "X",
+      "sector": "steel",
+      "location": {
+        "city": "Osceola",
+        "state": "Arkansas",
+        "country": "USA"
+      },
+      "capital_committed": 3000000000,
+      "capital_deployed": 2500000000,
+      "original_production_date": "2024-01-01",
+      "current_production_date": "2024-06-01",
+      "chips_award": null,
+      "grid_operator": "MISO",
+      "interconnection_id": null,
+      "phases": [
+        {"phase": 1, "node": "EAF", "status": "production", "target": "2024"}
+      ],
+      "workforce": {
+        "target_headcount": 900,
+        "current_headcount": 850,
+        "filled_pct": 94
+      },
+      "raid_file": "projects/ST003_US_Steel_AR_RAID.html",
+      "research_keywords": ["US Steel Arkansas", "US Steel Big River", "Big River Steel"],
+      "news_sources": ["reuters.com", "amm.com", "arkansasonline.com"]
+    },
+    {
+      "id": "HY001",
+      "name": "Air Products Louisiana",
+      "company": "Air Products",
+      "company_ticker": "APD",
+      "sector": "hydrogen",
+      "location": {
+        "city": "Ascension Parish",
+        "state": "Louisiana",
+        "country": "USA"
+      },
+      "capital_committed": 4500000000,
+      "capital_deployed": 1500000000,
+      "original_production_date": "2026-01-01",
+      "current_production_date": "2027-06-01",
+      "chips_award": null,
+      "grid_operator": "MISO",
+      "interconnection_id": "MISO-2023-0345",
+      "phases": [
+        {"phase": 1, "node": "blue_hydrogen", "status": "construction", "target": "2027"}
+      ],
+      "workforce": {
+        "target_headcount": 500,
+        "current_headcount": 150,
+        "filled_pct": 30
+      },
+      "raid_file": "projects/HY001_Air_Products_RAID.html",
+      "research_keywords": ["Air Products Louisiana", "Air Products hydrogen", "blue hydrogen Louisiana"],
+      "news_sources": ["reuters.com", "hydrogeninsight.com", "theadvocate.com"]
+    },
+    {
+      "id": "HY002",
+      "name": "Plug Power New York",
+      "company": "Plug Power",
+      "company_ticker": "PLUG",
+      "sector": "hydrogen",
+      "location": {
+        "city": "Rochester",
+        "state": "New York",
+        "country": "USA"
+      },
+      "capital_committed": 4000000000,
+      "capital_deployed": 800000000,
+      "original_production_date": "2025-01-01",
+      "current_production_date": null,
+      "chips_award": null,
+      "grid_operator": "NYISO",
+      "interconnection_id": "NYISO-2023-0567",
+      "phases": [
+        {"phase": 1, "node": "green_hydrogen", "status": "distressed", "target": null}
+      ],
+      "workforce": {
+        "target_headcount": 300,
+        "current_headcount": 50,
+        "filled_pct": 17
+      },
+      "raid_file": "projects/HY002_Plug_Power_RAID.html",
+      "research_keywords": ["Plug Power Rochester", "Plug Power green hydrogen", "Plug Power going concern"],
+      "news_sources": ["reuters.com", "hydrogeninsight.com", "democratandchronicle.com"]
+    },
+    {
+      "id": "ES001",
+      "name": "Tesla Megapack California",
+      "company": "Tesla Energy",
+      "company_ticker": "TSLA",
+      "sector": "energy_storage",
+      "location": {
+        "city": "Lathrop",
+        "state": "California",
+        "country": "USA"
+      },
+      "capital_committed": 800000000,
+      "capital_deployed": 700000000,
+      "original_production_date": "2023-01-01",
+      "current_production_date": "2023-06-01",
+      "chips_award": null,
+      "grid_operator": null,
+      "interconnection_id": null,
+      "phases": [
+        {"phase": "expansion", "node": "Megapack", "status": "production", "target": "2023"}
+      ],
+      "workforce": {
+        "target_headcount": 500,
+        "current_headcount": 480,
+        "filled_pct": 96
+      },
+      "raid_file": "projects/ES001_Tesla_Megapack_RAID.html",
+      "research_keywords": ["Tesla Megapack", "Tesla Lathrop", "Tesla energy storage"],
+      "news_sources": ["reuters.com", "electrek.co", "recordnet.com"]
+    }
+  ]
+}

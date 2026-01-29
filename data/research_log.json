@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-01-28T00:00:00Z",
+  "total_findings_processed": 0,
+  "seen_hashes": [],
+  "findings": [],
+  "rejected_findings": [],
+  "semantic_clusters": {},
+  "run_history": [],
+  "statistics": {
+    "total_runs": 0,
+    "total_findings_discovered": 0,
+    "total_findings_validated": 0,
+    "total_findings_applied": 0,
+    "total_findings_rejected": 0,
+    "rejection_breakdown": {
+      "duplicate_hash": 0,
+      "duplicate_semantic": 0,
+      "insufficient_credibility": 0,
+      "no_velocity_impact": 0,
+      "stale_data": 0
+    },
+    "source_breakdown": {
+      "sec_filings": 0,
+      "chips_portal": 0,
+      "grid_operators": 0,
+      "news_reuters": 0,
+      "news_wsj": 0,
+      "news_local": 0,
+      "news_trade": 0,
+      "company_ir": 0,
+      "other": 0
+    }
+  }
+}

@@ -1,0 +1,983 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-01-12T00:00:00Z",
+  "scoring_methodology": {
+    "factors": {
+      "timeline_adherence": 0.25,
+      "funding_security": 0.25,
+      "construction_progress": 0.25,
+      "operator_stability": 0.25
+    },
+    "delay_penalty": {
+      "per_year": 5,
+      "max_penalty": 30
+    },
+    "ahead_bonus": {
+      "per_year": 3,
+      "max_bonus": 8
+    }
+  },
+  "health_thresholds": {
+    "executing": {"min": 80, "max": 100},
+    "on_track": {"min": 65, "max": 79},
+    "monitoring": {"min": 50, "max": 64},
+    "distressed": {"min": 35, "max": 49},
+    "critical": {"min": 0, "max": 34},
+    "terminated": {"value": 0}
+  },
+  "scores": {
+    "SE001": {
+      "project_name": "TSMC Arizona",
+      "velocity_score": 72,
+      "health_status": "on_track",
+      "trend_30d": "+4",
+      "factor_scores": {
+        "timeline_adherence": 68,
+        "funding_security": 85,
+        "construction_progress": 75,
+        "operator_stability": 90
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 68},
+        {"date": "2025-11-12", "score": 65}
+      ]
+    },
+    "SE002": {
+      "project_name": "Intel Ohio",
+      "velocity_score": 32,
+      "health_status": "critical",
+      "trend_30d": "-3",
+      "factor_scores": {
+        "timeline_adherence": 20,
+        "funding_security": 45,
+        "construction_progress": 15,
+        "operator_stability": 35
+      },
+      "delay_years": 5.5,
+      "delay_penalty": 27.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 35},
+        {"date": "2025-11-12", "score": 38}
+      ]
+    },
+    "SE003": {
+      "project_name": "Samsung Taylor",
+      "velocity_score": 35,
+      "health_status": "distressed",
+      "trend_30d": "-2",
+      "factor_scores": {
+        "timeline_adherence": 30,
+        "funding_security": 50,
+        "construction_progress": 40,
+        "operator_stability": 30
+      },
+      "delay_years": 2.5,
+      "delay_penalty": 12.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 37},
+        {"date": "2025-11-12", "score": 40}
+      ]
+    },
+    "SE004": {
+      "project_name": "Micron Idaho",
+      "velocity_score": 75,
+      "health_status": "on_track",
+      "trend_30d": "+1",
+      "factor_scores": {
+        "timeline_adherence": 80,
+        "funding_security": 85,
+        "construction_progress": 65,
+        "operator_stability": 80
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 74},
+        {"date": "2025-11-12", "score": 73}
+      ]
+    },
+    "SE005": {
+      "project_name": "Micron New York",
+      "velocity_score": 55,
+      "health_status": "monitoring",
+      "trend_30d": "0",
+      "factor_scores": {
+        "timeline_adherence": 50,
+        "funding_security": 70,
+        "construction_progress": 30,
+        "operator_stability": 80
+      },
+      "delay_years": 2,
+      "delay_penalty": 10,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 55},
+        {"date": "2025-11-12", "score": 56}
+      ]
+    },
+    "SE006": {
+      "project_name": "GlobalFoundries Malta",
+      "velocity_score": 65,
+      "health_status": "on_track",
+      "trend_30d": "+2",
+      "factor_scores": {
+        "timeline_adherence": 60,
+        "funding_security": 75,
+        "construction_progress": 60,
+        "operator_stability": 75
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 63},
+        {"date": "2025-11-12", "score": 62}
+      ]
+    },
+    "SE007": {
+      "project_name": "Polar Semiconductor",
+      "velocity_score": 78,
+      "health_status": "on_track",
+      "trend_30d": "+13",
+      "factor_scores": {
+        "timeline_adherence": 75,
+        "funding_security": 80,
+        "construction_progress": 85,
+        "operator_stability": 80
+      },
+      "delay_years": 0.25,
+      "delay_penalty": 1.25,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 65},
+        {"date": "2025-11-12", "score": 62}
+      ]
+    },
+    "SE008": {
+      "project_name": "Wolfspeed North Carolina",
+      "velocity_score": 28,
+      "health_status": "critical",
+      "trend_30d": "-5",
+      "factor_scores": {
+        "timeline_adherence": 25,
+        "funding_security": 20,
+        "construction_progress": 30,
+        "operator_stability": 15
+      },
+      "delay_years": 1.5,
+      "delay_penalty": 7.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 33},
+        {"date": "2025-11-12", "score": 45}
+      ]
+    },
+    "SE009": {
+      "project_name": "Applied Materials Sunnyvale",
+      "velocity_score": 62,
+      "health_status": "monitoring",
+      "trend_30d": "-6",
+      "factor_scores": {
+        "timeline_adherence": 55,
+        "funding_security": 80,
+        "construction_progress": 50,
+        "operator_stability": 85
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 68},
+        {"date": "2025-11-12", "score": 70}
+      ]
+    },
+    "SE010": {
+      "project_name": "NVIDIA US Manufacturing",
+      "velocity_score": 82,
+      "health_status": "executing",
+      "trend_30d": "+3",
+      "factor_scores": {
+        "timeline_adherence": 85,
+        "funding_security": 95,
+        "construction_progress": 70,
+        "operator_stability": 95
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 79},
+        {"date": "2025-11-12", "score": 77}
+      ]
+    },
+    "BA001": {
+      "project_name": "LG Chem Tennessee",
+      "velocity_score": 78,
+      "health_status": "on_track",
+      "trend_30d": "+2",
+      "factor_scores": {
+        "timeline_adherence": 75,
+        "funding_security": 85,
+        "construction_progress": 80,
+        "operator_stability": 80
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 76},
+        {"date": "2025-11-12", "score": 74}
+      ]
+    },
+    "BA002": {
+      "project_name": "Panasonic Kansas",
+      "velocity_score": 72,
+      "health_status": "on_track",
+      "trend_30d": "+1",
+      "factor_scores": {
+        "timeline_adherence": 70,
+        "funding_security": 80,
+        "construction_progress": 70,
+        "operator_stability": 80
+      },
+      "delay_years": 0.25,
+      "delay_penalty": 1.25,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 71},
+        {"date": "2025-11-12", "score": 70}
+      ]
+    },
+    "BA003": {
+      "project_name": "SK Battery Georgia",
+      "velocity_score": 88,
+      "health_status": "executing",
+      "trend_30d": "0",
+      "factor_scores": {
+        "timeline_adherence": 100,
+        "funding_security": 90,
+        "construction_progress": 100,
+        "operator_stability": 80
+      },
+      "delay_years": 0,
+      "delay_penalty": 0,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 88},
+        {"date": "2025-11-12", "score": 87}
+      ]
+    },
+    "BA004": {
+      "project_name": "BlueOval SK Kentucky",
+      "velocity_score": 52,
+      "health_status": "monitoring",
+      "trend_30d": "-3",
+      "factor_scores": {
+        "timeline_adherence": 45,
+        "funding_security": 65,
+        "construction_progress": 50,
+        "operator_stability": 60
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 55},
+        {"date": "2025-11-12", "score": 58}
+      ]
+    },
+    "BA005": {
+      "project_name": "Ascend Elements Kentucky",
+      "velocity_score": 35,
+      "health_status": "distressed",
+      "trend_30d": "-27",
+      "factor_scores": {
+        "timeline_adherence": 30,
+        "funding_security": 35,
+        "construction_progress": 30,
+        "operator_stability": 40
+      },
+      "delay_years": 1.5,
+      "delay_penalty": 7.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 62},
+        {"date": "2025-11-12", "score": 65}
+      ]
+    },
+    "BA006": {
+      "project_name": "Natron Energy",
+      "velocity_score": 0,
+      "health_status": "terminated",
+      "trend_30d": "-58",
+      "factor_scores": {
+        "timeline_adherence": 0,
+        "funding_security": 0,
+        "construction_progress": 0,
+        "operator_stability": 0
+      },
+      "delay_years": null,
+      "delay_penalty": 0,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 58},
+        {"date": "2025-11-12", "score": 60}
+      ]
+    },
+    "BA007": {
+      "project_name": "Redwood Materials Nevada",
+      "velocity_score": 76,
+      "health_status": "on_track",
+      "trend_30d": "+2",
+      "factor_scores": {
+        "timeline_adherence": 75,
+        "funding_security": 85,
+        "construction_progress": 70,
+        "operator_stability": 80
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 74},
+        {"date": "2025-11-12", "score": 72}
+      ]
+    },
+    "BA008": {
+      "project_name": "AESC Kentucky",
+      "velocity_score": 58,
+      "health_status": "monitoring",
+      "trend_30d": "-2",
+      "factor_scores": {
+        "timeline_adherence": 55,
+        "funding_security": 70,
+        "construction_progress": 45,
+        "operator_stability": 70
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 60},
+        {"date": "2025-11-12", "score": 62}
+      ]
+    },
+    "BA009": {
+      "project_name": "Honda LG Ohio",
+      "velocity_score": 62,
+      "health_status": "monitoring",
+      "trend_30d": "-1",
+      "factor_scores": {
+        "timeline_adherence": 60,
+        "funding_security": 75,
+        "construction_progress": 55,
+        "operator_stability": 75
+      },
+      "delay_years": 0.9,
+      "delay_penalty": 4.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 63},
+        {"date": "2025-11-12", "score": 65}
+      ]
+    },
+    "BA010": {
+      "project_name": "Hyundai LG Georgia",
+      "velocity_score": 55,
+      "health_status": "monitoring",
+      "trend_30d": "-3",
+      "factor_scores": {
+        "timeline_adherence": 50,
+        "funding_security": 70,
+        "construction_progress": 45,
+        "operator_stability": 65
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 58},
+        {"date": "2025-11-12", "score": 60}
+      ]
+    },
+    "BA011": {
+      "project_name": "LG Energy Michigan",
+      "velocity_score": 85,
+      "health_status": "executing",
+      "trend_30d": "+1",
+      "factor_scores": {
+        "timeline_adherence": 90,
+        "funding_security": 85,
+        "construction_progress": 95,
+        "operator_stability": 80
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 84},
+        {"date": "2025-11-12", "score": 83}
+      ]
+    },
+    "BA012": {
+      "project_name": "Sila Nanotechnologies",
+      "velocity_score": 60,
+      "health_status": "monitoring",
+      "trend_30d": "-2",
+      "factor_scores": {
+        "timeline_adherence": 55,
+        "funding_security": 70,
+        "construction_progress": 65,
+        "operator_stability": 60
+      },
+      "delay_years": 1.5,
+      "delay_penalty": 7.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 62},
+        {"date": "2025-11-12", "score": 65}
+      ]
+    },
+    "BA013": {
+      "project_name": "Form Energy West Virginia",
+      "velocity_score": 70,
+      "health_status": "on_track",
+      "trend_30d": "+3",
+      "factor_scores": {
+        "timeline_adherence": 70,
+        "funding_security": 75,
+        "construction_progress": 70,
+        "operator_stability": 70
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 67},
+        {"date": "2025-11-12", "score": 65}
+      ]
+    },
+    "BA014": {
+      "project_name": "StarPlus Texas",
+      "velocity_score": 55,
+      "health_status": "monitoring",
+      "trend_30d": "-4",
+      "factor_scores": {
+        "timeline_adherence": 50,
+        "funding_security": 65,
+        "construction_progress": 50,
+        "operator_stability": 60
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 59},
+        {"date": "2025-11-12", "score": 62}
+      ]
+    },
+    "DC001": {
+      "project_name": "Stargate Abilene",
+      "velocity_score": 68,
+      "health_status": "on_track",
+      "trend_30d": "+5",
+      "factor_scores": {
+        "timeline_adherence": 65,
+        "funding_security": 90,
+        "construction_progress": 55,
+        "operator_stability": 75
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 63},
+        {"date": "2025-11-12", "score": 58}
+      ]
+    },
+    "DC002": {
+      "project_name": "CoreWeave Denton",
+      "velocity_score": 55,
+      "health_status": "monitoring",
+      "trend_30d": "-4",
+      "factor_scores": {
+        "timeline_adherence": 45,
+        "funding_security": 70,
+        "construction_progress": 50,
+        "operator_stability": 65
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 59},
+        {"date": "2025-11-12", "score": 62}
+      ]
+    },
+    "DC003": {
+      "project_name": "xAI Colossus",
+      "velocity_score": 92,
+      "health_status": "executing",
+      "trend_30d": "+2",
+      "factor_scores": {
+        "timeline_adherence": 100,
+        "funding_security": 95,
+        "construction_progress": 90,
+        "operator_stability": 85
+      },
+      "delay_years": 0,
+      "delay_penalty": 0,
+      "ahead_years": 0.5,
+      "ahead_bonus": 1.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 90},
+        {"date": "2025-11-12", "score": 88}
+      ]
+    },
+    "DC004": {
+      "project_name": "Anthropic Lake Mariner",
+      "velocity_score": 68,
+      "health_status": "on_track",
+      "trend_30d": "+2",
+      "factor_scores": {
+        "timeline_adherence": 70,
+        "funding_security": 80,
+        "construction_progress": 55,
+        "operator_stability": 75
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 66},
+        {"date": "2025-11-12", "score": 65}
+      ]
+    },
+    "DC005": {
+      "project_name": "Amazon AWS Virginia",
+      "velocity_score": 72,
+      "health_status": "on_track",
+      "trend_30d": "-2",
+      "factor_scores": {
+        "timeline_adherence": 65,
+        "funding_security": 95,
+        "construction_progress": 60,
+        "operator_stability": 90
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 74},
+        {"date": "2025-11-12", "score": 75}
+      ]
+    },
+    "DC006": {
+      "project_name": "Meta Data Center",
+      "velocity_score": 65,
+      "health_status": "on_track",
+      "trend_30d": "-1",
+      "factor_scores": {
+        "timeline_adherence": 60,
+        "funding_security": 90,
+        "construction_progress": 45,
+        "operator_stability": 85
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 66},
+        {"date": "2025-11-12", "score": 68}
+      ]
+    },
+    "DC007": {
+      "project_name": "Blackstone QTS Pennsylvania",
+      "velocity_score": 58,
+      "health_status": "monitoring",
+      "trend_30d": "-3",
+      "factor_scores": {
+        "timeline_adherence": 50,
+        "funding_security": 85,
+        "construction_progress": 35,
+        "operator_stability": 80
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 61},
+        {"date": "2025-11-12", "score": 63}
+      ]
+    },
+    "DC008": {
+      "project_name": "Google Data Center",
+      "velocity_score": 78,
+      "health_status": "on_track",
+      "trend_30d": "+1",
+      "factor_scores": {
+        "timeline_adherence": 75,
+        "funding_security": 95,
+        "construction_progress": 70,
+        "operator_stability": 90
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 77},
+        {"date": "2025-11-12", "score": 76}
+      ]
+    },
+    "DC009": {
+      "project_name": "Microsoft Azure",
+      "velocity_score": 80,
+      "health_status": "executing",
+      "trend_30d": "+2",
+      "factor_scores": {
+        "timeline_adherence": 78,
+        "funding_security": 95,
+        "construction_progress": 75,
+        "operator_stability": 92
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 78},
+        {"date": "2025-11-12", "score": 77}
+      ]
+    },
+    "AU001": {
+      "project_name": "VinFast North Carolina",
+      "velocity_score": 28,
+      "health_status": "critical",
+      "trend_30d": "-2",
+      "factor_scores": {
+        "timeline_adherence": 15,
+        "funding_security": 30,
+        "construction_progress": 10,
+        "operator_stability": 25
+      },
+      "delay_years": 3.5,
+      "delay_penalty": 17.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 30},
+        {"date": "2025-11-12", "score": 32}
+      ]
+    },
+    "AU002": {
+      "project_name": "Rivian Georgia",
+      "velocity_score": 42,
+      "health_status": "distressed",
+      "trend_30d": "+8",
+      "factor_scores": {
+        "timeline_adherence": 30,
+        "funding_security": 55,
+        "construction_progress": 25,
+        "operator_stability": 50
+      },
+      "delay_years": 4,
+      "delay_penalty": 20,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 34},
+        {"date": "2025-11-12", "score": 30}
+      ]
+    },
+    "AU003": {
+      "project_name": "Ford BlueOval City",
+      "velocity_score": 58,
+      "health_status": "monitoring",
+      "trend_30d": "-2",
+      "factor_scores": {
+        "timeline_adherence": 50,
+        "funding_security": 70,
+        "construction_progress": 55,
+        "operator_stability": 65
+      },
+      "delay_years": 1.5,
+      "delay_penalty": 7.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 60},
+        {"date": "2025-11-12", "score": 62}
+      ]
+    },
+    "AU004": {
+      "project_name": "GM ZERO Ohio",
+      "velocity_score": 68,
+      "health_status": "on_track",
+      "trend_30d": "+2",
+      "factor_scores": {
+        "timeline_adherence": 65,
+        "funding_security": 75,
+        "construction_progress": 70,
+        "operator_stability": 70
+      },
+      "delay_years": 1.5,
+      "delay_penalty": 7.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 66},
+        {"date": "2025-11-12", "score": 65}
+      ]
+    },
+    "AU005": {
+      "project_name": "Hyundai Metaplant Georgia",
+      "velocity_score": 75,
+      "health_status": "on_track",
+      "trend_30d": "+3",
+      "factor_scores": {
+        "timeline_adherence": 75,
+        "funding_security": 85,
+        "construction_progress": 75,
+        "operator_stability": 80
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 72},
+        {"date": "2025-11-12", "score": 70}
+      ]
+    },
+    "AU006": {
+      "project_name": "Scout Motors South Carolina",
+      "velocity_score": 70,
+      "health_status": "on_track",
+      "trend_30d": "+1",
+      "factor_scores": {
+        "timeline_adherence": 70,
+        "funding_security": 80,
+        "construction_progress": 60,
+        "operator_stability": 75
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 69},
+        {"date": "2025-11-12", "score": 68}
+      ]
+    },
+    "AU007": {
+      "project_name": "Ford Michigan",
+      "velocity_score": 55,
+      "health_status": "monitoring",
+      "trend_30d": "-3",
+      "factor_scores": {
+        "timeline_adherence": 50,
+        "funding_security": 65,
+        "construction_progress": 50,
+        "operator_stability": 60
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 58},
+        {"date": "2025-11-12", "score": 60}
+      ]
+    },
+    "PH001": {
+      "project_name": "Eli Lilly LEAP Indiana",
+      "velocity_score": 88,
+      "health_status": "executing",
+      "trend_30d": "+2",
+      "factor_scores": {
+        "timeline_adherence": 95,
+        "funding_security": 95,
+        "construction_progress": 85,
+        "operator_stability": 95
+      },
+      "delay_years": 0,
+      "delay_penalty": 0,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 86},
+        {"date": "2025-11-12", "score": 85}
+      ]
+    },
+    "PH002": {
+      "project_name": "Novo Nordisk North Carolina",
+      "velocity_score": 85,
+      "health_status": "executing",
+      "trend_30d": "+1",
+      "factor_scores": {
+        "timeline_adherence": 90,
+        "funding_security": 90,
+        "construction_progress": 80,
+        "operator_stability": 90
+      },
+      "delay_years": 0,
+      "delay_penalty": 0,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 84},
+        {"date": "2025-11-12", "score": 83}
+      ]
+    },
+    "PH003": {
+      "project_name": "Moderna Massachusetts",
+      "velocity_score": 78,
+      "health_status": "on_track",
+      "trend_30d": "+2",
+      "factor_scores": {
+        "timeline_adherence": 75,
+        "funding_security": 85,
+        "construction_progress": 80,
+        "operator_stability": 80
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 76},
+        {"date": "2025-11-12", "score": 75}
+      ]
+    },
+    "SO001": {
+      "project_name": "First Solar Ohio",
+      "velocity_score": 92,
+      "health_status": "executing",
+      "trend_30d": "+1",
+      "factor_scores": {
+        "timeline_adherence": 95,
+        "funding_security": 90,
+        "construction_progress": 98,
+        "operator_stability": 90
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 91},
+        {"date": "2025-11-12", "score": 90}
+      ]
+    },
+    "SO002": {
+      "project_name": "First Solar Alabama",
+      "velocity_score": 88,
+      "health_status": "executing",
+      "trend_30d": "+2",
+      "factor_scores": {
+        "timeline_adherence": 90,
+        "funding_security": 90,
+        "construction_progress": 85,
+        "operator_stability": 90
+      },
+      "delay_years": 0.17,
+      "delay_penalty": 0.85,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 86},
+        {"date": "2025-11-12", "score": 85}
+      ]
+    },
+    "SO003": {
+      "project_name": "Qcells Georgia",
+      "velocity_score": 90,
+      "health_status": "executing",
+      "trend_30d": "+1",
+      "factor_scores": {
+        "timeline_adherence": 92,
+        "funding_security": 90,
+        "construction_progress": 95,
+        "operator_stability": 88
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 89},
+        {"date": "2025-11-12", "score": 88}
+      ]
+    },
+    "SO004": {
+      "project_name": "Meyer Burger Arizona",
+      "velocity_score": 58,
+      "health_status": "monitoring",
+      "trend_30d": "-4",
+      "factor_scores": {
+        "timeline_adherence": 55,
+        "funding_security": 55,
+        "construction_progress": 60,
+        "operator_stability": 50
+      },
+      "delay_years": 1,
+      "delay_penalty": 5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 62},
+        {"date": "2025-11-12", "score": 65}
+      ]
+    },
+    "ST001": {
+      "project_name": "Nucor West Virginia",
+      "velocity_score": 82,
+      "health_status": "executing",
+      "trend_30d": "+2",
+      "factor_scores": {
+        "timeline_adherence": 80,
+        "funding_security": 90,
+        "construction_progress": 80,
+        "operator_stability": 90
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 80},
+        {"date": "2025-11-12", "score": 78}
+      ]
+    },
+    "ST002": {
+      "project_name": "Hyundai Steel Louisiana",
+      "velocity_score": 75,
+      "health_status": "on_track",
+      "trend_30d": "NEW",
+      "factor_scores": {
+        "timeline_adherence": 80,
+        "funding_security": 85,
+        "construction_progress": 60,
+        "operator_stability": 80
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": []
+    },
+    "ST003": {
+      "project_name": "US Steel Arkansas",
+      "velocity_score": 88,
+      "health_status": "executing",
+      "trend_30d": "+1",
+      "factor_scores": {
+        "timeline_adherence": 90,
+        "funding_security": 90,
+        "construction_progress": 95,
+        "operator_stability": 85
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 87},
+        {"date": "2025-11-12", "score": 86}
+      ]
+    },
+    "HY001": {
+      "project_name": "Air Products Louisiana",
+      "velocity_score": 55,
+      "health_status": "monitoring",
+      "trend_30d": "-5",
+      "factor_scores": {
+        "timeline_adherence": 50,
+        "funding_security": 70,
+        "construction_progress": 45,
+        "operator_stability": 65
+      },
+      "delay_years": 1.5,
+      "delay_penalty": 7.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 60},
+        {"date": "2025-11-12", "score": 62}
+      ]
+    },
+    "HY002": {
+      "project_name": "Plug Power New York",
+      "velocity_score": 18,
+      "health_status": "critical",
+      "trend_30d": "-8",
+      "factor_scores": {
+        "timeline_adherence": 10,
+        "funding_security": 15,
+        "construction_progress": 20,
+        "operator_stability": 10
+      },
+      "delay_years": null,
+      "delay_penalty": 0,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 26},
+        {"date": "2025-11-12", "score": 32}
+      ]
+    },
+    "ES001": {
+      "project_name": "Tesla Megapack California",
+      "velocity_score": 92,
+      "health_status": "executing",
+      "trend_30d": "+1",
+      "factor_scores": {
+        "timeline_adherence": 95,
+        "funding_security": 95,
+        "construction_progress": 98,
+        "operator_stability": 90
+      },
+      "delay_years": 0.5,
+      "delay_penalty": 2.5,
+      "previous_scores": [
+        {"date": "2025-12-12", "score": 91},
+        {"date": "2025-11-12", "score": 90}
+      ]
+    }
+  }
+}

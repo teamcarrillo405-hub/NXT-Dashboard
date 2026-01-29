@@ -1,0 +1,330 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-01-12T00:00:00Z",
+  "executive_summary": {
+    "headline": "xAI Built the World's Largest AI Cluster in 122 Days. Intel Ohio Is 5+ Years Behind. The Difference Isn't Capital.",
+    "bottom_line": "Power access is the differentiator. A 2,300 GW interconnection queue, a construction workforce short 500,000 workers, and mounting community opposition are the real constraints. Capital is abundant. Execution capacity is not."
+  },
+  "portfolio_totals": {
+    "total_capital_committed": 2530000000000,
+    "total_capital_committed_formatted": "$2.53T",
+    "capital_change_vs_q3": 85000000000,
+    "capital_change_formatted": "+$85B vs Q3 2025",
+    "total_projects": 54,
+    "projects_change_vs_q3": 3,
+    "active_projects": 53,
+    "terminated_projects": 1
+  },
+  "portfolio_health": {
+    "executing": {
+      "count": 10,
+      "percentage": 19
+    },
+    "on_track": {
+      "count": 21,
+      "percentage": 39
+    },
+    "monitoring": {
+      "count": 14,
+      "percentage": 26
+    },
+    "distressed": {
+      "count": 4,
+      "percentage": 7
+    },
+    "critical": {
+      "count": 4,
+      "percentage": 7
+    },
+    "terminated": {
+      "count": 1,
+      "percentage": 2
+    }
+  },
+  "at_risk_metrics": {
+    "at_risk_or_worse_count": 43,
+    "at_risk_or_worse_pct": 80,
+    "at_risk_change_vs_q3": 12,
+    "workforce_related_pct": 38,
+    "workforce_related_stable": true
+  },
+  "delayed_capital": {
+    "total_behind_schedule": 41000000000,
+    "total_formatted": "$41B+",
+    "worst_delays": [
+      {
+        "project_id": "SE002",
+        "project_name": "Intel Ohio",
+        "capital": 20000000000,
+        "delay_years": "5-6",
+        "score": 32,
+        "original_target": "2025",
+        "current_target": "2030-31",
+        "reason": "Weak chip demand, Intel financial struggles, workforce shortages. Only ~$1.5B of $20B invested to date."
+      },
+      {
+        "project_id": "AU001",
+        "project_name": "VinFast NC",
+        "capital": 4000000000,
+        "delay_years": "4",
+        "score": 28,
+        "original_target": "2024",
+        "current_target": "2028",
+        "reason": "Minimal U.S. sales, stock collapsed 96%, pivot to Asia. Site described as 'sound of crickets.'"
+      },
+      {
+        "project_id": "SE003",
+        "project_name": "Samsung Taylor",
+        "capital": 17000000000,
+        "delay_years": "2-3",
+        "score": 35,
+        "original_target": "H2 2024",
+        "current_target": "Feb 2027",
+        "reason": "No confirmed customers for the fab. Equipment installation frozen at 99.6%-complete."
+      }
+    ]
+  },
+  "at_risk_by_cause": {
+    "financial_demand": {
+      "count": 15,
+      "projects": ["Intel", "Samsung", "BlueOval SK", "VinFast", "Rivian", "AESC", "Ascend", "Natron", "Ford BlueOval City", "GM ZERO", "Wolfspeed", "Hyundai LG", "Stargate", "CoreWeave", "Plug Power"]
+    },
+    "grid_permitting": {
+      "count": 10,
+      "projects": ["GlobalFoundries", "Micron NY", "Nucor", "Applied Materials", "Amazon AWS", "Meta", "Google", "Microsoft", "Air Products", "Scout"]
+    },
+    "execution_ramp": {
+      "count": 8,
+      "projects": ["Polar Semi", "LG Chem", "SK Battery", "Panasonic", "Honda LG", "Redwood", "Ford MI", "Form Energy"]
+    },
+    "strategic_pivot": {
+      "count": 6,
+      "projects": ["Novo Nordisk", "StarPlus", "LG Energy", "Sila", "Hyundai Metaplant", "Hyundai Steel"]
+    }
+  },
+  "portfolio_velocity": {
+    "current_score": 54,
+    "previous_quarter_score": 66,
+    "change_vs_quarter": -12,
+    "year_ago_score": 72,
+    "change_vs_year": -18
+  },
+  "top_improvers_30d": [
+    {
+      "rank": 1,
+      "project_id": "ST002",
+      "project_name": "Hyundai Steel Louisiana",
+      "sector": "steel",
+      "score": 75,
+      "change": "NEW"
+    },
+    {
+      "rank": 2,
+      "project_id": "SE007",
+      "project_name": "Polar Semiconductor",
+      "sector": "semiconductor",
+      "score": 78,
+      "change": "+13"
+    },
+    {
+      "rank": 3,
+      "project_id": "BA001",
+      "project_name": "LG Chem Tennessee",
+      "sector": "battery",
+      "score": 78,
+      "change": "+2"
+    }
+  ],
+  "biggest_declines_30d": [
+    {
+      "rank": 1,
+      "project_id": "BA006",
+      "project_name": "Natron Energy",
+      "sector": "battery",
+      "score": 0,
+      "change": "-58",
+      "note": "Terminated"
+    },
+    {
+      "rank": 2,
+      "project_id": "BA005",
+      "project_name": "Ascend Elements",
+      "sector": "battery",
+      "score": 35,
+      "change": "-27"
+    },
+    {
+      "rank": 3,
+      "project_id": "SE009",
+      "project_name": "Applied Materials",
+      "sector": "semiconductor",
+      "score": 62,
+      "change": "-6"
+    }
+  ],
+  "sector_performance": {
+    "semiconductor": {
+      "velocity_score": 58,
+      "trend_30d": -12,
+      "total_capital": 580000000000,
+      "project_counts": {
+        "executing": 3,
+        "on_track": 2,
+        "distressed_or_worse": 5
+      }
+    },
+    "battery": {
+      "velocity_score": 58,
+      "trend_30d": -9,
+      "total_capital": 42000000000,
+      "project_counts": {
+        "executing": 9,
+        "on_track": 4,
+        "distressed_or_worse": 1
+      }
+    },
+    "data_center": {
+      "velocity_score": 76,
+      "trend_30d": 3,
+      "total_capital": 830000000000,
+      "project_counts": {
+        "executing": 1,
+        "on_track": 4,
+        "distressed_or_worse": 2
+      }
+    },
+    "automotive": {
+      "velocity_score": 62,
+      "trend_30d": -10,
+      "total_capital": 38000000000,
+      "project_counts": {
+        "executing": 1,
+        "on_track": 2,
+        "distressed_or_worse": 4
+      }
+    },
+    "pharmaceutical": {
+      "velocity_score": 84,
+      "trend_30d": 2,
+      "total_capital": 19000000000,
+      "project_counts": {
+        "executing": 2,
+        "on_track": 1,
+        "distressed_or_worse": 0
+      }
+    },
+    "solar": {
+      "velocity_score": 90,
+      "trend_30d": 4,
+      "total_capital": 7300000000,
+      "project_counts": {
+        "executing": 4,
+        "on_track": 0,
+        "distressed_or_worse": 0
+      }
+    },
+    "steel": {
+      "velocity_score": 81,
+      "trend_30d": 3,
+      "total_capital": 11700000000,
+      "project_counts": {
+        "executing": 1,
+        "on_track": 2,
+        "distressed_or_worse": 0
+      }
+    },
+    "hydrogen": {
+      "velocity_score": 32,
+      "trend_30d": -15,
+      "total_capital": 8500000000,
+      "project_counts": {
+        "executing": 0,
+        "on_track": 0,
+        "distressed_or_worse": 2
+      }
+    },
+    "energy_storage": {
+      "velocity_score": 82,
+      "trend_30d": 5,
+      "total_capital": 800000000,
+      "project_counts": {
+        "executing": 1,
+        "on_track": 0,
+        "distressed_or_worse": 0
+      }
+    }
+  },
+  "chips_act_status": {
+    "total_manufacturing_pool": 39000000000,
+    "finalized_awards": 25800000000,
+    "intel_equity_stake": 8900000000,
+    "renegotiating": 4300000000,
+    "rd_voided": 7400000000,
+    "recipients_count": 19,
+    "intel_stake_pct": 10,
+    "key_recipients": [
+      {"name": "Intel Ohio", "amount": 7900000000, "status": "Finalized", "risk": "High"},
+      {"name": "TSMC Arizona", "amount": 6600000000, "status": "Finalized", "risk": "Low"},
+      {"name": "Samsung Taylor", "amount": 4700000000, "status": "Finalized", "risk": "High"},
+      {"name": "Micron", "amount": 6400000000, "status": "Finalized", "risk": "Low"},
+      {"name": "Wolfspeed", "amount": 750000000, "status": "Never Finalized", "risk": "High"}
+    ],
+    "last_major_change": {
+      "date": "2025-08",
+      "description": "Intel CHIPS award converted to 10% equity stake ($8.9B)"
+    }
+  },
+  "infrastructure_constraints": {
+    "projects_constrained": 23,
+    "change_vs_q3": 5,
+    "grid_queue_avg_years": 5,
+    "grid_queue_change_yoy": 1,
+    "power_demand_gw": 14.2,
+    "labor_gap_filled_pct": 46,
+    "by_sector": {
+      "data_center": 7,
+      "semiconductor": 9,
+      "battery": 5,
+      "other": 2
+    }
+  },
+  "systemic_risk_indicators": {
+    "grid_queue": {
+      "status": "critical",
+      "metric": "5+ yrs",
+      "description": "Avg interconnection wait",
+      "detail": "2,300 GW backlog nationally. Only 13% of queue projects complete."
+    },
+    "workforce": {
+      "status": "critical",
+      "metric": "500K",
+      "description": "Workers short in 2025",
+      "detail": "$10.8B residential losses. 19,000 homes not built."
+    },
+    "regulatory": {
+      "status": "elevated",
+      "metric": "2",
+      "description": "FERC rejections YTD",
+      "detail": "$9.3B rate case exposure"
+    },
+    "chips_funding": {
+      "status": "stable",
+      "metric": "$25.8B",
+      "description": "Awards finalized",
+      "detail": "$4.3B renegotiating"
+    }
+  },
+  "contrast_highlight": {
+    "fast_mover": {
+      "project": "xAI Colossus",
+      "achievement": "Groundbreaking to 100,000 operational GPUs in 122 days",
+      "method": "Bypassed grid entirely, accepted regulatory risk",
+      "caveat": "Methods not replicable for publicly traded companies or regulated utilities"
+    },
+    "slow_mover": {
+      "project": "Intel Ohio",
+      "status": "5+ years behind",
+      "capital_deployed": "~$1.5B of $20B"
+    }
+  }
+}
