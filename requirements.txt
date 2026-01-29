@@ -1,0 +1,4 @@
+# Core dependencies for NXT Dashboard Research Agent
+anthropic>=0.18.0
+requests>=2.31.0
+beautifulsoup4>=4.12.0
